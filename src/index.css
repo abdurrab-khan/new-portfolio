@@ -1,0 +1,96 @@
+@import "tailwindcss";
+
+@layer theme {
+  :root {
+    /* APP VARIABLES */
+    --app-bg-color: #f0f0f0;
+
+    /* WINDOW 95 VARIABLES */
+    --light-gray: #c0c0c0;
+    --dark-gray: #808080;
+    --navy-blue: #000080;
+    --yellow: #ffff00;
+
+    --task-bar-height: 3.5rem;
+  }
+}
+
+/*  CUSTOM CLASSES FOR TAILWIND THEME EXTENSION */
+@theme {
+  --color-yellow: var(--yellow);
+  --color-navy-blue: var(--navy-blue);
+  --color-light-gray: var(--light-gray);
+  --color-dark-gray: var(--dark-gray);
+}
+
+/*  Custom component classes */
+@layer components {
+}
+
+/* Custom Utility Classes */
+@layer utilities {
+  .size-screen {
+    height: 100vh;
+    width: 100vw;
+  }
+
+  .size-full {
+    height: 100%;
+    width: 100%;
+  }
+
+  .flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .flex-start {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+  }
+
+  .flex-end {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+
+  .scroll-none {
+    overflow: hidden;
+  }
+}
+
+/* Custom Styles for Windows 95 Taskbar */
+.taskbar {
+  height: var(--task-bar-height);
+  position: relative;
+  background-color: var(--color-light-gray);
+  display: flex;
+  align-items: center;
+  padding: 0 1rem;
+
+  &::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 4px;
+    top: 6%;
+    left: 0;
+    z-index: 10;
+    background-color: white;
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    height: 88%;
+    width: 4px;
+    top: 50%;
+    left: 8px;
+    z-index: 9;
+    transform: translateY(-50%);
+    background-color: var(--color-dark-gray);
+  }
+}
