@@ -1,5 +1,5 @@
 import Body from "@/components/windows-95/windows/Body";
-import Taskbar from "@/components/windows-95/windows/Taskbar";
+import Taskbar from "@/components/windows-95/windows/taskbar/Taskbar";
 
 function App() {
   return (

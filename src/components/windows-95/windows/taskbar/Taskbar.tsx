@@ -3,7 +3,10 @@ import React from "react";
 function Taskbar() {
   return (
     <footer className="taskbar">
-      <p>This is the footer of the window.</p>
+      <div></div>
+
+      {/* Showing time and volume information */}
+      <div></div>
     </footer>
   );
 }
