@@ -41,6 +41,32 @@ const DataTree: DataTreeType = {
               address: "C:\\Windows\\Desktop",
             },
             children: {
+              "my-computer": {
+                data: {
+                  name: "My Computer",
+                  type: "folder",
+                  targetPath: "C:\\",
+                  iconPath: "/icons/my-computer-icon.png",
+                  address: "C:\\Windows\\Desktop\\My Computer",
+                },
+              },
+              recyclebin: {
+                data: {
+                  name: "Recycle Bin",
+                  type: "folder",
+                  address: "C:\\Windows\\Desktop\\Recycle Bin",
+                  iconPath: "/icons/recycle-bin-icon.png",
+                },
+              },
+              portfolio: {
+                data: {
+                  name: "About_Me.exe",
+                  type: "react-node",
+                  address: "C:\\Windows\\Desktop\\About_Me.exe",
+                  iconPath: "/icons/portfolio-icon.png",
+                  component: null, // Placeholder for React component
+                },
+              },
               skills: {
                 data: {
                   name: "Skills",
@@ -221,32 +247,6 @@ const DataTree: DataTreeType = {
                   address: "C:\\Windows\\Desktop\\New Folder",
                 },
                 children: {},
-              },
-              portfolio: {
-                data: {
-                  name: "About_Me.exe",
-                  type: "react-node",
-                  address: "C:\\Windows\\Desktop\\About_Me.exe",
-                  iconPath: "/icons/portfolio-icon.png",
-                  component: null, // Placeholder for React component
-                },
-              },
-              recyclebin: {
-                data: {
-                  name: "Recycle Bin",
-                  type: "react-node",
-                  address: "C:\\Windows\\Desktop\\Recycle Bin",
-                  iconPath: "/icons/recycle-bin-icon.png",
-                  component: null, // Placeholder for React component
-                },
-              },
-              "my-computer": {
-                data: {
-                  name: "My Computer",
-                  type: "folder",
-                  iconPath: "/icons/my-computer-icon.png",
-                  address: "C:\\Windows\\Desktop\\My Computer",
-                },
               },
             },
           },

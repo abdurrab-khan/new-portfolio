@@ -1,49 +1,29 @@
+import type { FolderIcon, ImageIcon, ReactNodeIcon, TextIcon } from "./icon";
+
 type ImageNode = {
-  data: {
-    name: string;
-    type: "image";
-    address: string;
-    imagePath: string;
-    iconPath: string;
-  };
+  data: ImageIcon;
 };
 
 type FolderNode = {
-  data: {
-    name: string;
-    type: "folder";
-    iconPath: string;
-    address: string;
-  };
+  data: FolderIcon;
   children?: {
-    [key: string]: FolderNode | ImageNode | ReactNode;
+    [key: string]: ImageNode | FolderNode | ReactNode | TextNode;
   };
 };
 
 type TextNode = {
-  data: {
-    name: string;
-    type: "text";
-    address: string;
-    iconPath: string;
-  };
+  data: TextIcon;
 };
 
 type ReactNode = {
-  data: {
-    name: string;
-    type: "react-node";
-    address: string;
-    iconPath: string;
-    component: React.ReactNode;
-  };
+  data: ReactNodeIcon;
 };
 
 type DataTreeType = {
   [key: string]: {
     data: ImageNode["data"] | FolderNode["data"] | ReactNode["data"] | TextNode["data"];
     children?: {
-      [key: string]: FolderNode | ImageNode | ReactNode | TextNode;
+      [key: string]: ImageNode | FolderNode | ReactNode | TextNode;
     };
   };
 };
