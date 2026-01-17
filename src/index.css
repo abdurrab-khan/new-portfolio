@@ -11,7 +11,7 @@
     --navy-blue: #000080;
     --yellow: #ffff00;
 
-    --task-bar-height: 3.5rem;
+    --taskbar-height: 3.5rem;
   }
 }
 
@@ -59,26 +59,5 @@
 
   .scroll-none {
     overflow: hidden;
-  }
-}
-
-/* Custom Styles for Windows 95 Taskbar */
-.taskbar {
-  height: var(--task-bar-height);
-  position: relative;
-  background-color: var(--color-light-gray);
-  display: flex;
-  align-items: center;
-  padding: 0 1rem;
-
-  &::after {
-    content: "";
-    position: absolute;
-    width: 100%;
-    height: 4px;
-    top: 10%;
-    left: 0;
-    z-index: 10;
-    background-color: white;
   }
 }

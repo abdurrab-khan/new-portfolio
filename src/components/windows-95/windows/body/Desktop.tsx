@@ -1,13 +1,13 @@
+import useStore from "@/zustand/store";
+
 interface IDesktopProps {
   data: any | null;
 }
 
 function Desktop({ data }: IDesktopProps) {
-  return (
-    <div>
-      <h1>This is the desktop component.</h1>
-    </div>
-  );
+  const { count, increment, decrement } = useStore((state) => state);
+
+  return <div></div>;
 }
 
 export default Desktop;

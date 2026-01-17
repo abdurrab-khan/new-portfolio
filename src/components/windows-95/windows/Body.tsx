@@ -1,7 +1,10 @@
 import { useMemo } from "react";
+
+import DataTree from "@/data/tree";
 import Desktop from "./body/Desktop";
 import { getNode } from "@/utils/tree-utils";
-import DataTree from "@/data/tree";
+
+import backgroundImage from "@/assets/background.jpg";
 
 const DESKTOP_PATH = "C:\\Windows\\Desktop";
 
@@ -11,7 +14,15 @@ function Body() {
   }, []);
 
   return (
-    <section className="flex-center bg-yellow size-full">
+    <section
+      className="flex-center size-full"
+      style={{
+        backgroundImage: `url(${backgroundImage})`,
+        backgroundSize: "contain",
+        backgroundRepeat: "no-repeat",
+        backgroundPosition: "center",
+      }}
+    >
       <Desktop data={data} />
     </section>
   );
