@@ -15,7 +15,7 @@ function Body() {
 
   return (
     <section
-      className="flex-center size-full"
+      className="flex-center size-full flex-1"
       style={{
         backgroundImage: `url(${backgroundImage})`,
         backgroundSize: "contain",

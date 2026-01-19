@@ -1,5 +1,8 @@
 @import "tailwindcss";
 
+/* Custom variant for popover-open state */
+@custom-variant popover-open (&:popover-open);
+
 @layer theme {
   :root {
     /* APP VARIABLES */
@@ -11,7 +14,7 @@
     --navy-blue: #000080;
     --yellow: #ffff00;
 
-    --taskbar-height: 3.5rem;
+    --taskbar-height: 3rem;
   }
 }
 
