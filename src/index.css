@@ -28,6 +28,20 @@
 
 /*  Custom component classes */
 @layer components {
+  .btn-border::after {
+    content: "";
+    position: absolute;
+    right: 2px;
+    bottom: 2px;
+    height: 100%;
+    width: 100%;
+    z-index: -20;
+    background-color: yellow;
+  }
+
+  .btn-border::before {
+    content: "";
+  }
 }
 
 /* Custom Utility Classes */
