@@ -1,5 +1,5 @@
 import useStore from "@/zustand/store";
-import ThreeDView from "../../common/ThreeDView";
+import View from "../../common/View";
 
 interface IDesktopProps {
   data: any | null;
@@ -10,11 +10,11 @@ function Desktop({ data }: IDesktopProps) {
 
   return (
     <div>
-      <div className="h-48 w-28 bg-blue-500">
-        <ThreeDView>
-          <div>Hello world</div>
-        </ThreeDView>
-      </div>
+      <View>
+        <div className="h-52 w-96">
+          <span>Hello world</span>
+        </div>
+      </View>
     </div>
   );
 }

@@ -1,4 +1,5 @@
 import window95StartIcon from "@/assets/icons/window-95-start-icon.png";
+import Button from "../../common/Button";
 
 const StartPopover = () => {
   return (
@@ -18,28 +19,29 @@ const StartPopover = () => {
 
 function StartBtn() {
   return (
-    <div className="relative h-[calc(var(--taskbar-height)-1rem)] min-w-16">
-      <button
+    <div className="relative h-[calc(var(--taskbar-height)-1rem)]">
+      <Button
         popoverTarget="start-popover"
-        style={{
-          anchorName: "--start-btn-anchor",
-        }}
-        className="peer bg-light-gray border-dark-gray relative z-20 flex size-full items-center justify-center border-r-2 border-b-2 px-1.5 py-1 outline-0 outline-none active:border-t-2 active:border-r-0 active:border-b-0 active:border-l-2"
+        style={
+          {
+            anchorName: "--start-btn-anchor",
+          } as React.CSSProperties
+        }
+        mainStyle="px-1 group-has-popover-open:border-r-0 group-has-popover-open:border-b-0  group-has-popover-open:border-t-2 group-has-popover-open:border-l-2"
+        borderOneStyle="border-white group-has-popover-open:border-black"
+        borderTwoStyle="border-black group-has-popover-open:border-white"
       >
         {/* START POPOVER */}
         <StartPopover />
 
         {/* BUTTON CONTENT */}
-        <div className="peer-has-popover-open:border peer-has-popover-open:border-dash flex size-full items-center gap-x-1 overflow-hidden px-0.5 py-0.5">
+        <div className="flex size-full items-center gap-x-1 overflow-hidden px-0.5 py-0.5">
           <span className="inline-block">
             <img src={window95StartIcon} alt="Windows 95 Start Icon" className="block h-4 w-6" />
           </span>
           <span>Start</span>
         </div>
-      </button>
-
-      <div className="absolute right-0 bottom-0 z-10 h-[calc(100%+0.15rem)] w-[calc(100%+0.15rem)] bg-white peer-active:bg-black"></div>
-      <div className="absolute -right-[0.15rem] -bottom-[0.15rem] z-0 h-[calc(100%+0.30rem)] w-[calc(100%+0.30rem)] bg-black peer-active:bg-white"></div>
+      </Button>
     </div>
   );
 }
