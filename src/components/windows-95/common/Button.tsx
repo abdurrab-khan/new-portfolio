@@ -14,23 +14,25 @@ function Button({ children, mainStyle, borderOneStyle, borderTwoStyle, ...props 
       {/* MAIN CONTENT */}
       <div
         className={cn(
-          "border-dark-gray relative z-30 size-full border-r-2 border-b-2 bg-none px-1.5 group-active:border-t-2 group-active:border-r-0 group-active:border-b-0 group-active:border-l-2",
+          "border-dark-gray relative z-30 size-full border-r-2 border-b-2 bg-transparent group-active:border-t-2 group-active:border-r-0 group-active:border-b-0 group-active:border-l-2",
           mainStyle,
         )}
       >
         {children}
       </div>
 
-      {/* BORDER EFFECT */}
+      {/* BORDER EFFECT - Top and Left White Border */}
       <span
         className={cn(
-          "absolute -right-0.5 -bottom-0.5 z-0 h-[calc(100%+4px)] w-[calc(100%+4px)] border-t-2 border-l-2 border-black bg-none group-active:border-t-2 group-active:border-r-0 group-active:border-b-0 group-active:border-l-2 group-active:border-white",
+          "absolute -right-0.5 -bottom-0.5 z-0 h-[calc(100%+4px)] w-[calc(100%+4px)] border-t-2 border-l-2 border-white bg-transparent group-active:border-t-2 group-active:border-l-2 group-active:border-black",
           borderOneStyle,
         )}
       />
+
+      {/* BORDER EFFECT - Bottom and Right Dark Border */}
       <span
         className={cn(
-          "absolute top-0 left-0 z-0 h-[calc(100%+2px)] w-[calc(100%+2px)] border-r-2 border-b-2 border-black bg-none group-active:border-t-2 group-active:border-r-0 group-active:border-b-0 group-active:border-l-2 group-active:border-white",
+          "absolute top-0 left-0 z-0 h-[calc(100%+2px)] w-[calc(100%+2px)] border-r-2 border-b-2 border-black bg-transparent group-active:border-t-2 group-active:border-l-2 group-active:border-white",
           borderTwoStyle,
         )}
       />

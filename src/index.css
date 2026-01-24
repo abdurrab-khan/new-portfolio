@@ -3,6 +3,13 @@
 /* Custom variant for popover-open state */
 @custom-variant popover-open (&:popover-open);
 
+@font-face {
+  font-family: MS Sans;
+  src:
+    url("/fonts/ms-sans.woff2") format("woff2"),
+    url("/fonts/ms-sans.woff") format("woff");
+}
+
 @layer theme {
   :root {
     /* APP VARIABLES */
@@ -24,6 +31,8 @@
   --color-navy-blue: var(--navy-blue);
   --color-light-gray: var(--light-gray);
   --color-dark-gray: var(--dark-gray);
+
+  --font-ms-sans: "MS Sans", sans-serif;
 }
 
 /*  Custom component classes */
