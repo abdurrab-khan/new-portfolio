@@ -10,11 +10,11 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 
 function Button({ children, mainStyle, borderOneStyle, borderTwoStyle, ...props }: ButtonProps) {
   return (
-    <button className="group relative size-full outline-none" {...props}>
+    <button className="group relative size-full select-none outline-none" {...props}>
       {/* MAIN CONTENT */}
       <div
         className={cn(
-          "border-dark-gray relative z-30 size-full border-r-2 border-b-2 bg-transparent group-active:border-t-2 group-active:border-r-0 group-active:border-b-0 group-active:border-l-2",
+          "relative z-30 size-full border-2 border-r-dark-gray border-b-dark-gray border-t-transparent border-l-transparent bg-transparent group-active:border-t-dark-gray group-active:border-l-dark-gray group-active:border-r-transparent group-active:border-b-transparent",
           mainStyle,
         )}
       >
@@ -24,7 +24,7 @@ function Button({ children, mainStyle, borderOneStyle, borderTwoStyle, ...props 
       {/* BORDER EFFECT - Top and Left White Border */}
       <span
         className={cn(
-          "absolute -right-0.5 -bottom-0.5 z-0 h-[calc(100%+4px)] w-[calc(100%+4px)] border-t-2 border-l-2 border-white bg-transparent group-active:border-t-2 group-active:border-l-2 group-active:border-black",
+          "absolute -right-0.5 -bottom-0.5 z-0 h-[calc(100%+4px)] w-[calc(100%+4px)] border-t-2 border-l-2 border-white bg-transparent group-active:border-black",
           borderOneStyle,
         )}
       />

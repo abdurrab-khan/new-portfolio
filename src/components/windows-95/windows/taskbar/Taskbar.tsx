@@ -1,6 +1,7 @@
 import StartBtn from "./StartBtn";
 import TaskBarApps from "./TaskBarApps";
 import Separator from "../../common/Separator";
+import DateTime from "./SystemTray";
 
 const CustomSeparator = () => {
   return (
@@ -13,7 +14,7 @@ function Taskbar() {
     <footer className="bg-light-gray h-(--taskbar-height) w-full">
       <div className="relative flex size-full items-center after:absolute after:top-0.5 after:h-0.5 after:w-full after:bg-white">
         <div className="flex h-[calc(var(--taskbar-height)-1rem)] w-full items-center justify-between gap-x-2 px-2">
-          <div className="mt-1 flex size-full flex-1 gap-x-2">
+          <div className="mt-1 flex size-full flex-1 min-w-0 gap-x-2">
             {/* START BUTTON */}
             <StartBtn />
 
@@ -25,8 +26,8 @@ function Taskbar() {
             <TaskBarApps />
           </div>
 
-          {/* Volume, network Section */}
-          <div className="h-full w-16 bg-yellow-500"></div>
+          {/* System Tray */}
+          <DateTime />
         </div>
       </div>
     </footer>
