@@ -1,18 +1,17 @@
 import { create } from "zustand";
+import type { Browser, FileExplorer } from "@/types/window";
 
 interface IStore {
-  count: number;
+  apps: Array<Browser | FileExplorer>;
 }
 
 interface IStoreActions {
-  increment: () => void;
-  decrement: () => void;
+  // increment: () => void;
+  // decrement: () => void;
 }
 
 const useStore = create<IStore & IStoreActions>((set) => ({
-  count: 0,
-  increment: () => set((state) => ({ count: state.count + 1 })),
-  decrement: () => set((state) => ({ count: state.count - 1 })),
+  apps: []
 }));
 
 export default useStore;

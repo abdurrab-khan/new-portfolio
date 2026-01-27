@@ -1,0 +1,10 @@
+import React from 'react'
+
+function AppIcon() {
+    return (
+        <div className='bg-red-500'>
+        </div>
+    )
+}
+
+export default AppIcon

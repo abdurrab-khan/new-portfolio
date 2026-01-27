@@ -1,3 +1,5 @@
+import type { IconType } from "./icon";
+
 // Main window types used in the application
 type Windows = {
   state: "open" | "minimized";
@@ -25,7 +27,7 @@ type Browser = Windows & {
 type FileExplorer = Windows & {
   type: "file-explorer";
   address: string;
-  contents?: Icon[];
+  contents?: IconType[];
 };
 
 export type { Browser, FileExplorer };

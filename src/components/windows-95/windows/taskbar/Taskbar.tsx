@@ -1,33 +1,21 @@
-import StartBtn from "./StartBtn";
-import TaskBarApps from "./TaskBarApps";
-import Separator from "../../common/Separator";
-import DateTime from "./SystemTray";
+import StartBtn from "./start/StartBtn";
+import TaskBarApps from "./taskbar-apps/TaskBarApps";
+import SystemTray from "./SystemTray";
 
-const CustomSeparator = () => {
-  return (
-    <span className="after:border-dark-gray relative inline-block h-full w-2 before:absolute before:left-0 before:inline-block before:h-full before:w-full before:border-t-2 before:border-l-2 before:border-white after:absolute after:right-0 after:inline-block after:h-full after:w-full after:border-r-2 after:border-b-2" />
-  );
-};
 
 function Taskbar() {
   return (
     <footer className="bg-light-gray h-(--taskbar-height) w-full">
       <div className="relative flex size-full items-center after:absolute after:top-0.5 after:h-0.5 after:w-full after:bg-white">
-        <div className="flex h-[calc(var(--taskbar-height)-1rem)] w-full items-center justify-between gap-x-2 px-2">
-          <div className="mt-1 flex size-full flex-1 min-w-0 gap-x-2">
-            {/* START BUTTON */}
-            <StartBtn />
+        <div className="flex h-[calc(var(--taskbar-height)-1rem)] mt-1 w-full items-center justify-between gap-x-2 px-2">
+          {/* START BTN */}
+          <StartBtn />
 
-            {/* SEPARATORS */}
-            <Separator type="vertical" />
-            <CustomSeparator />
-
-            {/* TASKBAR APPS */}
-            <TaskBarApps />
-          </div>
+          {/* OPENED APPLICATIONS */}
+          <TaskBarApps />
 
           {/* System Tray */}
-          <DateTime />
+          <SystemTray />
         </div>
       </div>
     </footer>
