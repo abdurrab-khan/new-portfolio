@@ -1,7 +1,30 @@
+import { useEffect, useState } from 'react';
 import Separator from '../../common/Separator';
 import soundIcon from "@/assets/icons/sound-icon.png";
 
 function SystemTray() {
+  const [date, setDate] = useState<{ hour: string, minute: string }>({ hour: '00', minute: '00' })
+
+  const updateTime = () => {
+    const date = new Date(Date.now());
+    setDate(() => ({
+      hour: date.getHours().toString(),
+      minute: date.getMinutes().toString()
+    }));
+  }
+
+  useEffect(() => {
+    updateTime();
+
+    const interval = setInterval(() => {
+      updateTime();
+    }, 60000);
+
+    return () => {
+      clearInterval(interval);
+    }
+  }, [])
+
   return (
     <div className="h-full w-max flex select-none items-center gap-x-2">
       <Separator />
@@ -14,7 +37,9 @@ function SystemTray() {
             <img src={soundIcon} className='size-full object-contain' />
           </div>
           <span className='font-ms-sans-bold font-light!'>
-            3:45 PM
+            {
+              `${date.hour}:${date.minute}`
+            }
           </span>
         </div>
       </div>

@@ -7,7 +7,7 @@ function Desktop() {
 
   return (
     <section
-      className="size-full flex-1 px-2.5 py-2"
+      className="size-full flex-1 p-2"
       style={{
         backgroundImage: `url(${backgroundImage})`,
         backgroundSize: "contain",
@@ -16,26 +16,9 @@ function Desktop() {
       }}
     >
       <div className="size-full app-grid">
-        <AppIcon />
-        <AppIcon />
-        <AppIcon />
-        <AppIcon />
-        <AppIcon />
-        <AppIcon />
-        <AppIcon />
-        <AppIcon />
-        <AppIcon />
-        <AppIcon />
-        <AppIcon />
-        <AppIcon />
-        <AppIcon />
-        <AppIcon />
-        <AppIcon />
-        <AppIcon />
-        <AppIcon />
-        <AppIcon />
-        <AppIcon />
-        <AppIcon />
+        {
+          Array(17).fill(0).map((_, idx) => <AppIcon key={idx} />)
+        }
       </div>
     </section>
   );

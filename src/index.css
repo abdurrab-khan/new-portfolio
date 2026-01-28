@@ -39,11 +39,13 @@
 @layer components {
   .app-grid {
     display: grid;
-    column-gap: 8px;
-    row-gap: 12px;
+    column-gap: 16px;
+    row-gap: 18px;
     grid-auto-flow: column;
+    grid-template-rows: repeat(auto-fill, minmax(min-content, 76px));
     grid-template-columns: repeat(auto-fill, 80px);
-    grid-template-rows: repeat(auto-fill, 92px);
+    /* prevent stretching items to full track height */
+    align-items: start;
   }
 }
 
@@ -92,5 +94,27 @@
   .bg-checkerboard {
     background-image: url("data:image/svg+xml,%3Csvg width='4' height='4' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3Cpattern id='checkerboard' x='0' y='0' width='4' height='4' patternUnits='userSpaceOnUse'%3E%3Crect width='2' height='2' fill='%23ffffff'/%3E%3Crect x='2' y='0' width='2' height='2' fill='%23cccccc'/%3E%3Crect x='0' y='2' width='2' height='2' fill='%23cccccc'/%3E%3Crect x='2' y='2' width='2' height='2' fill='%23ffffff'/%3E%3C/pattern%3E%3C/defs%3E%3Crect width='100%25' height='100%25' fill='url(%23checkerboard)'/%3E%3C/svg%3E");
     background-repeat: repeat;
+  }
+
+  .win95-icon-checker {
+    position: relative;
+  }
+
+  .win95-icon-checker::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+
+    background-image:
+      repeating-linear-gradient(0deg, #ffffff 0 1px, var(--navy-blue) 1px 2px),
+      repeating-linear-gradient(90deg, #ffffff 0 1px, var(--navy-blue) 1px 2px);
+    opacity: 0;
+    mix-blend-mode: multiply;
+  }
+
+  .win95-icon:focus .win95-icon-checker::after,
+  .win95-icon:focus-visible .win95-icon-checker::after {
+    opacity: 0.9;
   }
 }
