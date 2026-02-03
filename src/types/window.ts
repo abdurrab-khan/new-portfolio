@@ -2,8 +2,8 @@ import type { IconType } from "./icon";
 
 // Main window types used in the application
 type Windows = {
+  id: string;
   state: "open" | "minimized";
-
   titleBar: {
     title: string;
     iconPath: string;
