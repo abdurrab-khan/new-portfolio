@@ -1,6 +1,7 @@
-import type { DataTreeType } from "@/types/data-tree";
+import DataTree from "@/data/tree";
+import type { DataTreeType, NodeData } from "@/types/data-tree";
 
-const getNode = (path: string, tree: DataTreeType) => {
+const getNode = (path: string, tree: DataTreeType = DataTree) => {
   const segments = path
     .toLowerCase()
     .split("\\")
@@ -21,7 +22,20 @@ const getNode = (path: string, tree: DataTreeType) => {
     }
   }
 
-  return currentNode;
+  return null;
 };
 
-export { getNode };
+const getChildren = (node: NodeData | null) => {
+  // Return blank array if no node exist
+  if (node === null) return [];
+
+  const currentNode = node.children ?? {};
+  const keys = Object.keys(currentNode);
+
+  // Return blank array if no child is there
+  if (keys.length === 0) return [];
+
+  return keys.map((v) => currentNode[v].data);
+};
+
+export { getNode, getChildren };

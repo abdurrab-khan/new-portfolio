@@ -26,3 +26,10 @@ const customTwMerge = extendTailwindMerge({
 export function cn(...inputs: ClassValue[]) {
   return customTwMerge(clsx(inputs));
 }
+
+/**
+ * Utility function that resolve assets path from given path
+ */
+export function getAssetsUrl(path: string) {
+  return new URL(`../assets/${path}`, import.meta.url).href;
+}
