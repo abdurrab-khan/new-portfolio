@@ -2,23 +2,25 @@ import DataTree from "@/data/tree";
 import type { DataTreeType, NodeData } from "@/types/data-tree";
 
 const getNode = (path: string, tree: DataTreeType = DataTree) => {
-  const segments = path
+  const pathSegments = path
     .toLowerCase()
     .split("\\")
     .filter((s) => s.length > 0)
     .map((s) => s.replace(":", ""));
 
-  let currentNode = tree;
+  let currentNode: DataTreeType | NodeData = tree;
+  
+  for(let i = 0; i < pathSegments.length; i++){
+    const segment = pathSegments[i];
+    currentNode  = currentNode[segment];
 
-  for (const segment of segments) {
-    const nextNode = currentNode[segment];
+    // Return null if node doesn't exist
+    if(currentNode === null) return currentNode;
 
-    if (!nextNode) return null;
-
-    if (nextNode.children) {
-      currentNode = nextNode.children;
+    if (currentNode?.children && i !== pathSegments.length - 1) {
+      currentNode = currentNode.children;
     } else {
-      return segments.indexOf(segment) === segments.length - 1 ? nextNode : null;
+      return i === pathSegments.length - 1 ? currentNode : null;
     }
   }
 

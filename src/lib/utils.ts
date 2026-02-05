@@ -31,5 +31,5 @@ export function cn(...inputs: ClassValue[]) {
  * Utility function that resolve assets path from given path
  */
 export function getAssetsUrl(path: string) {
-  return new URL(`../assets/${path}`, import.meta.url).href;
+  return new URL("../assets" + path, import.meta.url).href;
 }

@@ -1,5 +1,3 @@
-import useStore from "@/zustand/store";
-
 import AppIcon from "../../common/AppIcon";
 import backgroundImage from "@/assets/background.jpg";
 
@@ -11,7 +9,6 @@ const DESKTOP_APPS = getChildren(getNode("C:\\Windows\\Desktop"));
 
 function Desktop() {
   const [desktopApps, setDesktopApps] = useState<AppType[]>(DESKTOP_APPS);
-  const { count, increment, decrement } = useStore((state) => state);
 
   return (
     <section

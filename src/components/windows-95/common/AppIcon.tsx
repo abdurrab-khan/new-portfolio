@@ -9,12 +9,20 @@ function AppIcon({
   position,
   address,
   iconPath,
-  setAppUpdate,
 }: AppType & { setAppUpdate: React.Dispatch<React.SetStateAction<AppType[]>> }) {
-  const handleLaunchApp = useStore((state) => state.handleLaunchApp);
+  const {toggleAppState, handleLaunchApp, apps} = useStore((state) => state);
 
-  const launchApp = () => {
-    // Building data's required during launching an app
+  const launchApp = (e: React.MouseEvent<HTMLButtonElement>) => {
+    if(e.detail !== 2) return; // Only launch on double click
+
+    // Check if app is already opened -- if yes, just toggle its state
+    const currentApp = apps.find(app => app.address === address);
+    if(currentApp) {
+      toggleAppState(currentApp.id)
+      return;
+    };
+    
+    // Create app data based on type
     const appData: Browser | FileExplorer = {
       id: `${Date.now()}_${name.replace(" ", "").toLowerCase()}`,
       address,
@@ -33,8 +41,7 @@ function AppIcon({
       },
     };
 
-    // Updating the state for launching it.
-    handleLaunchApp(appData);
+    handleLaunchApp(appData); // Launch the app
   };
 
   return (

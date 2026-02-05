@@ -1,23 +1,20 @@
 import Button from "../../../common/Button";
-import window95StartIcon from "@/assets/icons/start-icon.png";
+import window95StartIcon from "@/assets/icons/start.png";
 import Separator from "../../../common/Separator";
 import StartPopover from "./StartPopover";
 import CustomSeparator from "./CustomSeperator";
 
-function StartBtn() {
+function StartBtn() { 
   return (
     <div className="flex h-full gap-x-2">
       <div className="flex h-full shrink-0 items-center gap-x-2">
         <Button
           popoverTarget="start-popover"
           style={
-            {
+            { 
               anchorName: "--start-btn-anchor",
-            } as React.CSSProperties
+            }
           }
-          mainStyle="px-1 group-has-popover-open:border-r-transparent group-has-popover-open:border-b-transparent group-has-popover-open:border-t-dark-gray group-has-popover-open:border-l-dark-gray"
-          borderOneStyle="border-white group-has-popover-open:border-black"
-          borderTwoStyle="border-black group-has-popover-open:border-white"
         >
           {/* START POPOVER */}
           <StartPopover />

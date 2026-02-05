@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import Separator from '../../common/Separator';
-import soundIcon from "@/assets/icons/sound-icon.png";
+import soundIcon from "@/assets/icons/sound.png";
 
 function SystemTray() {
   const [date, setDate] = useState<{ hour: string, minute: string }>({ hour: '00', minute: '00' })
