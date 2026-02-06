@@ -40,7 +40,7 @@
   .app-grid {
     display: grid;
     column-gap: 16px;
-    row-gap: 18px;
+    row-gap: 14px;
     grid-auto-flow: column;
     grid-template-rows: repeat(auto-fill, minmax(min-content, 76px));
     grid-template-columns: repeat(auto-fill, 80px);

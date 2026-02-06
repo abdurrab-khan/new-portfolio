@@ -4,11 +4,11 @@ import View from "./View";
 
 interface IWindowLayoutProps {
   children: React.ReactNode;
-  appData: Browser | FileExplorer;
+  app: Browser | FileExplorer;
 }
 
-function WindowLayout({ children, appData }: IWindowLayoutProps) {
-  const { position, size } = appData;
+function Window({ children, app }: IWindowLayoutProps) {
+  const { position, size } = app;
 
   return (
     <View style={{ transform: `translate(${position.x}, ${position.y})` }}>
@@ -25,4 +25,4 @@ function WindowLayout({ children, appData }: IWindowLayoutProps) {
   );
 }
 
-export default WindowLayout;
+export default Window;

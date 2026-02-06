@@ -10,18 +10,18 @@ function AppIcon({
   address,
   iconPath,
 }: AppType & { setAppUpdate: React.Dispatch<React.SetStateAction<AppType[]>> }) {
-  const {toggleAppState, handleLaunchApp, apps} = useStore((state) => state);
+  const { toggleAppState, handleLaunchApp, apps } = useStore((state) => state);
 
   const launchApp = (e: React.MouseEvent<HTMLButtonElement>) => {
-    if(e.detail !== 2) return; // Only launch on double click
+    if (e.detail !== 2) return; // Only launch on double click
 
     // Check if app is already opened -- if yes, just toggle its state
-    const currentApp = apps.find(app => app.address === address);
-    if(currentApp) {
-      toggleAppState(currentApp.id)
+    const currentApp = apps.find((app) => app.address === address);
+    if (currentApp) {
+      toggleAppState(currentApp.id);
       return;
-    };
-    
+    }
+
     // Create app data based on type
     const appData: Browser | FileExplorer = {
       id: `${Date.now()}_${name.replace(" ", "").toLowerCase()}`,
@@ -56,8 +56,8 @@ function AppIcon({
       <div className="win95-icon-checker h-8 w-8">
         <img src={getAssetsUrl(iconPath)} className="size-full object-fill" />
       </div>
-      <div className="border-yellow group-focus:bg-navy-blue max-h-[36px] w-full overflow-hidden text-center leading-[18px] group-focus:border-2 group-focus:border-dashed group-focus:text-white">
-        <span className="font-ms-sans [display:-webkit-box] overflow-hidden wrap-break-word text-ellipsis [-webkit-box-orient:vertical] [-webkit-line-clamp:2]">
+      <div className="border-yellow group-focus:bg-navy-blue max-h-9 w-full overflow-hidden text-center leading-4.5 group-focus:border-2 group-focus:border-dashed group-focus:text-white">
+        <span className="font-ms-sans [display:-webkit-box] overflow-hidden text-sm font-light wrap-break-word text-ellipsis text-white [-webkit-box-orient:vertical] [-webkit-line-clamp:2]">
           {name}
         </span>
       </div>

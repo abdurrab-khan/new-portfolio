@@ -6,7 +6,10 @@ interface IViewProps extends React.HTMLAttributes<HTMLDivElement> {
 
 function View({ children, ...props }: IViewProps) {
   return (
-    <div className="bg-light-gray relative size-max border-r-2 border-b-2 border-black" {...props}>
+    <div
+      className="bg-light-gray pointer-events-auto relative size-max border-r-2 border-b-2 border-black"
+      {...props}
+    >
       <div className="p-1">{children}</div>
 
       {/* BORDER OVERLAY  */}

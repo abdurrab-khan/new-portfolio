@@ -1,30 +1,20 @@
-import AppIcon from "../../common/AppIcon";
+import OpenedApps from "./OpenedApps";
+import DesktopApps from "./DesktopApps";
 import backgroundImage from "@/assets/background.jpg";
 
-import { getChildren, getNode } from "@/utils/tree-utils";
-import { useState } from "react";
-import type { AppType } from "@/types/app";
-
-const DESKTOP_APPS = getChildren(getNode("C:\\Windows\\Desktop"));
-
 function Desktop() {
-  const [desktopApps, setDesktopApps] = useState<AppType[]>(DESKTOP_APPS);
-
   return (
     <section
-      className="size-full flex-1 p-2"
       style={{
         backgroundImage: `url(${backgroundImage})`,
         backgroundSize: "contain",
         backgroundRepeat: "no-repeat",
         backgroundPosition: "center",
       }}
+      className="relative size-full flex-1 px-2 py-4"
     >
-      <div className="app-grid size-full">
-        {desktopApps.map((da, idx) => (
-          <AppIcon key={idx} setAppUpdate={setDesktopApps} {...da} />
-        ))}
-      </div>
+      <DesktopApps />
+      <OpenedApps />
     </section>
   );
 }

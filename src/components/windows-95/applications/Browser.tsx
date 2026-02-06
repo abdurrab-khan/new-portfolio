@@ -1,5 +1,5 @@
 import React from "react";
-import WindowLayout from "../layout/WindowLayout";
+import Window from "../layout/Window";
 
 import type { FileExplorer, Browser } from "@/types/window";
 
@@ -10,9 +10,9 @@ interface IBrowserProps {
 
 function Browser({ children, appData }: IBrowserProps) {
   return (
-    <WindowLayout appData={appData}>
+    <Window appData={appData}>
       <></>
-    </WindowLayout>
+    </Window>
   );
 }
 
