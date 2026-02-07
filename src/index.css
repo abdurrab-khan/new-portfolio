@@ -22,6 +22,9 @@
     --yellow: #ffff00;
 
     --taskbar-height: 3rem;
+    --window-titlebar-height: 1.5rem;
+
+    --taskbar-z-index: 1000;
   }
 }
 

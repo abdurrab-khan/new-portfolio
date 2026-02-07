@@ -4,13 +4,12 @@ import Window from "../layout/Window";
 import type { FileExplorer, Browser } from "@/types/window";
 
 interface IBrowserProps {
-  children: React.ReactNode;
-  appData: Browser | FileExplorer;
+  app: Browser | FileExplorer;
 }
 
-function Browser({ children, appData }: IBrowserProps) {
+function Browser({ app }: IBrowserProps) {
   return (
-    <Window appData={appData}>
+    <Window app={app}>
       <></>
     </Window>
   );

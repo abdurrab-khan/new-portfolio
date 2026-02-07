@@ -9,6 +9,7 @@ function AppIcon({
   position,
   address,
   iconPath,
+  type,
 }: AppType & { setAppUpdate: React.Dispatch<React.SetStateAction<AppType[]>> }) {
   const { toggleAppState, handleLaunchApp, apps } = useStore((state) => state);
 
@@ -26,6 +27,7 @@ function AppIcon({
     const appData: Browser | FileExplorer = {
       id: `${Date.now()}_${name.replace(" ", "").toLowerCase()}`,
       address,
+      type: ["folder", "image", "text-file"].includes(type) ? "file-explorer" : "browser",
       state: "open",
       titleBar: {
         title: name,
