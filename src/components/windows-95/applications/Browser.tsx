@@ -1,10 +1,10 @@
 import React from "react";
 import Window from "../layout/Window";
 
-import type { FileExplorer, Browser } from "@/types/window";
+import type { FileExplorer, Browser as BrowserT } from "@/types/window";
 
 interface IBrowserProps {
-  app: Browser | FileExplorer;
+  app: BrowserT | FileExplorer;
 }
 
 function Browser({ app }: IBrowserProps) {

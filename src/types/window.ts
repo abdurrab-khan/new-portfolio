@@ -4,7 +4,7 @@ import type { AppType } from "./app";
 type Windows = {
   id: string;
   address: string;
-  state: "open" | "minimized";
+  state: "open" | "minimized" | "full";
   titleBar: {
     title: string;
     iconPath: string;

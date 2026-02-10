@@ -10,7 +10,7 @@ function View({ children, ...props }: IViewProps) {
       className="bg-light-gray pointer-events-auto relative size-max border-r-2 border-b-2 border-black"
       {...props}
     >
-      <div className="py-1.75 pr-1.25 pl-1.75">{children}</div>
+      <div className="size-max pt-1.75 pr-1.25 pb-1.25 pl-1.75">{children}</div>
 
       {/* BORDER OVERLAY  */}
       <div className="absolute right-0 bottom-0 z-0 h-[calc(100%-2px)] w-[calc(100%-2px)] border-t-2 border-l-2 border-white bg-transparent"></div>

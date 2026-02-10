@@ -1,5 +1,6 @@
 import useStore from "@/zustand/store";
-import Window from "../../layout/Window";
+import Browser from "../../applications/Browser";
+import FileExplorer from "../../applications/FileExplorer";
 
 function OpenedApps() {
   const openedApps = useStore((state) => state.apps);
@@ -8,11 +9,13 @@ function OpenedApps() {
     <div className="pointer-events-none absolute inset-0 size-full">
       {openedApps
         .filter((app) => app.state === "open")
-        .map((app) => (
-          <Window key={app.id} app={app}>
-            <></>
-          </Window>
-        ))}
+        .map((app) =>
+          app.type === "file-explorer" ? (
+            <FileExplorer key={app.id} app={app} />
+          ) : (
+            <Browser key={app.id} app={app} />
+          ),
+        )}
     </div>
   );
 }
