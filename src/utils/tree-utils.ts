@@ -9,13 +9,13 @@ const getNode = (path: string, tree: DataTreeType = DataTree) => {
     .map((s) => s.replace(":", ""));
 
   let currentNode: DataTreeType | NodeData = tree;
-  
-  for(let i = 0; i < pathSegments.length; i++){
+
+  for (let i = 0; i < pathSegments.length; i++) {
     const segment = pathSegments[i];
-    currentNode  = currentNode[segment];
+    currentNode = currentNode[segment];
 
     // Return null if node doesn't exist
-    if(currentNode === null) return currentNode;
+    if (currentNode === null) return currentNode;
 
     if (currentNode?.children && i !== pathSegments.length - 1) {
       currentNode = currentNode.children;
@@ -29,7 +29,7 @@ const getNode = (path: string, tree: DataTreeType = DataTree) => {
 
 const getChildren = (node: NodeData | null) => {
   // Return blank array if no node exist
-  if (node === null) return [];
+  if (!node) return [];
 
   const currentNode = node.children ?? {};
   const keys = Object.keys(currentNode);

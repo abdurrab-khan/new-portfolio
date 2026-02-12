@@ -1,12 +1,15 @@
 import React from "react";
+import useStore from "@/zustand/store";
+
 import View from "./View";
 import Button from "../common/Button";
-import useStore from "@/zustand/store";
+import DoubleSeparator from "../common/DoubleSeparator";
 import explorerIcon from "@/assets/icons/explorer.png";
+
 import { getAssetsUrl } from "@/lib/utils";
 
 import type { Browser, FileExplorer } from "@/types/window";
-import DoubleSeparator from "../common/DoubleSeparator";
+import Separator from "../common/Separator";
 
 interface IWindowLayoutProps {
   children: React.ReactNode;
@@ -14,7 +17,7 @@ interface IWindowLayoutProps {
 }
 
 function Window({ children, app }: IWindowLayoutProps) {
-  const { id, position, size, titleBar, type, state } = app;
+  const { id, type, address, position, size, titleBar } = app;
   const { toggleAppState, handleCloseApp } = useStore((state) => state);
 
   return (
@@ -119,9 +122,9 @@ function Window({ children, app }: IWindowLayoutProps) {
 
             {/* TOOLBAR */}
             {type === "file-explorer" ? (
-              <FileExplorerToolBar />
+              <FileExplorerToolBar address={address} />
             ) : type === "browser" ? (
-              <BrowserToolBar />
+              <BrowserToolBar address={address} />
             ) : null}
           </div>
         </div>
@@ -148,12 +151,11 @@ function MenuBar() {
       <div className="bg-light-gray border-dark-gray mr-0.5 inline-block size-full flex-1 border-r-2 border-b-2 px-0.75 py-0.5">
         <div className="flex size-full items-center">
           <DoubleSeparator />
-          <span className="mx-0.75 not-nth-of-type-2:ml-2 nth-of-type-2:ml-2.75">File</span>
-          <span className="mx-0.75 not-nth-of-type-2:ml-2 nth-of-type-2:ml-2.75">Edit</span>
-          <span className="mx-0.75 not-nth-of-type-2:ml-2 nth-of-type-2:ml-2.75">View</span>
-          <span className="mx-0.75 not-nth-of-type-2:ml-2 nth-of-type-2:ml-2.75">Go</span>
-          <span className="mx-0.75 not-nth-of-type-2:ml-2 nth-of-type-2:ml-2.75">Favorites</span>
-          <span className="mx-0.75 not-nth-of-type-2:ml-2 nth-of-type-2:ml-2.75">Help</span>
+          {["File", "Edit", "View", "Go", "Favorites", "Help"].map((menu) => (
+            <span key={menu} className="mx-0.75 not-nth-of-type-2:ml-3 nth-of-type-2:ml-2.75">
+              {menu}
+            </span>
+          ))}
         </div>
       </div>
       <span className="border-dark-gray mr-0.5 inline-block h-full w-10 border-b-2 bg-black p-1">
@@ -163,40 +165,56 @@ function MenuBar() {
   );
 }
 
-function FileExplorerToolBar() {
+function FileExplorerToolBar({ address }: { address: string }) {
   return (
-    <div className="ml-0.5 w-full">
-      <div className="bg-light-gray mr-0.5 mb-0.5 h-12 px-0.75 py-0.5">
-        <DoubleSeparator />
-        <ToolBarButton label="Back" iconPath="/icons/back.png" isDisable />
-      </div>
-      <div className="font-ms-sans ml-0.5 w-full text-sm font-normal">
-        <div className="bg-light-gray mr-0.5 h-8 w-full px-0.75 py-0.5">
-          <div className="flex size-full items-center gap-x-1">
-            <DoubleSeparator />
-            <div className="flex">
-              <p>Address</p>
-              <div>
-                <input />
-              </div>
-            </div>
-          </div>
+    <div className="w-full border-2 border-t-0 border-white">
+      <div className="bg-light-gray mb-0.5 flex h-12 items-center gap-x-0.75 px-0.75">
+        <span className="inline-block h-full py-0.5">
+          <DoubleSeparator />
+        </span>
+        <div className="flex h-full items-center gap-x-0.75">
+          <ToolBarButton label="Back" iconPath={getAssetsUrl("/icons/drive.png")} />
+          <ToolBarButton label="Back" iconPath={getAssetsUrl("/icons/drive.png")} />
+
+          {/* SEPARATOR */}
+          <span className="inline-block h-full w-fit py-1">
+            <Separator />
+          </span>
+
+          <ToolBarButton label="Back" iconPath={getAssetsUrl("/icons/drive.png")} />
         </div>
       </div>
+      <AddressBar address={address} />
     </div>
   );
 }
 
-function BrowserToolBar() {
+function BrowserToolBar({ address }: { address: string }) {
+  return <AddressBar address={address} />;
+}
+
+function AddressBar({ address }: { address: string }) {
   return (
-    <div className="font-ms-sans ml-0.5 w-full text-sm font-normal">
-      <div className="bg-light-gray mr-0.5 h-8 w-full px-0.75 py-0.5">
+    <div className="font-ms-sans w-full text-sm font-normal">
+      <div className="bg-light-gray h-8 w-full px-0.75">
         <div className="flex size-full items-center gap-x-1">
-          <DoubleSeparator />
-          <div className="flex">
+          <span className="inline-block h-full py-0.5">
+            <DoubleSeparator />
+          </span>
+          <div className="flex h-full w-full flex-1 items-center gap-x-0.5">
             <p>Address</p>
-            <div>
-              <input />
+            <div className="relative mr-0.75 ml-1.75 flex h-full w-full flex-1 items-center gap-x-1">
+              {/* BORDER */}
+              <span className="border-dark-gray pointer-events-none absolute inset-0 size-full border-t-2 border-l-2 bg-transparent" />
+              <span className="pointer-events-none absolute inset-0 size-full border-r-2 border-b-2 border-white bg-transparent" />
+
+              <span className="inline-block h-full px-1 py-1.75">
+                <img src={getAssetsUrl("/icons/folder.png")} className="size-full object-contain" />
+              </span>
+              <input
+                value={address}
+                className="size-full border-none font-normal ring-0 outline-none"
+              />
             </div>
           </div>
         </div>
@@ -215,8 +233,18 @@ function ToolBarButton({
   isDisable?: boolean;
 }) {
   return (
-    <button disabled={isDisable} className="bg-blue-500">
-      {label}
+    <button
+      disabled={isDisable}
+      className="group relative h-full w-12 shrink-0 border-0 bg-transparent py-1 ring-0 outline-none"
+    >
+      <span className="group-hover:border-dark-gray pointer-events-auto absolute inset-0 size-full bg-transparent group-hover:border-t-2 group-hover:border-l-2 group-active:border-white" />
+      <span className="group-active:border-dark-gray pointer-events-auto absolute inset-0 size-full bg-transparent group-hover:border-r-2 group-hover:border-b-2 group-hover:border-white" />
+      <div className="flex size-full flex-col gap-y-0.5">
+        <span className="inline-block size-full flex-1 px-2">
+          <img src={iconPath} className="size-full object-contain" />
+        </span>
+        <span className="font-ms-sans text-xs leading-3">{label}</span>
+      </div>
     </button>
   );
 }

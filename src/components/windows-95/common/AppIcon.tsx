@@ -1,4 +1,4 @@
-import { getAssetsUrl } from "@/lib/utils";
+import { cn, getAssetsUrl } from "@/lib/utils";
 
 import useStore from "@/zustand/store";
 import type { AppType } from "@/types/app";
@@ -6,11 +6,12 @@ import type { Browser, FileExplorer } from "@/types/window";
 
 function AppIcon({
   name,
+  type,
   position,
   address,
   iconPath,
-  type,
-}: AppType & { setAppUpdate: React.Dispatch<React.SetStateAction<AppType[]>> }) {
+  className,
+}: AppType & { onUpdate: React.Dispatch<React.SetStateAction<AppType[]>>; className?: string }) {
   const { toggleAppState, handleLaunchApp, apps } = useStore((state) => state);
 
   const launchApp = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -53,7 +54,10 @@ function AppIcon({
       style={{
         ...(position && { transform: `translate(${position.x}, ${position.y})` }),
       }}
-      className="win95-icon group flex max-w-20 flex-col items-center justify-start gap-y-2 border-0 outline-none select-none focus:ring-0 focus:outline-none"
+      className={cn(
+        "win95-icon group flex max-w-20 flex-col items-center justify-start gap-y-2 border-0 outline-none select-none focus:ring-0 focus:outline-none",
+        className,
+      )}
     >
       <div className="win95-icon-checker h-8 w-8">
         <img src={getAssetsUrl(iconPath)} className="size-full object-fill" />

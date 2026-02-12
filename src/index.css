@@ -50,6 +50,13 @@
     /* prevent stretching items to full track height */
     align-items: start;
   }
+
+  .window-grid {
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 16px;
+    row-gap: 8px;
+  }
 }
 
 /* Custom Utility Classes */
