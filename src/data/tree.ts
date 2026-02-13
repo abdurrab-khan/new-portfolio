@@ -13,7 +13,7 @@ const DataTree: DataTreeType = {
         data: {
           name: "My Documents",
           type: "folder",
-          iconPath: "/icons/my-documents.png",
+          iconPath: "/icons/folder.png",
           address: "C:\\My Documents",
         },
       },
@@ -320,6 +320,7 @@ const DataTree: DataTreeType = {
         data: {
           name: "BOOTLOG.TXT",
           type: "text",
+          content: "",
           iconPath: "/icons/text.png",
           address: "C:\\BOOTLOG.TXT",
         },

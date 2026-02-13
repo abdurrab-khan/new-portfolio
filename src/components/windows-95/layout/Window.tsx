@@ -3,25 +3,32 @@ import useStore from "@/zustand/store";
 
 import View from "./View";
 import Button from "../common/Button";
+import Separator from "../common/Separator";
 import DoubleSeparator from "../common/DoubleSeparator";
 import explorerIcon from "@/assets/icons/explorer.png";
 
 import { getAssetsUrl } from "@/lib/utils";
 
-import type { Browser, FileExplorer } from "@/types/window";
-import Separator from "../common/Separator";
+import type { WindowContent } from "@/types/window";
 
 interface IWindowLayoutProps {
+  app: WindowContent;
   children: React.ReactNode;
-  app: Browser | FileExplorer;
 }
 
-function Window({ children, app }: IWindowLayoutProps) {
+function Window({ app, children }: IWindowLayoutProps) {
   const { id, type, address, position, size, titleBar } = app;
   const { toggleAppState, handleCloseApp } = useStore((state) => state);
 
   return (
-    <View style={{ transform: `translate(${position.x + 20}px, ${position.y + 20}px)` }}>
+    <View
+      style={{
+        position: "absolute",
+        left: position.x + "px",
+        top: position.y + "px",
+        zIndex: "var(--window-z-index)",
+      }}
+    >
       <div
         style={{
           height: size.height,
@@ -43,7 +50,7 @@ function Window({ children, app }: IWindowLayoutProps) {
 
             {/* MANAGE STATE */}
             <div className="flex h-full items-center gap-x-2.5 py-1.25">
-              {(type === "browser" || type === "file-explorer") && (
+              {type !== "alert" && (
                 <>
                   {/* MINIMIZE BUTTON */}
                   <div className="h-full w-5">

@@ -1,4 +1,4 @@
-import type { AppType } from "./app";
+import type { App } from "./app";
 
 // Main window types used in the application
 type Windows = {
@@ -19,14 +19,19 @@ type Windows = {
   };
 };
 
-type Browser = Windows & {
-  type?: "browser";
-  contents?: React.ReactNode;
+type AppType = "file-explorer" | "browser" | "image-viewer" | "text-editor" | "browser" | "alert";
+
+type WindowContent<T extends AppType = AppType> = Windows & {
+  type: T;
+  contents?: T extends "file-explorer"
+    ? App[]
+    : T extends "browser"
+      ? React.ReactNode
+      : T extends "image-viewer"
+        ? string
+        : T extends "text-editor"
+          ? string
+          : never;
 };
 
-type FileExplorer = Windows & {
-  type?: "file-explorer";
-  contents?: AppType[];
-};
-
-export type { Browser, FileExplorer };
+export type { WindowContent };

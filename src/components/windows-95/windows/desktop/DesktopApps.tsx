@@ -1,19 +1,17 @@
 import { useState } from "react";
 import AppIcon from "../../common/AppIcon";
-import type { AppType } from "@/types/app";
+import type { App } from "@/types/app";
 import { getChildren, getNode } from "@/utils/tree-utils";
 
 const DESKTOP_APPS = getChildren(getNode("C:\\Windows\\Desktop"));
 
 function DesktopApps() {
-  const [desktopApps, setDesktopApps] = useState<AppType[]>(DESKTOP_APPS);
-
-  console.log("Desktop Apps: ", desktopApps);
+  const [desktopApps, setDesktopApps] = useState<App[]>(DESKTOP_APPS);
 
   return (
     <div className="app-grid size-full">
       {desktopApps.map((da, idx) => (
-        <AppIcon key={idx} onUpdate={setDesktopApps} {...da} />
+        <AppIcon key={idx} app={da} onUpdate={setDesktopApps} />
       ))}
     </div>
   );

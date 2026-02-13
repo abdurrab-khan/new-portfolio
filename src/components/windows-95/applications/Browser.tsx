@@ -1,10 +1,9 @@
-import React from "react";
 import Window from "../layout/Window";
 
-import type { FileExplorer, Browser as BrowserT } from "@/types/window";
+import type { WindowContent } from "@/types/window";
 
 interface IBrowserProps {
-  app: BrowserT | FileExplorer;
+  app: WindowContent<"browser">;
 }
 
 function Browser({ app }: IBrowserProps) {

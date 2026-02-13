@@ -24,6 +24,7 @@
     --taskbar-height: 3rem;
     --window-titlebar-height: 1.5rem;
 
+    --window-z-index: 500;
     --taskbar-z-index: 1000;
   }
 }

@@ -1,14 +1,14 @@
 import { useState } from "react";
 
 import Window from "../layout/Window";
+import AppIcon from "../common/AppIcon";
 
 import { getChildren, getNode } from "@/utils/tree-utils";
 
-import type { FileExplorer as FileExplorerT, Browser } from "@/types/window";
-import AppIcon from "../common/AppIcon";
+import type { WindowContent } from "@/types/window";
 
 interface IFileExplorerProps {
-  app: Browser | FileExplorerT;
+  app: WindowContent<"file-explorer">;
 }
 
 function FileExplorer({ app }: IFileExplorerProps) {
@@ -22,9 +22,9 @@ function FileExplorer({ app }: IFileExplorerProps) {
         {locatedFile.map((lf) => (
           <AppIcon
             key={lf.address}
+            app={lf}
             className="h-17 w-56 shrink-0"
             onUpdate={setLocatedFile}
-            {...lf}
           />
         ))}
       </div>

@@ -1,9 +1,9 @@
 import App from "./App";
 import useAppStateManager from "@/hooks/useAppStateManager";
-import type { Browser, FileExplorer } from "@/types/window";
+import type { WindowContent } from "@/types/window";
 
 interface ITraskBarAppsProps {
-  openedApps: (Browser | FileExplorer)[];
+  openedApps: WindowContent[];
 }
 
 function TaskBarApps({ openedApps }: ITraskBarAppsProps) {
