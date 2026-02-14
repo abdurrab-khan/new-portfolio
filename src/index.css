@@ -25,6 +25,7 @@
     --window-titlebar-height: 1.5rem;
 
     --window-z-index: 500;
+    --app-z-index: 600;
     --taskbar-z-index: 1000;
   }
 }

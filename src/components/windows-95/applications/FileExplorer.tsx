@@ -14,8 +14,6 @@ interface IFileExplorerProps {
 function FileExplorer({ app }: IFileExplorerProps) {
   const [locatedFile, setLocatedFile] = useState(getChildren(getNode(app.address)));
 
-  console.log("Located File:", app);
-
   return (
     <Window app={app}>
       <div className="window-grid size-full overflow-auto p-1.5">

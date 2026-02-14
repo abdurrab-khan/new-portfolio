@@ -1,4 +1,5 @@
-import React from "react";
+import React, { type RefObject } from "react";
+import useMove from "@/hooks/useMove";
 import useStore from "@/zustand/store";
 
 import View from "./View";
@@ -18,6 +19,16 @@ interface IWindowLayoutProps {
 
 function Window({ app, children }: IWindowLayoutProps) {
   const { id, type, address, position, size, titleBar } = app;
+
+  const navContainerRef = React.useRef<HTMLDivElement>(null);
+  const mainContainerRef = React.useRef<HTMLDivElement>(null);
+  const overLaysContainerRef = React.useRef<HTMLDivElement>(null);
+  const x = useMove(
+    overLaysContainerRef as RefObject<HTMLElement>,
+    navContainerRef as RefObject<HTMLElement>,
+    mainContainerRef as RefObject<HTMLElement>,
+  );
+
   const { toggleAppState, handleCloseApp } = useStore((state) => state);
 
   return (
@@ -28,18 +39,27 @@ function Window({ app, children }: IWindowLayoutProps) {
         top: position.y + "px",
         zIndex: "var(--window-z-index)",
       }}
+      ref={mainContainerRef}
     >
+      <div
+        ref={overLaysContainerRef}
+        className="border-yellow pointer-events-none absolute inset-0 z-(--window-z-index) size-full border-4 bg-transparent opacity-0"
+      />
+
       <div
         style={{
           height: size.height,
           width: size.width,
         }}
-        className="flex h-100! min-h-(--window-titlebar-height) min-w-96 flex-col overflow-hidden select-none"
+        className="flex min-h-(--window-titlebar-height) min-w-96 flex-col overflow-hidden select-none"
       >
         {/* NAV SECTION */}
         <div className="flex w-full shrink-0 flex-col">
           {/* TITLE BAR */}
-          <div className="bg-navy-blue flex size-full max-h-(--window-titlebar-height) items-center justify-between px-1.5">
+          <div
+            ref={navContainerRef}
+            className="bg-navy-blue flex size-full max-h-(--window-titlebar-height) items-center justify-between px-1.5"
+          >
             {/* TITLE */}
             <div className="flex items-center gap-x-0.75">
               <span className="size-3.75">
