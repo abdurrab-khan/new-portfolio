@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import Window from "../layout/Window";
+import Window from "../layout/window/Window";
 import AppIcon from "../common/AppIcon";
 
 import { getChildren, getNode } from "@/utils/tree-utils";
@@ -16,14 +16,9 @@ function FileExplorer({ app }: IFileExplorerProps) {
 
   return (
     <Window app={app}>
-      <div className="window-grid size-full overflow-auto p-1.5">
-        {locatedFile.map((lf) => (
-          <AppIcon
-            key={lf.address}
-            app={lf}
-            className="h-17 w-56 shrink-0"
-            onUpdate={setLocatedFile}
-          />
+      <div className="window-grid win95-scroll size-full overflow-y-auto p-1.5">
+        {[...locatedFile].map((lf) => (
+          <AppIcon key={lf.address} app={lf} className="shrink-0" />
         ))}
       </div>
     </Window>

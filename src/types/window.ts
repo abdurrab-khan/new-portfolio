@@ -34,4 +34,4 @@ type WindowContent<T extends AppType = AppType> = Windows & {
           : never;
 };
 
-export type { WindowContent };
+export type { WindowContent, AppType };

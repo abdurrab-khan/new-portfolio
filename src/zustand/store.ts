@@ -1,15 +1,16 @@
 import { create } from "zustand";
-import type { Browser, FileExplorer } from "@/types/window";
+import type { WindowContent } from "@/types/window";
 
 interface IStore {
-  apps: Array<Browser | FileExplorer>;
+  apps: WindowContent[];
 }
 
 interface IStoreActions {
-  handleLaunchApp: (app: Browser | FileExplorer) => void;
+  handleLaunchApp: (app: WindowContent) => void;
   handleCloseApp: (appId: string) => void;
   toggleAppState: (appId: string) => void;
-  updateAppState: (appId: string, update: Partial<Browser | FileExplorer>) => void;
+  toggleAppSize: (appId: string) => void;
+  updateAppState: (appId: string, update: Partial<WindowContent>) => void;
 }
 
 const useStore = create<IStore & IStoreActions>((set) => ({
@@ -43,6 +44,18 @@ const useStore = create<IStore & IStoreActions>((set) => ({
           ? {
               ...a,
               state: a.state === "open" ? "minimized" : "open",
+            }
+          : a,
+      ),
+    }));
+  },
+  toggleAppSize(appId) {
+    set((prevState) => ({
+      apps: prevState.apps.map((a) =>
+        a.id === appId
+          ? {
+              ...a,
+              state: a.state === "full" ? "open" : "full",
             }
           : a,
       ),

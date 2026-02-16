@@ -17,7 +17,9 @@ function AppIcon({ app, className }: IAppProps) {
 
   const btnRef = useRef<HTMLButtonElement>(null);
   const btnOverlays = useRef<HTMLDivElement>(null);
-  const move = useMove(btnOverlays as RefObject<HTMLElement>, btnRef as RefObject<HTMLElement>);
+
+  // useMove will handle the logic for moving the app icon around when the user clicks and drags it.
+  useMove(btnOverlays as RefObject<HTMLElement>, btnRef as RefObject<HTMLElement>);
 
   const { toggleAppState, handleLaunchApp, apps } = useStore((state) => state);
 
@@ -46,19 +48,19 @@ function AppIcon({ app, className }: IAppProps) {
       title={name}
       onClick={launchApp}
       className={cn(
-        "win95-icon group relative max-w-20 border-0 outline-none select-none focus:ring-0 focus:outline-none",
+        "win95-icon group relative max-h-24 w-20 border-0 outline-none select-none focus:ring-0 focus:outline-none",
         className,
       )}
     >
       <div className="flex size-full flex-col items-center justify-start gap-y-2">
-        <div className="win95-icon-checker h-8 w-8">
+        <div className="win95-icon-checker size-8">
           <img
             src={getAssetsUrl(iconPath)}
             className="size-full object-fill select-none"
             draggable={"false"}
           />
         </div>
-        <div className="border-yellow group-focus:bg-navy-blue max-h-9 w-full overflow-hidden text-center leading-4.5 group-focus:border-2 group-focus:border-dashed group-focus:text-white">
+        <div className="group-focus:bg-navy-blue group-focus:border-yellow max-h-9 w-full overflow-hidden border-2 border-dashed border-transparent text-center leading-4.5 group-focus:text-white">
           <span className="font-ms-sans [display:-webkit-box] overflow-hidden text-sm leading-3.5 font-light wrap-break-word text-ellipsis text-white [-webkit-box-orient:vertical] [-webkit-line-clamp:2]">
             {name}
           </span>
@@ -70,14 +72,14 @@ function AppIcon({ app, className }: IAppProps) {
         ref={btnOverlays}
         className="absolute inset-0 flex size-full flex-col items-center justify-start gap-y-2 opacity-0"
       >
-        <div className="win95-icon-checker h-8 w-8">
+        <div className="win95-icon-checker size-8">
           <img
             src={getAssetsUrl(iconPath)}
             className="size-full object-fill select-none"
             draggable={"false"}
           />
         </div>
-        <div className="border-yellow group-focus:bg-navy-blue max-h-9 w-full overflow-hidden text-center leading-4.5 group-focus:border-2 group-focus:border-dashed group-focus:text-white">
+        <div className="group-focus:bg-navy-blue group-focus:border-yellow max-h-9 w-full overflow-hidden border-2 border-dashed border-transparent text-center leading-4.5 group-focus:text-white">
           <span className="font-ms-sans [display:-webkit-box] overflow-hidden text-sm leading-3.5 font-light wrap-break-word text-ellipsis text-white [-webkit-box-orient:vertical] [-webkit-line-clamp:2]">
             {name}
           </span>

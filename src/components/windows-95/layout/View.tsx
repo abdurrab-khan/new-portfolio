@@ -1,12 +1,14 @@
 import React from "react";
 
-interface IViewProps extends React.HTMLAttributes<HTMLDivElement> {
+interface IViewProps
+  extends React.HTMLAttributes<HTMLDivElement>, React.RefAttributes<HTMLDivElement> {
   children: React.ReactNode;
 }
 
-function View({ children, ...props }: IViewProps) {
+function View({ children, ref, ...props }: IViewProps) {
   return (
     <div
+      ref={ref}
       className="bg-light-gray pointer-events-auto relative size-max border-r-2 border-b-2 border-black"
       {...props}
     >

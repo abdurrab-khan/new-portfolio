@@ -1,4 +1,4 @@
-import Window from "../layout/Window";
+import Window from "../layout/window/Window";
 
 import type { WindowContent } from "@/types/window";
 

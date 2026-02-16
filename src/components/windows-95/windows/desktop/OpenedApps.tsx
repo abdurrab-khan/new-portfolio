@@ -8,7 +8,7 @@ function OpenedApps() {
   return (
     <div className="pointer-events-none absolute inset-0 size-full">
       {openedApps
-        .filter((app) => app.state === "open")
+        .filter((app) => app.state !== "minimized")
         .map((app) =>
           app.type === "file-explorer" ? (
             <FileExplorer key={app.id} app={app} />
