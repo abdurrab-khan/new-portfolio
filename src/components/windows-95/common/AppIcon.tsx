@@ -6,6 +6,7 @@ import type { App } from "@/types/app";
 import { cn, getAssetsUrl } from "@/lib/utils";
 import { getAppData } from "@/lib/windowUtils";
 import useMove from "@/hooks/useMove";
+import { motion } from "motion/react";
 
 interface IAppProps {
   app: App;
@@ -19,7 +20,10 @@ function AppIcon({ app, className }: IAppProps) {
   const btnOverlays = useRef<HTMLDivElement>(null);
 
   // useMove will handle the logic for moving the app icon around when the user clicks and drags it.
-  useMove(btnOverlays as RefObject<HTMLElement>, btnRef as RefObject<HTMLElement>);
+  const { x, y } = useMove({
+    targetRef: btnRef as RefObject<HTMLElement>,
+    overLaysRef: btnOverlays as RefObject<HTMLElement>,
+  });
 
   const { toggleAppState, handleLaunchApp, apps } = useStore((state) => state);
 
@@ -48,7 +52,7 @@ function AppIcon({ app, className }: IAppProps) {
       title={name}
       onClick={launchApp}
       className={cn(
-        "win95-icon group relative max-h-24 w-20 border-0 outline-none select-none focus:ring-0 focus:outline-none",
+        "win95-icon group x-0 y-0 relative max-h-24 w-20 border-0 outline-none select-none focus:ring-0 focus:outline-none",
         className,
       )}
     >
@@ -68,8 +72,12 @@ function AppIcon({ app, className }: IAppProps) {
       </div>
 
       {/* OVERLAYS VERSION */}
-      <div
+      <motion.div
         ref={btnOverlays}
+        style={{
+          translateX: x,
+          translateY: y,
+        }}
         className="absolute inset-0 flex size-full flex-col items-center justify-start gap-y-2 opacity-0"
       >
         <div className="win95-icon-checker size-8">
@@ -84,7 +92,7 @@ function AppIcon({ app, className }: IAppProps) {
             {name}
           </span>
         </div>
-      </div>
+      </motion.div>
     </button>
   );
 }

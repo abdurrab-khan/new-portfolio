@@ -31,7 +31,7 @@ const useStore = create<IStore & IStoreActions>((set) => ({
         a.id === appId
           ? {
               ...a,
-              update,
+              ...update,
             }
           : a,
       ),

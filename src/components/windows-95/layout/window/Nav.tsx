@@ -14,14 +14,14 @@ interface INavProps {
   id: string;
   type: AppType;
   address: string;
-  navContainerRef: React.RefObject<HTMLDivElement | null>;
+  navRef: React.RefObject<HTMLDivElement | null>;
   titleBar: {
     title: string;
     iconPath: string;
   };
 }
 
-function Nav({ id, type, address, titleBar, navContainerRef }: INavProps) {
+function Nav({ id, type, address, titleBar, navRef }: INavProps) {
   const { toggleAppState, toggleAppSize, handleCloseApp } = useStore((state) => state);
 
   return (
@@ -30,7 +30,7 @@ function Nav({ id, type, address, titleBar, navContainerRef }: INavProps) {
       <div className="bg-navy-blue flex size-full max-h-(--window-titlebar-height) items-center justify-between">
         <div
           className="flex size-full flex-1 cursor-grab items-center gap-x-0.75 pl-1.5 active:cursor-grabbing"
-          ref={navContainerRef}
+          ref={navRef}
         >
           <span className="size-3.75">
             <img src={getAssetsUrl(titleBar.iconPath)} className="size-full object-contain" />
