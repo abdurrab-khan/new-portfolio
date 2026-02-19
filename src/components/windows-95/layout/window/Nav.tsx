@@ -182,7 +182,9 @@ function ToolBar({ type, address }: { type: AppType; address: string }) {
 
                 <span className="inline-block h-full px-1 py-1.75">
                   <img
-                    src={getAssetsUrl("/icons/folder.png")}
+                    src={getAssetsUrl(
+                      `${type === "file-explorer" ? "/icons/folder.png" : "/icons/explorer.png"}`,
+                    )}
                     className="size-full object-contain"
                   />
                 </span>
