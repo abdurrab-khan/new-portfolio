@@ -1,12 +1,14 @@
-import React from "react";
-import SideBar from "./SideBar";
-import Main from "./Main";
+import { useState } from "react";
+import Body from "./Body";
+import Header from "./Header";
 
 function Portfolio() {
+  const [currentTab, setCurrentTab] = useState("home");
+
   return (
-    <div className="relative flex size-full items-start gap-x-3 overflow-y-auto p-1">
-      <SideBar />
-      <Main />
+    <div className="flex size-full flex-1 shrink-0 flex-col items-center justify-start overflow-y-auto bg-gray-800">
+      <Header currentTab={currentTab} setCurrentTab={setCurrentTab} />
+      <Body currentTab={currentTab} />
     </div>
   );
 }
