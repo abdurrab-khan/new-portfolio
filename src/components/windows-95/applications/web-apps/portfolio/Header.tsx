@@ -16,7 +16,7 @@ function Header({
 
   return (
     <section className="w-full">
-      <div className="bg-linear-to-b from-[#195ff8] to-[#180083] py-6 text-center text-white">
+      <div className="text-yellow bg-linear-to-b from-[#195ff8] to-[#180083] py-4 text-center">
         <h1
           className="text-5xl font-bold tracking-widest uppercase"
           style={{
