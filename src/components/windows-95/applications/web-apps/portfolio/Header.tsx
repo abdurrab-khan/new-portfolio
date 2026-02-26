@@ -15,7 +15,7 @@ function Header({
   };
 
   return (
-    <section className="w-full">
+    <section className="w-full shrink-0">
       <div className="text-yellow bg-linear-to-b from-[#195ff8] to-[#180083] py-4 text-center">
         <h1
           className="text-5xl font-bold tracking-widest uppercase"

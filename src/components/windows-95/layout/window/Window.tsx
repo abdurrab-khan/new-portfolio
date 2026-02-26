@@ -57,9 +57,10 @@ function Window({ app, children }: IWindowLayoutProps) {
       />
 
       <div
+        id="xxxx"
         style={{
-          height: state === "full" ? "100%" : size.height,
-          width: state === "full" ? "100%" : size.width,
+          height: state === "full" ? "calc(100vh - 14px)" : size.height,
+          width: state === "full" ? "calc(100vw - 14px)" : size.width,
         }}
         className="flex min-h-(--window-titlebar-height) min-w-96 flex-col overflow-hidden select-none"
       >

@@ -38,7 +38,7 @@ function BorderContainer({ children, className }: BorderContainerProps) {
         className="pointer-events-none absolute inset-0 rounded-xl border-6 border-purple-200 bg-purple-200"
         style={{ filter: `url(#${FILTER_ID})` }}
       />
-      <div className="relative z-10 h-full w-full rounded-lg border-2 border-t-purple-800 border-r-purple-300 border-b-purple-300 border-l-purple-800 bg-white p-4">
+      <div className="relative z-10 h-fit w-full rounded-lg border-2 border-t-purple-800 border-r-purple-300 border-b-purple-300 border-l-purple-800 bg-white p-2">
         {children}
       </div>
     </div>

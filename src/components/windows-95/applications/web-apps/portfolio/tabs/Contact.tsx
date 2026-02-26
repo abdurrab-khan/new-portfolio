@@ -1,8 +1,14 @@
 import React from "react";
+import TabContainer from "./TabContainer";
 
 function Contact() {
   return (
-    <div className="flex size-full flex-col items-center justify-center gap-y-4">Contact Tab</div>
+    <TabContainer titleImagePath="/assets/windows-95/applications/web-apps/portfolio/contact-title.png">
+      <div className="flex size-full h-76! flex-1 flex-col items-start justify-between">
+        <div>Hello</div>
+        <div className="w-full text-end">World</div>
+      </div>
+    </TabContainer>
   );
 }
 

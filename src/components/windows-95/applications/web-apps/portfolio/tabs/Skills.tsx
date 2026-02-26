@@ -1,8 +1,16 @@
 import React from "react";
+import TabContainer from "./TabContainer";
 
 function Skills() {
   return (
-    <div className="flex size-full flex-col items-center justify-center gap-y-4">Skills Tab</div>
+    <TabContainer titleImagePath="/assets/windows-95/applications/web-apps/portfolio/skills-title.png">
+      <div>
+        <div className="h-20 w-full bg-blue-500" />
+        <div className="h-20 w-full bg-blue-500" />
+        <div className="h-20 w-full bg-blue-500" />
+        <div className="h-20 w-full bg-blue-500" />
+      </div>
+    </TabContainer>
   );
 }
 

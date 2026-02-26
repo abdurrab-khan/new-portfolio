@@ -25,10 +25,8 @@ function Body({ currentTab }: { currentTab: string }) {
   }
 
   return (
-    <section className="relative size-full flex-1 bg-red-500">
-      <BorderContainer className="absolute top-8 right-1/2 h-full min-h-6/7 w-4/5 translate-x-1/2">
-        {content}
-      </BorderContainer>
+    <section className="flex h-fit w-full flex-1 items-start justify-center pt-8">
+      <BorderContainer className="h-fit w-4/5">{content}</BorderContainer>
     </section>
   );
 }
