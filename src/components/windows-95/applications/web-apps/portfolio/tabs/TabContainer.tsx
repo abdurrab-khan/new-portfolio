@@ -8,9 +8,9 @@ function TabContainer({
   titleImagePath: string;
 }) {
   return (
-    <div className="flex size-full flex-col gap-y-2">
+    <div className="bg-light-gray flex size-full flex-col gap-y-2">
       <span className="h-18 w-full bg-blue-500"></span>
-      <div className="bg-yellow h-fit min-h-76 w-full flex-1">{children}</div>
+      <div className="h-fit min-h-76 w-full flex-1">{children}</div>
     </div>
   );
 }
