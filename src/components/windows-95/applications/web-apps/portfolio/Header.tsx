@@ -34,8 +34,10 @@ function Header({
             <li
               key={item}
               className={cn(
-                "cursor-pointer rounded-lg bg-white px-6 py-2 text-lg font-semibold text-gray-800 hover:bg-gray-200",
-                currentTab === item.toLowerCase() && "bg-gray-300",
+                "cursor-pointer bg-[#c0c0c0] px-6 py-2 text-lg font-bold text-gray-800 uppercase",
+                "border-2 border-t-white border-r-black border-b-black border-l-white shadow-sm",
+                currentTab === item.toLowerCase() &&
+                  "border-t-black border-r-white border-b-white border-l-black bg-[#d4d4d4]",
               )}
               onClick={() => handleTabClick(item)}
             >
