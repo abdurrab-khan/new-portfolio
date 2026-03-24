@@ -30,6 +30,7 @@ const getAppData = (app: App, screenSize: { height: number; width: number }) => 
   // Create the window data based on the app data
   const windowData: WindowContent = {
     id: `${Date.now()}_${name.replace(" ", "").toLowerCase()}`,
+    zIndex: 1,
     state: "open",
     type: appType,
     address,

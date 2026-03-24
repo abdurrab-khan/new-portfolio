@@ -2,26 +2,36 @@ import { useEffect, useState } from "react";
 import Separator from "../../common/Separator";
 import soundIcon from "@/assets/icons/sound.png";
 
-function SystemTray() {
-  const [date, setDate] = useState<{ hour: string; minute: string }>({ hour: "00", minute: "00" });
+const formatTime = (date: Date) =>
+  date.toLocaleTimeString([], {
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false,
+  });
 
-  const updateTime = () => {
-    const date = new Date(Date.now());
-    setDate(() => ({
-      hour: date.getHours().toString(),
-      minute: date.getMinutes().toString(),
-    }));
-  };
+function SystemTray() {
+  const [time, setTime] = useState(() => formatTime(new Date()));
 
   useEffect(() => {
+    let minuteInterval: ReturnType<typeof setInterval> | null = null;
+    let startTimeout: ReturnType<typeof setTimeout> | null = null;
+
+    const updateTime = () => {
+      setTime(formatTime(new Date()));
+    };
+
     updateTime();
 
-    const interval = setInterval(() => {
+    // Align updates with real minute boundaries to avoid interval drift.
+    const msUntilNextMinute = 60000 - (Date.now() % 60000);
+    startTimeout = setTimeout(() => {
       updateTime();
-    }, 60000);
+      minuteInterval = setInterval(updateTime, 60000);
+    }, msUntilNextMinute);
 
     return () => {
-      clearInterval(interval);
+      if (startTimeout) clearTimeout(startTimeout);
+      if (minuteInterval) clearInterval(minuteInterval);
     };
   }, []);
 
@@ -36,7 +46,7 @@ function SystemTray() {
           <div className="h-[60%]">
             <img src={soundIcon} className="size-full object-contain" />
           </div>
-          <span className="font-ms-sans-bold font-light!">{`${date.hour}:${date.minute}`}</span>
+          <span className="font-ms-sans-bold font-light!">{time}</span>
         </div>
       </div>
     </div>

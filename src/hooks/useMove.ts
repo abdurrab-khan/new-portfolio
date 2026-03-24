@@ -36,27 +36,23 @@ function useMove({ id, targetRef, overLaysRef, defaultPosition = { x: 0, y: 0 } 
   });
 
   useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      if (!isDragging.current || !startMouse.current) return;
-
-      const deltaX = e.clientX - startMouse.current.x;
-      const deltaY = e.clientY - startMouse.current.y;
-
-      // Only start moving after exceeding the drag threshold
-      if (!hasMoved.current) {
-        if (Math.abs(deltaX) < DRAG_THRESHOLD && Math.abs(deltaY) < DRAG_THRESHOLD) return;
-        hasMoved.current = true;
-        overLaysRef.current.style.opacity = "0.5";
-      }
-
-      mX.set(deltaX);
-      mY.set(deltaY);
+    const setGlobalGrabbingCursor = () => {
+      document.body.style.cursor = "grabbing";
     };
 
-    const handleMouseUp = () => {
+    const clearGlobalGrabbingCursor = () => {
+      document.body.style.cursor = "";
+    };
+
+    const stopDragging = () => {
       if (!isDragging.current) return;
+
       isDragging.current = false;
-      overLaysRef.current.style.opacity = "0";
+      clearGlobalGrabbingCursor();
+
+      if (overLaysRef.current) {
+        overLaysRef.current.style.opacity = "0";
+      }
 
       if (hasMoved.current) {
         if (id) {
@@ -67,7 +63,7 @@ function useMove({ id, targetRef, overLaysRef, defaultPosition = { x: 0, y: 0 } 
               y: Math.round(defaultPosition.y + mY.get()),
             },
           });
-        } else {
+        } else if (targetRef.current) {
           // AppIcon: accumulate the drag delta onto the existing transform.
           const currentTransform = targetRef.current.style.transform;
           const match = currentTransform.match(/translate\(\s*([^,]+)px,\s*([^)]+)px\s*\)/);
@@ -84,8 +80,38 @@ function useMove({ id, targetRef, overLaysRef, defaultPosition = { x: 0, y: 0 } 
       mY.set(0);
     };
 
+    const handleMouseMove = (e: MouseEvent) => {
+      if (!isDragging.current || !startMouse.current) return;
+
+      // Fallback for cases where mouseup happened outside the viewport and wasn't captured.
+      if (e.buttons === 0) {
+        stopDragging();
+        return;
+      }
+
+      const deltaX = e.clientX - startMouse.current.x;
+      const deltaY = e.clientY - startMouse.current.y;
+
+      // Only start moving after exceeding the drag threshold
+      if (!hasMoved.current) {
+        if (Math.abs(deltaX) < DRAG_THRESHOLD && Math.abs(deltaY) < DRAG_THRESHOLD) return;
+        hasMoved.current = true;
+        if (overLaysRef.current) {
+          overLaysRef.current.style.opacity = "0.5";
+        }
+      }
+
+      mX.set(deltaX);
+      mY.set(deltaY);
+    };
+
+    const handleMouseUp = () => {
+      stopDragging();
+    };
+
     const handleMouseDown = (e: MouseEvent) => {
       isDragging.current = true;
+      setGlobalGrabbingCursor();
       hasMoved.current = false;
       startMouse.current = { x: e.clientX, y: e.clientY };
       // Reset offset to 0 — overlay starts aligned with the element.
@@ -94,16 +120,24 @@ function useMove({ id, targetRef, overLaysRef, defaultPosition = { x: 0, y: 0 } 
     };
 
     const target = targetRef.current;
-    target.addEventListener("mousedown", handleMouseDown);
+    if (target) {
+      target.addEventListener("mousedown", handleMouseDown);
+    }
     window.addEventListener("mousemove", handleMouseMove);
     window.addEventListener("mouseup", handleMouseUp);
+    window.addEventListener("blur", stopDragging);
+    document.addEventListener("mouseleave", stopDragging);
 
     return () => {
+      stopDragging();
+
       if (target) {
         target.removeEventListener("mousedown", handleMouseDown);
       }
       window.removeEventListener("mousemove", handleMouseMove);
       window.removeEventListener("mouseup", handleMouseUp);
+      window.removeEventListener("blur", stopDragging);
+      document.removeEventListener("mouseleave", stopDragging);
     };
   }, [defaultPosition, id, mX, mY, overLaysRef, targetRef, updateApp]);
 

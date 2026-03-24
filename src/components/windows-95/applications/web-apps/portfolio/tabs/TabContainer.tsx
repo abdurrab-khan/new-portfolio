@@ -14,7 +14,7 @@ function TabContainer({ children, title }: { children: React.ReactNode; title: s
           {title}
         </p>
       </span>
-      <div className="mx-auto w-4/5 rounded-sm border-2 border-t-white border-l-white border-b-dark-gray border-r-dark-gray bg-[#c0c0c0] p-px">
+      <div className="border-b-dark-gray border-r-dark-gray mx-auto w-4/5 rounded-sm border-2 border-t-white border-l-white bg-[#c0c0c0] p-px">
         <div className="flex flex-col gap-[2px]">
           <div className="h-px w-full bg-white opacity-90" />
           <div className="h-px w-full bg-[#808080]" />

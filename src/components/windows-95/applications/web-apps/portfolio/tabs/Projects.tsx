@@ -120,6 +120,20 @@ function RetroButton({
 }
 
 function Projects() {
+  const [selectedProject, setSelectedProject] = useState<Pick<
+    ProjectData,
+    "title" | "videoPath"
+  > | null>(null);
+
+  const handleOpenPreview = (project: ProjectData) => {
+    setSelectedProject({
+      title: project.title,
+      videoPath: project.videoPath,
+    });
+  };
+
+  const handleClosePreview = () => setSelectedProject(null);
+
   return (
     <TabContainer title="Projects">
       <div className="flex flex-col gap-6 p-4 text-sm text-black">
@@ -127,9 +141,9 @@ function Projects() {
           {projects.map((project) => (
             <fieldset
               key={project.title}
-              className="border-2 border-t-white border-l-white border-b-dark-gray border-r-dark-gray bg-[#c0c0c0] p-2"
+              className="border-b-dark-gray border-r-dark-gray border-2 border-t-white border-l-white bg-[#c0c0c0] p-2"
             >
-              <legend className="flex items-center justify-between border-2 border-t-white border-l-white border-b-dark-gray border-r-dark-gray bg-linear-to-b from-[#000080] to-[#1e1b4b] px-2 py-1 text-xs font-bold text-yellow">
+              <legend className="border-b-dark-gray border-r-dark-gray text-yellow flex items-center justify-between border-2 border-t-white border-l-white bg-linear-to-b from-[#000080] to-[#1e1b4b] px-2 py-1 text-xs font-bold">
                 <div className="flex min-w-0 items-center gap-2">
                   <div className="flex items-center gap-1">
                     <span className="h-2.5 w-2.5 rounded-sm bg-[#808080]" />
@@ -141,14 +155,14 @@ function Projects() {
                 <span className="opacity-90">95</span>
               </legend>
 
-              <div className="mt-2 rounded-sm border-2 border-t-dark-gray border-l-dark-gray border-r-light-gray border-b-light-gray bg-white p-2">
+              <div className="border-t-dark-gray border-l-dark-gray border-r-light-gray border-b-light-gray mt-2 rounded-sm border-2 bg-white p-2">
                 <div className="flex flex-col gap-3">
                   {/* Placeholder "preview image" */}
                   <div className="bg-checkerboard p-2">
                     <img
                       src={makePlaceholderImage(project.title)}
                       alt={`${project.title} preview`}
-                      className="h-32 w-full rounded-sm border-2 border-t-white border-l-white border-b-dark-gray border-r-dark-gray object-cover bg-[#c0c0c0]"
+                      className="border-b-dark-gray border-r-dark-gray h-32 w-full rounded-sm border-2 border-t-white border-l-white bg-[#c0c0c0] object-cover"
                       style={{ imageRendering: "pixelated" }}
                     />
                   </div>
@@ -160,7 +174,7 @@ function Projects() {
                     {project.demoUrl ? (
                       <RetroButton href={project.demoUrl} label="Demo" variant="primary" />
                     ) : (
-                      <span className="inline-flex items-center justify-center border-b-dark-gray border-r-dark-gray border border-t-white border-l-white bg-[#d4d4d4] px-3 py-1 text-xs font-semibold text-gray-500">
+                      <span className="border-b-dark-gray border-r-dark-gray inline-flex items-center justify-center border border-t-white border-l-white bg-[#d4d4d4] px-3 py-1 text-xs font-semibold text-gray-500">
                         Demo N/A
                       </span>
                     )}

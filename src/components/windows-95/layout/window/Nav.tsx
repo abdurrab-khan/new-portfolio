@@ -9,6 +9,7 @@ import useStore from "@/zustand/store";
 import { getAssetsUrl } from "@/lib/utils";
 
 import type { AppType } from "@/types/window";
+import { getNode } from "@/utils/tree-utils";
 
 interface INavProps {
   id: string;
@@ -144,6 +145,25 @@ function MenuBar() {
 }
 
 function ToolBar({ type, address }: { type: AppType; address: string }) {
+  const [windowAddress, setWindowAddress] = React.useState(address);
+  const { apps, toggleAppState, handleLaunchApp } = useStore((state) => state);
+
+  const handleOpenApp = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (!(e.key === "Enter" && windowAddress.trim() !== "")) return;
+
+    const isAppAlreadyOpen = apps.find((app) => app.address === windowAddress);
+    if (isAppAlreadyOpen) {
+      toggleAppState(isAppAlreadyOpen.id);
+      return;
+    }
+
+    const appData = getNode(windowAddress);
+    if (!appData) {
+      alert("App not found!");
+      return;
+    }
+  };
+
   return (
     <div className="w-full border-2 border-t-0 border-white">
       {/* TOOLBAR */}
@@ -189,8 +209,10 @@ function ToolBar({ type, address }: { type: AppType; address: string }) {
                   />
                 </span>
                 <input
-                  value={address}
+                  value={windowAddress}
                   className="size-full border-none font-normal ring-0 outline-none"
+                  onChange={(e) => setWindowAddress(e.target.value)}
+                  onKeyDown={handleOpenApp}
                 />
               </div>
             </div>

@@ -67,18 +67,18 @@ function Contact() {
   return (
     <TabContainer title="Contact Us">
       <div className="flex w-full flex-col gap-4 p-4 text-sm text-black">
-        <div className="rounded-sm border-2 border-t-white border-l-white border-b-dark-gray border-r-dark-gray bg-[#c0c0c0] p-px">
-          <div className="rounded-sm border-2 border-t-dark-gray border-l-dark-gray border-r-light-gray border-b-light-gray bg-white">
-            <div className="flex items-center justify-between border-b-2 border-b-dark-gray bg-linear-to-b from-[#000080] to-[#1e1b4b] px-2 py-1">
+        <div className="border-b-dark-gray border-r-dark-gray rounded-sm border-2 border-t-white border-l-white bg-[#c0c0c0] p-px">
+          <div className="border-t-dark-gray border-l-dark-gray border-r-light-gray border-b-light-gray rounded-sm border-2 bg-white">
+            <div className="border-b-dark-gray flex items-center justify-between border-b-2 bg-linear-to-b from-[#000080] to-[#1e1b4b] px-2 py-1">
               <div className="flex min-w-0 items-center gap-2">
                 <div className="flex items-center gap-1">
                   <span className="h-2.5 w-2.5 rounded-sm bg-[#808080]" />
                   <span className="h-2.5 w-2.5 rounded-sm bg-[#ffff00]" />
                   <span className="h-2.5 w-2.5 rounded-sm bg-[#00aa00]" />
                 </div>
-                <span className="truncate text-xs font-bold text-yellow">SEND AN E-MAIL</span>
+                <span className="text-yellow truncate text-xs font-bold">SEND AN E-MAIL</span>
               </div>
-              <span className="text-[10px] font-bold text-yellow opacity-90">95</span>
+              <span className="text-yellow text-[10px] font-bold opacity-90">95</span>
             </div>
 
             <form onSubmit={handleSubmit} className="flex flex-col gap-4 p-3">

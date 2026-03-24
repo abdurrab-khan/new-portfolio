@@ -3,7 +3,7 @@ import Taskbar from "./windows/taskbar/Taskbar";
 
 function Windows() {
   return (
-    <div className="flex size-full flex-col bg-[#008083]">
+    <div className="flex size-full flex-col">
       <Desktop />
       <Taskbar />
     </div>

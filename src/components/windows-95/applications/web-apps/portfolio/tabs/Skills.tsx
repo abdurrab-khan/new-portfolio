@@ -43,19 +43,29 @@ function Skills() {
             return (
               <div
                 key={category.title}
-                className="rounded-sm border-2 border-t-white border-l-white border-b-dark-gray border-r-dark-gray bg-[#c0c0c0] p-px"
+                className="border-b-dark-gray border-r-dark-gray rounded-sm border-2 border-t-white border-l-white bg-[#c0c0c0] p-px"
               >
-                <div className="rounded-sm border-2 border-t-dark-gray border-l-dark-gray border-r-light-gray border-b-light-gray bg-white">
-                  <div className="flex items-center justify-between border-b-2 border-b-dark-gray bg-linear-to-b from-[#000080] to-[#1e1b4b] px-2 py-1">
+                <div className="border-t-dark-gray border-l-dark-gray border-r-light-gray border-b-light-gray rounded-sm border-2 bg-white">
+                  <div className="border-b-dark-gray flex items-center justify-between border-b-2 bg-linear-to-b from-[#000080] to-[#1e1b4b] px-2 py-1">
                     <div className="flex min-w-0 items-center gap-2">
                       <div className="flex items-center gap-1">
                         <span className="h-2.5 w-2.5 rounded-sm bg-[#808080]" />
-                        <span className="h-2.5 w-2.5 rounded-sm" style={{ backgroundColor: dotColorA }} />
-                        <span className="h-2.5 w-2.5 rounded-sm" style={{ backgroundColor: dotColorB }} />
+                        <span
+                          className="h-2.5 w-2.5 rounded-sm"
+                          style={{ backgroundColor: dotColorA }}
+                        />
+                        <span
+                          className="h-2.5 w-2.5 rounded-sm"
+                          style={{ backgroundColor: dotColorB }}
+                        />
                       </div>
-                      <span className="truncate text-xs font-bold text-yellow">{category.title}</span>
+                      <span className="text-yellow truncate text-xs font-bold">
+                        {category.title}
+                      </span>
                     </div>
-                    <span className="text-[10px] font-bold text-yellow opacity-90">{index + 1}</span>
+                    <span className="text-yellow text-[10px] font-bold opacity-90">
+                      {index + 1}
+                    </span>
                   </div>
 
                   <div className="p-3">
@@ -63,7 +73,7 @@ function Skills() {
                       {category.items.map((skill) => (
                         <span
                           key={skill}
-                          className="inline-flex items-center rounded-sm border-b-dark-gray border-r-dark-gray border border-t-white border-l-white bg-[#c0c0c0] px-2 py-1 text-xs font-semibold"
+                          className="border-b-dark-gray border-r-dark-gray inline-flex items-center rounded-sm border border-t-white border-l-white bg-[#c0c0c0] px-2 py-1 text-xs font-semibold"
                         >
                           {skill}
                         </span>

@@ -9,6 +9,7 @@ import Nav from "./Nav";
 import { motion } from "motion/react";
 import useMove from "@/hooks/useMove";
 import useResize from "@/hooks/useResize";
+import useStore from "@/zustand/store";
 
 interface IWindowLayoutProps {
   app: WindowContent;
@@ -16,7 +17,8 @@ interface IWindowLayoutProps {
 }
 
 function Window({ app, children }: IWindowLayoutProps) {
-  const { id, type, state, address, position, size, titleBar } = app;
+  const { id, type, state, address, position, size, titleBar, zIndex = 1 } = app;
+  const bringToFront = useStore((store) => store.bringToFront);
 
   const navRef = React.useRef<HTMLDivElement>(null);
   const resizeBarRef = React.useRef<HTMLDivElement>(null);
@@ -42,8 +44,10 @@ function Window({ app, children }: IWindowLayoutProps) {
         position: "absolute",
         left: (state !== "full" ? position.x : 0) + "px",
         top: (state !== "full" ? position.y : 0) + "px",
-        zIndex: state !== "full" ? "var(--window-z-index)" : "9999999999999",
+        zIndex: state !== "full" ? `calc(var(--window-z-index)+${zIndex})` : "9999999999999",
+        isolation: "isolate",
       }}
+      onPointerDownCapture={() => bringToFront(id)}
     >
       <motion.div
         ref={overLaysRef}
@@ -57,7 +61,6 @@ function Window({ app, children }: IWindowLayoutProps) {
       />
 
       <div
-        id="xxxx"
         style={{
           height: state === "full" ? "calc(100vh - 14px)" : size.height,
           width: state === "full" ? "calc(100vw - 14px)" : size.width,
