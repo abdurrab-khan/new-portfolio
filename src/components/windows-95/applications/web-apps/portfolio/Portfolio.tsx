@@ -8,7 +8,7 @@ function Portfolio() {
   return (
     <div className="flex h-full w-full flex-col items-center justify-start overflow-auto bg-gray-800 pb-4">
       <Header currentTab={currentTab} setCurrentTab={setCurrentTab} />
-      <Body currentTab={currentTab} />
+      <Body currentTab={currentTab} setCurrentTab={setCurrentTab} />
     </div>
   );
 }

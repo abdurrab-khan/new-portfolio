@@ -4,12 +4,18 @@ import Projects from "./tabs/Projects";
 import Contact from "./tabs/Contact";
 import BorderContainer from "@/components/windows-95/common/BorderContainer";
 
-function Body({ currentTab }: { currentTab: string }) {
+function Body({
+  currentTab,
+  setCurrentTab,
+}: {
+  currentTab: string;
+  setCurrentTab: React.Dispatch<React.SetStateAction<string>>;
+}) {
   let content;
 
   switch (currentTab) {
     case "home":
-      content = <Home />;
+      content = <Home setCurrentTab={setCurrentTab} />;
       break;
     case "skills":
       content = <Skills />;
@@ -21,7 +27,7 @@ function Body({ currentTab }: { currentTab: string }) {
       content = <Contact />;
       break;
     default:
-      content = <Home />;
+      content = <Home setCurrentTab={setCurrentTab} />;
   }
 
   return (

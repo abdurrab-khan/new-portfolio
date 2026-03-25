@@ -1,9 +1,13 @@
-import TabContainer from "./TabContainer";
+import { useState } from "react";
+import { TabContainer, Frame } from "./Container";
+import BorderContainer from "@/components/windows-95/common/BorderContainer";
+import Button from "@/components/windows-95/common/Button";
 
 type Project = {
   title: string;
   githubUrl: string;
   demoUrl?: string;
+  videoUrl?: string;
   techStack: string[];
 };
 
@@ -75,11 +79,13 @@ const projects: Project[] = [
     title: "Portfolio OS",
     githubUrl: "https://github.com/your-username/portfolio-os",
     demoUrl: "https://your-demo-link.com",
+    videoUrl: "/assets/videos/hero.mp4",
     techStack: ["React", "TypeScript", "Tailwind CSS"],
   },
   {
     title: "E-Commerce Terminal",
     githubUrl: "https://github.com/your-username/e-commerce-terminal",
+    videoUrl: "/assets/videos/hero.mp4",
     techStack: ["Next.js", "Node.js", "Payments API"],
   },
   {
@@ -94,6 +100,125 @@ const projects: Project[] = [
     techStack: ["BullMQ", "Postgres", "Docker"],
   },
 ];
+
+function Projects() {
+  const [activeVideo, setActiveVideo] = useState<{ title: string; videoUrl: string } | null>(null);
+
+  return (
+    <TabContainer title="Projects">
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+        {projects.map((project, index) => (
+          <Frame key={project.title} title={project.title} showTitleBar={false} index={index + 1}>
+            <div
+              className={`border-t-dark-gray border-l-dark-gray border-r-light-gray border-b-light-gray mt-2 rounded-sm border-2 bg-white p-2 ${project.videoUrl ? "cursor-pointer transition-colors hover:bg-gray-100" : ""}`}
+              onClick={() => {
+                if (project.videoUrl)
+                  setActiveVideo({ title: project.title, videoUrl: project.videoUrl });
+              }}
+              title={project.videoUrl ? "Click to play demo video" : undefined}
+            >
+              <div className="flex flex-col gap-3">
+                {/* Placeholder "preview image" */}
+                <div className="bg-checkerboard group relative p-2">
+                  {project.videoUrl && (
+                    <div className="absolute inset-0 z-10 hidden items-center justify-center bg-black/40 group-hover:flex">
+                      <div className="border-b-dark-gray border-r-dark-gray border border-t-white border-l-white bg-[#c0c0c0] px-3 py-1 text-sm font-bold">
+                        ▶ PLAY DEMO
+                      </div>
+                    </div>
+                  )}
+                  <img
+                    src={makePlaceholderImage(project.title)}
+                    alt={`${project.title} preview`}
+                    className="border-b-dark-gray border-r-dark-gray h-32 w-full rounded-sm border-2 border-t-white border-l-white bg-[#c0c0c0] object-cover"
+                    style={{ imageRendering: "pixelated" }}
+                  />
+                </div>
+
+                {/* Tech stack */}
+                <div className="mt-1">
+                  <div className="border-t-dark-gray border-l-dark-gray border-b-light-gray border-r-light-gray relative mt-3 border-2 p-2">
+                    <span
+                      className="absolute -top-3 left-2 bg-white px-1 text-xs font-bold text-black"
+                      style={{ fontFamily: "monospace" }}
+                    >
+                      Tech Stack
+                    </span>
+                    <div className="flex flex-wrap gap-2 pt-1">
+                      {project.techStack.map((tech) => (
+                        <span
+                          key={tech}
+                          className="bg-[#000080] px-1.5 py-0.5 text-xs text-white"
+                          style={{ fontFamily: "monospace" }}
+                        >
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Links / Actions */}
+                <div className="mt-2 flex justify-end gap-2 border-t border-gray-300 pt-3">
+                  <RetroButton href={project.githubUrl} label="GitHub" />
+
+                  {project.demoUrl ? (
+                    <RetroButton href={project.demoUrl} label="Visit" variant="primary" />
+                  ) : (
+                    <span className="border-t-dark-gray border-l-dark-gray inline-flex items-center justify-center border border-r-white border-b-white bg-[#c0c0c0] px-3 py-1 text-xs font-semibold text-gray-500 shadow-[1px_1px_0px_#fff]">
+                      Visit N/A
+                    </span>
+                  )}
+                </div>
+              </div>
+            </div>
+          </Frame>
+        ))}
+      </div>
+      {activeVideo && (
+        <ProjectVideoDialog
+          title={activeVideo.title}
+          videoPath={activeVideo.videoUrl}
+          onClose={() => setActiveVideo(null)}
+        />
+      )}
+    </TabContainer>
+  );
+}
+
+function ProjectVideoDialog({
+  title,
+  videoPath,
+  onClose,
+}: {
+  title: string;
+  videoPath: string;
+  onClose: () => void;
+}) {
+  return (
+    <div
+      className="absolute inset-0 z-20 flex items-center justify-center bg-black/30 p-2"
+      onClick={onClose}
+    >
+      <div className="w-full max-w-3xl" onClick={(event) => event.stopPropagation()}>
+        <BorderContainer className="bg-white p-3 shadow-md">
+          <div className="mb-3 flex items-center justify-between gap-3 border-b border-gray-300 pb-2">
+            <h3 className="text-sm font-bold text-purple-900">{title} Preview</h3>
+            <div className="h-7 w-18">
+              <Button type="button" onClick={onClose}>
+                Close
+              </Button>
+            </div>
+          </div>
+          <video className="w-full bg-black" controls autoPlay muted loop playsInline>
+            <source src={videoPath} type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+        </BorderContainer>
+      </div>
+    </div>
+  );
+}
 
 function RetroButton({
   href,
@@ -113,94 +238,15 @@ function RetroButton({
       : "bg-[#c0c0c0] text-black hover:bg-[#d4d4d4]";
 
   return (
-    <a href={href} target="_blank" rel="noopener noreferrer" className={`${base} ${variantClass}`}>
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className={`${base} ${variantClass}`}
+      onClick={(e) => e.stopPropagation()}
+    >
       {label}
     </a>
-  );
-}
-
-function Projects() {
-  const [selectedProject, setSelectedProject] = useState<Pick<
-    ProjectData,
-    "title" | "videoPath"
-  > | null>(null);
-
-  const handleOpenPreview = (project: ProjectData) => {
-    setSelectedProject({
-      title: project.title,
-      videoPath: project.videoPath,
-    });
-  };
-
-  const handleClosePreview = () => setSelectedProject(null);
-
-  return (
-    <TabContainer title="Projects">
-      <div className="flex flex-col gap-6 p-4 text-sm text-black">
-        <div className="grid grid-cols-1 gap-4 pb-8 md:grid-cols-2">
-          {projects.map((project) => (
-            <fieldset
-              key={project.title}
-              className="border-b-dark-gray border-r-dark-gray border-2 border-t-white border-l-white bg-[#c0c0c0] p-2"
-            >
-              <legend className="border-b-dark-gray border-r-dark-gray text-yellow flex items-center justify-between border-2 border-t-white border-l-white bg-linear-to-b from-[#000080] to-[#1e1b4b] px-2 py-1 text-xs font-bold">
-                <div className="flex min-w-0 items-center gap-2">
-                  <div className="flex items-center gap-1">
-                    <span className="h-2.5 w-2.5 rounded-sm bg-[#808080]" />
-                    <span className="h-2.5 w-2.5 rounded-sm bg-[#ffff00]" />
-                    <span className="h-2.5 w-2.5 rounded-sm bg-[#00aa00]" />
-                  </div>
-                  <span className="truncate">{project.title}</span>
-                </div>
-                <span className="opacity-90">95</span>
-              </legend>
-
-              <div className="border-t-dark-gray border-l-dark-gray border-r-light-gray border-b-light-gray mt-2 rounded-sm border-2 bg-white p-2">
-                <div className="flex flex-col gap-3">
-                  {/* Placeholder "preview image" */}
-                  <div className="bg-checkerboard p-2">
-                    <img
-                      src={makePlaceholderImage(project.title)}
-                      alt={`${project.title} preview`}
-                      className="border-b-dark-gray border-r-dark-gray h-32 w-full rounded-sm border-2 border-t-white border-l-white bg-[#c0c0c0] object-cover"
-                      style={{ imageRendering: "pixelated" }}
-                    />
-                  </div>
-
-                  {/* Links */}
-                  <div className="flex flex-wrap gap-2">
-                    <RetroButton href={project.githubUrl} label="GitHub" />
-
-                    {project.demoUrl ? (
-                      <RetroButton href={project.demoUrl} label="Demo" variant="primary" />
-                    ) : (
-                      <span className="border-b-dark-gray border-r-dark-gray inline-flex items-center justify-center border border-t-white border-l-white bg-[#d4d4d4] px-3 py-1 text-xs font-semibold text-gray-500">
-                        Demo N/A
-                      </span>
-                    )}
-                  </div>
-
-                  {/* Tech stack */}
-                  <div>
-                    <p className="mb-2 font-semibold underline decoration-black">Tech Stack</p>
-                    <div className="flex flex-wrap gap-2">
-                      {project.techStack.map((tech) => (
-                        <div
-                          key={tech}
-                          className="border-b-dark-gray border-r-dark-gray border border-t-white border-l-white bg-[#c0c0c0] px-2 py-1 text-xs"
-                        >
-                          {tech}
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </fieldset>
-          ))}
-        </div>
-      </div>
-    </TabContainer>
   );
 }
 
