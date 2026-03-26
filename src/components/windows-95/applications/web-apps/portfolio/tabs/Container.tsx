@@ -12,7 +12,7 @@ export function TabContainer({ title, style, children }: ITabContainerProps) {
     <div className={cn("flex size-full flex-col gap-y-2", style)}>
       <span className="flex h-18 w-full items-center justify-center">
         <p
-          className="bg-linear-to-b from-blue-700 to-green-400 bg-clip-text text-6xl font-bold tracking-widest text-transparent uppercase"
+          className="bg-linear-to-b from-blue-700 to-green-400 bg-clip-text text-center text-4xl font-bold tracking-widest text-transparent uppercase @lg:text-5xl @xl:text-6xl"
           style={{
             WebkitTextStroke: "2px #1e1b4b",
             filter: "drop-shadow(3px 3px 0px #1e1b4b)",
@@ -21,13 +21,15 @@ export function TabContainer({ title, style, children }: ITabContainerProps) {
           {title}
         </p>
       </span>
-      <div className="border-b-dark-gray border-r-dark-gray mx-auto w-4/5 rounded-sm border-2 border-t-white border-l-white bg-[#c0c0c0] p-px">
+      <div className="border-b-dark-gray border-r-dark-gray mx-auto w-full rounded-sm border-2 border-t-white border-l-white bg-[#c0c0c0] p-px @lg:w-5/6 @xl:w-4/5">
         <div className="flex flex-col gap-0.5">
           <div className="h-px w-full bg-white opacity-90" />
           <div className="h-px w-full bg-[#808080]" />
         </div>
       </div>
-      <div className="mt-2 h-fit min-h-76 w-full flex-1 p-4">{children}</div>
+      <div className="mt-2 h-fit min-h-76 w-full flex-1 p-0.5 @lg:p-1 @xl:p-2 @2xl:p-4">
+        {children}
+      </div>
     </div>
   );
 }

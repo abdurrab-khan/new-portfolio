@@ -1,15 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { TabContainer, Frame } from "./Container";
-import BorderContainer from "@/components/windows-95/common/BorderContainer";
 import Button from "@/components/windows-95/common/Button";
-
-type Project = {
-  title: string;
-  githubUrl: string;
-  demoUrl?: string;
-  videoUrl?: string;
-  techStack: string[];
-};
+import { projects } from "@/constants/personal";
 
 const escapeXml = (value: string) =>
   value
@@ -74,59 +66,33 @@ const makePlaceholderImage = (title: string) => {
   return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
 };
 
-const projects: Project[] = [
-  {
-    title: "Portfolio OS",
-    githubUrl: "https://github.com/your-username/portfolio-os",
-    demoUrl: "https://your-demo-link.com",
-    videoUrl: "/assets/videos/hero.mp4",
-    techStack: ["React", "TypeScript", "Tailwind CSS"],
-  },
-  {
-    title: "E-Commerce Terminal",
-    githubUrl: "https://github.com/your-username/e-commerce-terminal",
-    videoUrl: "/assets/videos/hero.mp4",
-    techStack: ["Next.js", "Node.js", "Payments API"],
-  },
-  {
-    title: "Realtime Chat CRT",
-    githubUrl: "https://github.com/your-username/realtime-chat-crt",
-    demoUrl: "https://your-demo-link.com/chat",
-    techStack: ["WebSockets", "Redis", "Express"],
-  },
-  {
-    title: "Task Scheduler 95",
-    githubUrl: "https://github.com/your-username/task-scheduler-95",
-    techStack: ["BullMQ", "Postgres", "Docker"],
-  },
-];
-
 function Projects() {
-  const [activeVideo, setActiveVideo] = useState<{ title: string; videoUrl: string } | null>(null);
+  const [activeVideo, setActiveVideo] = useState<{
+    title: string;
+    videoUrl: string;
+    index: number;
+  } | null>(null);
 
   return (
     <TabContainer title="Projects">
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+      <div className="grid grid-cols-1 gap-4 @lg:grid-cols-2 @6xl:grid-cols-3">
         {projects.map((project, index) => (
           <Frame key={project.title} title={project.title} showTitleBar={false} index={index + 1}>
             <div
               className={`border-t-dark-gray border-l-dark-gray border-r-light-gray border-b-light-gray mt-2 rounded-sm border-2 bg-white p-2 ${project.videoUrl ? "cursor-pointer transition-colors hover:bg-gray-100" : ""}`}
               onClick={() => {
                 if (project.videoUrl)
-                  setActiveVideo({ title: project.title, videoUrl: project.videoUrl });
+                  setActiveVideo({
+                    title: project.title,
+                    videoUrl: project.videoUrl,
+                    index: index + 1,
+                  });
               }}
               title={project.videoUrl ? "Click to play demo video" : undefined}
             >
               <div className="flex flex-col gap-3">
                 {/* Placeholder "preview image" */}
                 <div className="bg-checkerboard group relative p-2">
-                  {project.videoUrl && (
-                    <div className="absolute inset-0 z-10 hidden items-center justify-center bg-black/40 group-hover:flex">
-                      <div className="border-b-dark-gray border-r-dark-gray border border-t-white border-l-white bg-[#c0c0c0] px-3 py-1 text-sm font-bold">
-                        ▶ PLAY DEMO
-                      </div>
-                    </div>
-                  )}
                   <img
                     src={makePlaceholderImage(project.title)}
                     alt={`${project.title} preview`}
@@ -179,6 +145,7 @@ function Projects() {
         <ProjectVideoDialog
           title={activeVideo.title}
           videoPath={activeVideo.videoUrl}
+          index={activeVideo.index}
           onClose={() => setActiveVideo(null)}
         />
       )}
@@ -188,20 +155,35 @@ function Projects() {
 
 function ProjectVideoDialog({
   title,
+  index,
   videoPath,
   onClose,
 }: {
   title: string;
+  index: number;
   videoPath: string;
   onClose: () => void;
 }) {
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape" || event.key.toLowerCase() === "q") {
+        onClose();
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [onClose]);
+
   return (
     <div
-      className="absolute inset-0 z-20 flex items-center justify-center bg-black/30 p-2"
+      className="absolute inset-0 z-20 flex items-center justify-center bg-black/30 p-2 backdrop-blur-sm"
       onClick={onClose}
     >
       <div className="w-full max-w-3xl" onClick={(event) => event.stopPropagation()}>
-        <BorderContainer className="bg-white p-3 shadow-md">
+        <Frame title={`${title} Demo`} showTitleBar={false} index={index}>
           <div className="mb-3 flex items-center justify-between gap-3 border-b border-gray-300 pb-2">
             <h3 className="text-sm font-bold text-purple-900">{title} Preview</h3>
             <div className="h-7 w-18">
@@ -210,11 +192,11 @@ function ProjectVideoDialog({
               </Button>
             </div>
           </div>
-          <video className="w-full bg-black" controls autoPlay muted loop playsInline>
+          <video className="min-h-100 w-full bg-black" controls autoPlay muted loop playsInline>
             <source src={videoPath} type="video/mp4" />
             Your browser does not support the video tag.
           </video>
-        </BorderContainer>
+        </Frame>
       </div>
     </div>
   );

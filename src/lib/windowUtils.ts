@@ -54,8 +54,6 @@ const getAppData = (app: App, screenSize: { height: number; width: number }) => 
     y: getRandomPosition(screenSize.height, windowData.size.height),
   };
 
-  console.log("Launching app with data:", windowData);
-
   return windowData;
 };
 

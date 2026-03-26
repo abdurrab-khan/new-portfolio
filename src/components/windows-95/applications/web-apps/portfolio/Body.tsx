@@ -31,8 +31,8 @@ function Body({
   }
 
   return (
-    <section className="flex h-fit w-full flex-1 items-start justify-center pt-8">
-      <BorderContainer className="h-fit w-4/5">{content}</BorderContainer>
+    <section className="flex h-fit w-full flex-1 items-start justify-center px-4 pt-8 @md:px-10 @2xl:px-18">
+      <BorderContainer className="h-fit w-full">{content}</BorderContainer>
     </section>
   );
 }

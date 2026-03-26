@@ -1,4 +1,4 @@
-import DataTree from "@/data/tree";
+import DataTree from "@/constants/tree";
 import type { DataTreeType, NodeData } from "@/types/data-tree";
 
 const getNode = (path: string, tree: DataTreeType = DataTree) => {

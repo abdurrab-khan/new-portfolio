@@ -1,10 +1,11 @@
+import { techSpots } from "@/constants/personal";
 import { Frame } from "./Container";
 
 function Home({ setCurrentTab }: { setCurrentTab: React.Dispatch<React.SetStateAction<string>> }) {
   return (
-    <div className="flex min-h-116 w-full flex-col items-start justify-center gap-x-8 gap-y-4 p-4 md:flex-row">
+    <div className="flex min-h-116 w-full flex-col items-start justify-center gap-x-8 gap-y-4 p-4 @2xl:flex-row">
       {/* Profile image (left) */}
-      <div className="flex w-full flex-col md:w-auto">
+      <div className="flex w-full flex-col @md:w-auto">
         <Frame title="Profile">
           <img
             src="https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg"
@@ -16,7 +17,7 @@ function Home({ setCurrentTab }: { setCurrentTab: React.Dispatch<React.SetStateA
       </div>
 
       {/* Content body (right) */}
-      <div className="mt-8 flex w-full flex-col items-start justify-start gap-y-4 md:mt-0">
+      <div className="mt-8 flex w-full flex-col items-start justify-start gap-y-4 @md:mt-0">
         {/* Welcome window */}
         <Frame title="WELCOME!">
           <div className="font-ms-sans">
@@ -31,7 +32,7 @@ function Home({ setCurrentTab }: { setCurrentTab: React.Dispatch<React.SetStateA
         </Frame>
 
         {/* Two-panel grid */}
-        <div className="grid w-full grid-cols-1 gap-4 md:grid-cols-2">
+        <div className="grid w-full grid-cols-1 gap-4 @md:grid-cols-2">
           {/* WHAT I DO */}
           <Frame title="What I Do" showTitleBar={false}>
             <div className="flex flex-col gap-2 text-sm">
@@ -50,17 +51,7 @@ function Home({ setCurrentTab }: { setCurrentTab: React.Dispatch<React.SetStateA
           {/* TECH SNAPSHOT */}
           <Frame title="TECH SNAPSHOT" showTitleBar={false}>
             <div className="flex flex-wrap gap-2">
-              {[
-                "React",
-                "Next.js",
-                "Tailwind CSS",
-                "TypeScript",
-                "Node.js",
-                "Express",
-                "Redis",
-                "WebSockets",
-                "PostgreSQL",
-              ].map((tech) => (
+              {techSpots.map((tech) => (
                 <span
                   key={tech}
                   className="border-b-dark-gray border-r-dark-gray inline-flex items-center rounded-sm border border-t-white border-l-white bg-[#c0c0c0] px-2 py-1 text-xs font-semibold"
