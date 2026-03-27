@@ -23,10 +23,20 @@ function Home({ setCurrentTab }: { setCurrentTab: React.Dispatch<React.SetStateA
           <div className="font-ms-sans">
             <span className="text-lg font-semibold text-rose-600">WELCOME!</span>
             <p className="mt-2 text-sm text-gray-700">
-              Full-stack dev. I work across the whole thing — frontend, backend, databases,
-              deployment. Mostly React, Next.js, Tailwind up front; Node, Express, Redis, WebSockets
-              on the backend. JS, TS, and some Python. I tend to overthink before I write code, but
-              that's kind of the point.
+              I am a full-stack developer who loves building real, useful web apps using React,
+              Node.js, and TypeScript. I enjoy working on both the frontend and backend side, and I
+              also have good knowledge of databases and real-time features. I always focus on
+              writing clean and maintainable code that works well in real use.
+            </p>
+            <p className="mt-2 text-sm text-gray-700">
+              Beyond coding, I'm passionate about performance optimization, scalability, and
+              creating seamless user experiences. I continuously learn new technologies and best
+              practices to stay ahead in the fast-evolving tech landscape.
+            </p>
+            <p className="mt-2 text-sm text-gray-700">
+              When I'm not coding, you'll find me exploring open-source projects, contributing to
+              the developer community, or working on side projects that challenge my technical
+              skills.
             </p>
           </div>
         </Frame>

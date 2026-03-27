@@ -11,7 +11,7 @@ function TaskBarApps({ openedApps }: ITraskBarAppsProps) {
 
   return (
     <div className="size-full flex-1 overflow-hidden px-0.5 py-0.75">
-      <div className="flex size-full gap-x-3">
+      <div className="flex size-full items-center gap-x-3">
         {openedApps.map(({ id, state, titleBar }, idx) => (
           <App key={idx} id={id} state={state} iconPath={titleBar.iconPath} name={titleBar.title} />
         ))}

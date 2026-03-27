@@ -4,15 +4,6 @@ import { TabContainer, Frame } from "./Container";
 import Input from "@/components/windows-95/common/Input";
 import TextArea from "@/components/windows-95/common/TextArea";
 
-const contactFormSchema = z.object({
-  name: z.string().min(1, "Name is required"),
-  email: z.email("Invalid email address").optional(),
-  subject: z.string().optional(),
-  message: z.string().min(1, "Message is required"),
-});
-
-type FormKeys = keyof z.infer<typeof contactFormSchema> | "sendError";
-
 interface FormFieldProps {
   label: string;
   shortcut: string;
@@ -25,38 +16,14 @@ interface FormFieldProps {
   onChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
 }
 
-const FormField = ({
-  label,
-  shortcut,
-  id,
-  name,
-  type = "text",
-  placeholder,
-  value,
-  error,
-  onChange,
-}: FormFieldProps) => (
-  <div className="not-first:mt-5">
-    <div className="flex items-center gap-3">
-      <label htmlFor={id} className="w-20 shrink-0 font-semibold">
-        <span className="underline decoration-black">{shortcut}</span>
-        {label}
-      </label>
-      <div className="flex-1">
-        <Input
-          id={id}
-          name={name}
-          type={type}
-          onChange={onChange}
-          placeholder={placeholder}
-          value={value}
-          className="h-8 w-full text-sm"
-        />
-        <div className="h-5">{error && <span className="text-xs text-red-600">{error}</span>}</div>
-      </div>
-    </div>
-  </div>
-);
+const contactFormSchema = z.object({
+  name: z.string().min(1, "Name is required"),
+  email: z.email("Invalid email address").optional(),
+  subject: z.string().optional(),
+  message: z.string().min(1, "Message is required"),
+});
+
+type FormKeys = keyof z.infer<typeof contactFormSchema> | "sendError";
 
 function Contact() {
   const [isLoading, setIsLoading] = React.useState(false);
@@ -123,6 +90,7 @@ function Contact() {
             email: data.email,
             subject: data.subject,
             message: data.message,
+            currentTime: getFormattedDate(),
           },
         }),
       });
@@ -136,7 +104,8 @@ function Contact() {
       setTimeout(() => {
         setSuccessMessage("");
       }, 5000);
-    } catch (err) {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    } catch (_) {
       setValidationError({
         sendError: "Failed to send message. Please try again later.",
       });
@@ -230,6 +199,48 @@ function Contact() {
     </TabContainer>
   );
 }
+
+const getFormattedDate = () => {
+  const now = new Date();
+
+  const hours = now.getHours();
+  const minutes = now.getMinutes();
+
+  return `${hours}:${minutes}`;
+};
+
+const FormField = ({
+  label,
+  shortcut,
+  id,
+  name,
+  type = "text",
+  placeholder,
+  value,
+  error,
+  onChange,
+}: FormFieldProps) => (
+  <div className="not-first:mt-5">
+    <div className="flex items-center gap-3">
+      <label htmlFor={id} className="w-20 shrink-0 font-semibold">
+        <span className="underline decoration-black">{shortcut}</span>
+        {label}
+      </label>
+      <div className="flex-1">
+        <Input
+          id={id}
+          name={name}
+          type={type}
+          onChange={onChange}
+          placeholder={placeholder}
+          value={value}
+          className="h-8 w-full text-sm"
+        />
+        <div className="h-5">{error && <span className="text-xs text-red-600">{error}</span>}</div>
+      </div>
+    </div>
+  </div>
+);
 
 const RetroButton = ({
   onClick,

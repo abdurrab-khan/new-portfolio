@@ -65,7 +65,7 @@ function Window({ app, children }: IWindowLayoutProps) {
           height: state === "full" ? "calc(100vh - 14px)" : size.height,
           width: state === "full" ? "calc(100vw - 14px)" : size.width,
         }}
-        className="flex min-h-(--window-titlebar-height) min-w-96 flex-col overflow-hidden select-none"
+        className="flex min-h-(--window-titlebar-height) min-w-64 flex-col overflow-hidden select-none sm:min-w-96"
       >
         <Nav id={id} type={type} address={address} titleBar={titleBar} navRef={navRef} />
         <Body>{children}</Body>
