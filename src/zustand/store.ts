@@ -6,9 +6,11 @@ const getMaxZIndex = (apps: WindowContent[]) =>
 
 interface IStore {
   apps: WindowContent[];
+  isShutdown: boolean;
 }
 
 interface IStoreActions {
+  toggleShutdown: () => void;
   handleLaunchApp: (app: WindowContent) => void;
   handleCloseApp: (appId: string) => void;
   bringToFront: (appId: string) => void;
@@ -19,6 +21,13 @@ interface IStoreActions {
 
 const useStore = create<IStore & IStoreActions>((set) => ({
   apps: [],
+  isShutdown: false,
+  toggleShutdown() {
+    set((prevState) => ({
+      ...prevState,
+      isShutdown: !prevState.isShutdown,
+    }));
+  },
   handleLaunchApp(app) {
     set((prevState) => ({
       apps: [

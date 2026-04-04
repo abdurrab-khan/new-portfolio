@@ -13,29 +13,49 @@ import useStore from "@/zustand/store";
 
 interface IWindowLayoutProps {
   app: WindowContent;
+  contentLength?: number;
   children: React.ReactNode;
 }
 
-function Window({ app, children }: IWindowLayoutProps) {
-  const { id, type, state, address, position, size, titleBar, zIndex = 1 } = app;
+function Window({ app, contentLength, children }: IWindowLayoutProps) {
+  const { id, type, state, position, size, zIndex = 1 } = app;
   const bringToFront = useStore((store) => store.bringToFront);
 
   const navRef = React.useRef<HTMLDivElement>(null);
   const resizeBarRef = React.useRef<HTMLDivElement>(null);
   const overLaysRef = React.useRef<HTMLDivElement>(null);
 
+  const minSize = () => {
+    const screenWidth = window.innerWidth;
+
+    if (screenWidth >= 640) {
+      return {
+        width: 406,
+        height: 260,
+      };
+    } else {
+      return {
+        width: 256,
+        height: 240,
+      };
+    }
+  };
+
   const { x, y } = useMove({
     id,
+    state,
+    defaultPosition: position,
     targetRef: navRef as RefObject<HTMLElement>,
     overLaysRef: overLaysRef as RefObject<HTMLElement>,
-    defaultPosition: position,
   });
 
   const { height, width } = useResize({
     id,
+    state,
+    limit: minSize(),
+    defaultSize: size,
     targetRef: resizeBarRef as RefObject<HTMLElement>,
     overLaysRef: overLaysRef as RefObject<HTMLElement>,
-    defaultSize: size,
   });
 
   return (
@@ -56,8 +76,13 @@ function Window({ app, children }: IWindowLayoutProps) {
           width,
           translateX: x,
           translateY: y,
+          borderTop: "2px solid #ffffff",
+          borderLeft: "2px solid #ffffff",
+          borderRight: "2px solid #808080",
+          borderBottom: "2px solid #808080",
+          boxShadow: "inset 1px 1px 0 #dfdfdf, inset -1px -1px 0 #000000",
         }}
-        className="border-yellow pointer-events-none absolute inset-0 z-(--window-z-index) size-full cursor-grabbing border-4 opacity-0"
+        className="pointer-events-none absolute inset-0 z-(--window-z-index) size-full cursor-grabbing opacity-0"
       />
 
       <div
@@ -65,11 +90,11 @@ function Window({ app, children }: IWindowLayoutProps) {
           height: state === "full" ? "calc(100vh - 14px)" : size.height,
           width: state === "full" ? "calc(100vw - 14px)" : size.width,
         }}
-        className="flex min-h-(--window-titlebar-height) min-w-64 flex-col overflow-hidden select-none sm:min-w-96"
+        className="flex min-h-56 min-w-64 flex-col overflow-hidden select-none sm:min-h-65 sm:min-w-101.5"
       >
-        <Nav id={id} type={type} address={address} titleBar={titleBar} navRef={navRef} />
+        <Nav id={id} state={state} app={app} navRef={navRef} />
         <Body>{children}</Body>
-        <Footer type={type} resizerRef={resizeBarRef} />
+        <Footer contentLength={contentLength} state={state} type={type} resizerRef={resizeBarRef} />
       </div>
     </View>
   );

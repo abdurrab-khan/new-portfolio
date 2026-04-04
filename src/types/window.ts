@@ -1,11 +1,11 @@
-import type { App } from "./app";
-
 // Main window types used in the application
-type Windows = {
+type WindowContent = {
   id: string;
+  type: "file-explorer" | "browser" | "image-viewer" | "text-editor" | "browser" | "alert";
   address: string;
   zIndex: number;
   state: "open" | "minimized" | "full";
+  url?: string;
   titleBar: {
     title: string;
     iconPath: string;
@@ -20,19 +20,4 @@ type Windows = {
   };
 };
 
-type AppType = "file-explorer" | "browser" | "image-viewer" | "text-editor" | "browser" | "alert";
-
-type WindowContent<T extends AppType = AppType> = Windows & {
-  type: T;
-  contents?: T extends "file-explorer"
-    ? App[]
-    : T extends "browser"
-      ? React.ReactNode
-      : T extends "image-viewer"
-        ? string
-        : T extends "text-editor"
-          ? string
-          : never;
-};
-
-export type { WindowContent, AppType };
+export type { WindowContent };

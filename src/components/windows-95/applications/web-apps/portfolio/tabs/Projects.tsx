@@ -48,15 +48,10 @@ const makePlaceholderImage = (title: string) => {
   <rect x='26' y='70' width='548' height='290' fill='url(#c)' opacity='0.92'/>
   <rect x='26' y='70' width='548' height='290' fill='url(#scan)' opacity='0.22'/>
 
-  <text x='50%' y='150' text-anchor='middle'
-    font-family='monospace' font-size='36' fill='#000080' font-weight='900'
+  <text x='50%' y='50%' text-anchor='middle'
+    font-family='monospace' font-size='38' fill='#000080' font-weight='900'
     dominant-baseline='middle'>
     ${safeTitle}
-  </text>
-  <text x='50%' y='190' text-anchor='middle'
-    font-family='monospace' font-size='14' fill='#000'
-    dominant-baseline='middle'>
-    PLACEHOLDER PREVIEW
   </text>
 
   <!-- Faux frame highlight -->
@@ -75,7 +70,7 @@ function Projects() {
 
   return (
     <TabContainer title="Projects">
-      <div className="grid grid-cols-1 gap-4 @lg:grid-cols-2 @6xl:grid-cols-3">
+      <div className="grid grid-cols-1 gap-4 @xl:grid-cols-2 @7xl:grid-cols-3 @[100rem]:grid-cols-4">
         {projects.map((project, index) => (
           <Frame key={project.title} title={project.title} showTitleBar={false} index={index + 1}>
             <div
@@ -99,6 +94,22 @@ function Projects() {
                     className="border-b-dark-gray border-r-dark-gray h-32 w-full rounded-sm border-2 border-t-white border-l-white bg-[#c0c0c0] object-cover"
                     style={{ imageRendering: "pixelated" }}
                   />
+                </div>
+
+                {/* Project Description */}
+                <div className="mt-1">
+                  <div className="border-t-dark-gray border-l-dark-gray border-b-light-gray border-r-light-gray relative mt-3 border-2 p-2">
+                    <span
+                      className="absolute -top-3 left-2 bg-white px-1 text-xs font-bold text-black"
+                      style={{ fontFamily: "monospace" }}
+                    >
+                      Description
+                    </span>
+                    <div className="pt-1 text-sm text-gray-700">
+                      {project.description ||
+                        "No description provided for this project. Please check the GitHub repository for more details."}
+                    </div>
+                  </div>
                 </div>
 
                 {/* Tech stack */}

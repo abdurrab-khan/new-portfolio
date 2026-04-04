@@ -1,9 +1,11 @@
+import type { WindowContent } from "@/types/window";
 import useStore from "@/zustand/store";
 import { useMotionValue, useSpring } from "motion/react";
 import React, { useEffect } from "react";
 
 interface IUseMove {
   id?: string;
+  state?: WindowContent["state"];
   targetRef: React.RefObject<HTMLElement>;
   overLaysRef: React.RefObject<HTMLElement>;
   defaultPosition?: { x: number; y: number };
@@ -11,7 +13,13 @@ interface IUseMove {
 
 const DRAG_THRESHOLD = 5; // pixels before drag starts
 
-function useMove({ id, targetRef, overLaysRef, defaultPosition = { x: 0, y: 0 } }: IUseMove) {
+function useMove({
+  id,
+  state,
+  targetRef,
+  overLaysRef,
+  defaultPosition = { x: 0, y: 0 },
+}: IUseMove) {
   const isDragging = React.useRef(false);
   const hasMoved = React.useRef(false);
   const startMouse = React.useRef<{ x: number; y: number } | null>(null);
@@ -37,6 +45,7 @@ function useMove({ id, targetRef, overLaysRef, defaultPosition = { x: 0, y: 0 } 
 
   useEffect(() => {
     const setGlobalGrabbingCursor = () => {
+      if (state === "full") return;
       document.body.style.cursor = "grabbing";
     };
 
@@ -81,7 +90,7 @@ function useMove({ id, targetRef, overLaysRef, defaultPosition = { x: 0, y: 0 } 
     };
 
     const handleMouseMove = (e: MouseEvent) => {
-      if (!isDragging.current || !startMouse.current) return;
+      if (!isDragging.current || !startMouse.current || state === "full") return;
 
       // Fallback for cases where mouseup happened outside the viewport and wasn't captured.
       if (e.buttons === 0) {
@@ -139,7 +148,7 @@ function useMove({ id, targetRef, overLaysRef, defaultPosition = { x: 0, y: 0 } 
       window.removeEventListener("blur", stopDragging);
       document.removeEventListener("mouseleave", stopDragging);
     };
-  }, [defaultPosition, id, mX, mY, overLaysRef, targetRef, updateApp]);
+  }, [defaultPosition, id, mX, mY, overLaysRef, targetRef, updateApp, state]);
 
   return {
     x,

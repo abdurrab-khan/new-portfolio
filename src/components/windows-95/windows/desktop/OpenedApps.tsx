@@ -2,9 +2,7 @@ import useStore from "@/zustand/store";
 import Browser from "../../applications/Browser";
 import FileExplorer from "../../applications/FileExplorer";
 import type { WindowContent } from "@/types/window";
-
-const isFileExplorer = (app: WindowContent): app is WindowContent<"file-explorer"> =>
-  app.type === "file-explorer";
+import Alert from "../../common/Alert";
 
 function OpenedApps() {
   const openedApps = useStore((state) => state.apps);
@@ -14,15 +12,34 @@ function OpenedApps() {
 
   return (
     <div className="pointer-events-none absolute inset-0 size-full">
-      {visibleApps.map((app) =>
-        isFileExplorer(app) ? (
-          <FileExplorer key={app.id} app={app} />
-        ) : (
-          <Browser key={app.id} app={app as WindowContent<"browser">} />
-        ),
-      )}
+      {visibleApps.map((app) => (
+        <App key={app.id} app={app} />
+      ))}
     </div>
   );
 }
+
+const App = ({ app }: { app: WindowContent }) => {
+  const handleCloseApp = useStore((state) => state.handleCloseApp);
+
+  const onClose = () => {
+    handleCloseApp(app.id);
+  };
+
+  switch (app.type) {
+    case "file-explorer":
+      return <FileExplorer app={app} />;
+    case "browser":
+      return <Browser app={app} />;
+    default:
+      return (
+        <Alert
+          title="App Not Found"
+          message={`The application of type "${app.type}" is not found.`}
+          onClose={onClose}
+        />
+      );
+  }
+};
 
 export default OpenedApps;

@@ -8,9 +8,20 @@ const getRandomSize = (screenSize: number, maxSizePercentage: number = 50) => {
 };
 
 // Function to get a random position for the window, ensuring it doesn't go off-screen
-const getRandomPosition = (screenSize: number, windowSize: number) => {
+const getRandomPosition = (screenSize: number, windowSize: number, type: "x" | "y") => {
+  const isSmallDevice = screenSize <= 768;
+
+  // On small devices, force X to start at 0 so left content is always visible
+  if (type === "x" && isSmallDevice) {
+    return 0;
+  }
+
+  // Keep a safe visible area and prevent negative ranges
   const maxSize = (screenSize * 80) / 100;
-  return Math.round(Math.random() * (maxSize - windowSize)) + 20;
+  const availableSpace = Math.max(maxSize - windowSize, 0);
+  const minOffset = type === "x" ? 20 : 20;
+
+  return Math.round(Math.random() * availableSpace) + minOffset;
 };
 
 // Function to convert App data to WindowContent data when launching an app
@@ -48,10 +59,15 @@ const getAppData = (app: App, screenSize: { height: number; width: number }) => 
     },
   };
 
+  // If app is browser.
+  if (app.type === "browser") {
+    windowData["url"] = app.url;
+  }
+
   // Randomly position the window on the screen, ensuring it doesn't go off-screen
   windowData.position = {
-    x: getRandomPosition(screenSize.width, windowData.size.width),
-    y: getRandomPosition(screenSize.height, windowData.size.height),
+    x: getRandomPosition(screenSize.width, windowData.size.width, "x"),
+    y: getRandomPosition(screenSize.height, windowData.size.height, "y"),
   };
 
   return windowData;

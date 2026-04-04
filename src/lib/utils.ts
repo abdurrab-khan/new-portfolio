@@ -28,8 +28,19 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 /**
+ * Cache all assets in the assets folder to make them available in the production build
+ */
+const assets = import.meta.glob("../assets/**/*", { eager: true, import: "default" });
+
+/**
  * Utility function that resolve assets path from given path
  */
 export function getAssetsUrl(path: string) {
-  return new URL("../assets" + path, import.meta.url).href;
+  const assetPath = `../assets${path}`;
+  if (assets[assetPath]) {
+    return assets[assetPath] as string;
+  }
+
+  // Fallback to URL constructor for missing or runtime evaluated paths
+  return new URL(assetPath, import.meta.url).href;
 }

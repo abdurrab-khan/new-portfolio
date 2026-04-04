@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import Activity from "./Activity.tsx";
-import Loading from "./components/Loading.tsx";
 import Windows from "./components/windows-95/Windows";
 import useStore from "./zustand/store.ts";
 
@@ -20,6 +19,7 @@ function App() {
         zIndex: 1,
         state: "open" as const,
         type: "browser" as const,
+        url: "www.abdurrabkhan.dev",
         address: "C:\\Windows\\Desktop\\About Me",
         titleBar: {
           title: "About Me",
@@ -56,7 +56,6 @@ function App() {
           <Windows />
         </div>
       </Activity>
-      <Loading />
     </main>
   );
 }

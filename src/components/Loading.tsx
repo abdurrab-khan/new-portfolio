@@ -1,3 +1,4 @@
+import useStore from "@/zustand/store";
 import { cn } from "../lib/utils";
 import { Activity, useEffect, useMemo, useRef, useState } from "react";
 
@@ -18,6 +19,8 @@ export default function Loading() {
 
   const initialLoaded = useMemo(() => randInt(4, 8), []);
   const durationMs = useMemo(() => randInt(2800, 4200), []);
+
+  const isShutDown = useStore((state) => state.isShutdown);
 
   useEffect(() => {
     let rafId = 0;
@@ -66,7 +69,7 @@ export default function Loading() {
     };
   }, [durationMs, fadeMs]);
 
-  const isVisible = phase !== "done";
+  const isVisible = phase !== "done" || isShutDown;
   if (!isVisible) return null;
 
   return (

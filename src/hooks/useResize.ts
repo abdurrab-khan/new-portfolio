@@ -1,15 +1,21 @@
 import React, { useEffect } from "react";
 import { useMotionValue, useSpring } from "motion/react";
 import useStore from "@/zustand/store";
+import type { WindowContent } from "@/types/window";
 
 interface IUseResize {
   id: string;
+  limit: {
+    height: number;
+    width: number;
+  };
+  state: WindowContent["state"];
   targetRef: React.RefObject<HTMLElement>;
   overLaysRef: React.RefObject<HTMLElement>;
   defaultSize: { width: number; height: number };
 }
 
-function useResize({ id, targetRef, overLaysRef, defaultSize }: IUseResize) {
+function useResize({ id, state, limit, targetRef, overLaysRef, defaultSize }: IUseResize) {
   const isResizing = React.useRef(false);
   const lastMousePosition = React.useRef<{ x: number; y: number } | null>(null);
 
@@ -38,10 +44,16 @@ function useResize({ id, targetRef, overLaysRef, defaultSize }: IUseResize) {
       const deltaX = e.clientX - lastMousePosition.current.x;
       const deltaY = e.clientY - lastMousePosition.current.y;
 
-      mWidth.set(Math.max(100, mWidth.get() + deltaX)); // Minimum width of 100px
-      mHeight.set(Math.max(100, mHeight.get() + deltaY)); // Minimum height of 100px
+      const currentHeight = mHeight.get() + deltaY;
+      const currentWidth = mWidth.get() + deltaX;
 
-      lastMousePosition.current = { x: e.clientX, y: e.clientY };
+      const isValidToResize = currentHeight > limit.height && currentWidth > limit.width;
+
+      if (isValidToResize) {
+        mWidth.set(Math.max(100, mWidth.get() + deltaX)); // Minimum width of 100px
+        mHeight.set(Math.max(100, mHeight.get() + deltaY)); // Minimum height of 100px
+        lastMousePosition.current = { x: e.clientX, y: e.clientY };
+      }
     };
 
     const handleMouseUp = () => {
@@ -76,7 +88,7 @@ function useResize({ id, targetRef, overLaysRef, defaultSize }: IUseResize) {
       window.removeEventListener("mousemove", handleMouseMove);
       window.removeEventListener("mouseup", handleMouseUp);
     };
-  }, [id, mHeight, mWidth, overLaysRef, targetRef, updateApp]);
+  }, [id, mHeight, mWidth, overLaysRef, targetRef, updateApp, state, limit.height, limit.width]);
 
   return {
     height,

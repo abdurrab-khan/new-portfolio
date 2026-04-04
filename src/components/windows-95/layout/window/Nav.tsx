@@ -6,23 +6,20 @@ import DoubleSeparator from "../../common/DoubleSeparator";
 import explorerIcon from "@/assets/icons/explorer.png";
 
 import useStore from "@/zustand/store";
-import { getAssetsUrl } from "@/lib/utils";
+import { cn, getAssetsUrl } from "@/lib/utils";
 
-import type { AppType } from "@/types/window";
+import type { WindowContent } from "@/types/window";
 import { getNode } from "@/utils/tree-utils";
 
 interface INavProps {
   id: string;
-  type: AppType;
-  address: string;
+  state: WindowContent["state"];
+  app: WindowContent;
   navRef: React.RefObject<HTMLDivElement | null>;
-  titleBar: {
-    title: string;
-    iconPath: string;
-  };
 }
 
-function Nav({ id, type, address, titleBar, navRef }: INavProps) {
+function Nav({ id, state, app, navRef }: INavProps) {
+  const { type, titleBar } = app;
   const { toggleAppState, toggleAppSize, handleCloseApp } = useStore((state) => state);
 
   return (
@@ -30,7 +27,10 @@ function Nav({ id, type, address, titleBar, navRef }: INavProps) {
       {/* TITLE BAR */}
       <div className="bg-navy-blue flex size-full max-h-(--window-titlebar-height) items-center justify-between">
         <div
-          className="flex size-full flex-1 cursor-grab items-center gap-x-0.75 pl-1.5 active:cursor-grabbing"
+          className={cn(
+            "flex size-full flex-1 items-center gap-x-0.75 pl-1.5",
+            state === "full" ? "cursor-default" : "cursor-grab active:cursor-grabbing",
+          )}
           ref={navRef}
         >
           <span className="size-3.75">
@@ -118,7 +118,7 @@ function Nav({ id, type, address, titleBar, navRef }: INavProps) {
       {/* MENU BAR & TOOLBAR */}
       <div className="border-dark-gray mt-0.5 flex w-full shrink-0 flex-col border-2 bg-white">
         <MenuBar />
-        <ToolBar address={address} type={type} />
+        <ToolBar address={app.url ? app.url : app.address} type={type} />
       </div>
     </div>
   );
@@ -144,9 +144,9 @@ function MenuBar() {
   );
 }
 
-function ToolBar({ type, address }: { type: AppType; address: string }) {
+function ToolBar({ type, address }: { type: WindowContent["type"]; address: string }) {
   const [windowAddress, setWindowAddress] = React.useState(address);
-  const { apps, toggleAppState, handleLaunchApp } = useStore((state) => state);
+  const { apps, toggleAppState } = useStore((state) => state);
 
   const handleOpenApp = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (!(e.key === "Enter" && windowAddress.trim() !== "")) return;
@@ -209,6 +209,7 @@ function ToolBar({ type, address }: { type: AppType; address: string }) {
                   />
                 </span>
                 <input
+                  disabled
                   value={windowAddress}
                   className="size-full border-none font-normal ring-0 outline-none"
                   onChange={(e) => setWindowAddress(e.target.value)}

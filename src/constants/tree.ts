@@ -60,7 +60,8 @@ const DataTree: DataTreeType = {
               portfolio: {
                 data: {
                   name: "About Me",
-                  type: "react-node",
+                  type: "browser",
+                  url: "www.abdurrabkhan.dev",
                   address: "C:\\Windows\\Desktop\\About Me",
                   iconPath: "/icons/explorer.png",
                   component: null, // Placeholder for React component
@@ -329,6 +330,7 @@ const DataTree: DataTreeType = {
         data: {
           name: "AUTOEXEC.BAT",
           type: "text",
+          content: "",
           iconPath: "/icons/text.png",
           address: "C:\\AUTOEXEC.BAT",
         },
@@ -337,6 +339,7 @@ const DataTree: DataTreeType = {
         data: {
           name: "CONFIG.SYS",
           type: "text",
+          content: "",
           iconPath: "/icons/text.png",
           address: "C:\\CONFIG.SYS",
         },
@@ -345,6 +348,7 @@ const DataTree: DataTreeType = {
         data: {
           name: "IO.SYS",
           type: "text",
+          content: "",
           iconPath: "/icons/text.png",
           address: "C:\\IO.SYS",
         },
@@ -353,6 +357,7 @@ const DataTree: DataTreeType = {
         data: {
           name: "MSDOS.SYS",
           type: "text",
+          content: "",
           iconPath: "/icons/text.png",
           address: "C:\\MSDOS.SYS",
         },

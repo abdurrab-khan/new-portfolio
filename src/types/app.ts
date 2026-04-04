@@ -22,11 +22,12 @@ type TextIcon = Icon & {
   content: string;
 };
 
-type ReactNodeIcon = Icon & {
-  type: "react-node";
+type BrowserIcon = Icon & {
+  type: "browser";
+  url: string;
   component: React.ReactNode;
 };
 
-type App = FolderIcon | ImageIcon | TextIcon | ReactNodeIcon;
+type App = FolderIcon | ImageIcon | TextIcon | BrowserIcon;
 
-export type { App, FolderIcon, ImageIcon, TextIcon, ReactNodeIcon };
+export type { App, FolderIcon, ImageIcon, TextIcon, BrowserIcon };

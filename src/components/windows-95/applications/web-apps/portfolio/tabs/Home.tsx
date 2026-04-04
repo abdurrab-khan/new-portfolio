@@ -33,11 +33,6 @@ function Home({ setCurrentTab }: { setCurrentTab: React.Dispatch<React.SetStateA
               creating seamless user experiences. I continuously learn new technologies and best
               practices to stay ahead in the fast-evolving tech landscape.
             </p>
-            <p className="mt-2 text-sm text-gray-700">
-              When I'm not coding, you'll find me exploring open-source projects, contributing to
-              the developer community, or working on side projects that challenge my technical
-              skills.
-            </p>
           </div>
         </Frame>
 

@@ -4,7 +4,7 @@ import type { WindowContent } from "@/types/window";
 import Portfolio from "./web-apps/portfolio/Portfolio";
 
 interface IBrowserProps {
-  app: WindowContent<"browser">;
+  app: WindowContent;
 }
 
 function Browser({ app }: IBrowserProps) {
