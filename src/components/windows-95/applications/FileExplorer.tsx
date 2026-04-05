@@ -1,18 +1,25 @@
-import React from "react";
-import WindowLayout from "../layout/WindowLayout";
+import Window from "../layout/window/Window";
+import AppIcon from "../common/AppIcon";
 
-import type { FileExplorer, Browser } from "@/types/window";
+import { getChildren, getNode } from "@/utils/tree-utils";
+
+import type { WindowContent } from "@/types/window";
 
 interface IFileExplorerProps {
-  children: React.ReactNode;
-  appData: Browser | FileExplorer;
+  app: WindowContent;
 }
 
-function FileExplorer({ children, appData }: IFileExplorerProps) {
+function FileExplorer({ app }: IFileExplorerProps) {
+  const locatedFile = getChildren(getNode(app.address));
+
   return (
-    <WindowLayout appData={appData}>
-      <></>
-    </WindowLayout>
+    <Window contentLength={locatedFile.length} app={app}>
+      <div className="window-grid size-full overflow-y-auto p-1.5">
+        {[...locatedFile].map((lf) => (
+          <AppIcon key={lf.address} app={lf} className="shrink-0" />
+        ))}
+      </div>
+    </Window>
   );
 }
 

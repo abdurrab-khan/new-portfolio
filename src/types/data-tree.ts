@@ -1,4 +1,4 @@
-import type { FolderIcon, ImageIcon, ReactNodeIcon, TextIcon } from "./icon";
+import type { FolderIcon, ImageIcon, BrowserIcon, TextIcon } from "./app";
 
 type ImageNode = {
   data: ImageIcon;
@@ -7,7 +7,7 @@ type ImageNode = {
 type FolderNode = {
   data: FolderIcon;
   children?: {
-    [key: string]: ImageNode | FolderNode | ReactNode | TextNode;
+    [key: string]: ImageNode | FolderNode | BrowserNode | TextNode;
   };
 };
 
@@ -15,17 +15,19 @@ type TextNode = {
   data: TextIcon;
 };
 
-type ReactNode = {
-  data: ReactNodeIcon;
+type BrowserNode = {
+  data: BrowserIcon;
 };
 
-type DataTreeType = {
-  [key: string]: {
-    data: ImageNode["data"] | FolderNode["data"] | ReactNode["data"] | TextNode["data"];
-    children?: {
-      [key: string]: ImageNode | FolderNode | ReactNode | TextNode;
-    };
+type NodeData = {
+  data: ImageNode["data"] | FolderNode["data"] | BrowserNode["data"] | TextNode["data"];
+  children?: {
+    [key: string]: ImageNode | FolderNode | BrowserNode | TextNode;
   };
 };
 
-export type { DataTreeType, FolderNode, ImageNode };
+type DataTreeType = {
+  [key: string]: NodeData;
+};
+
+export type { DataTreeType, FolderNode, ImageNode, NodeData };

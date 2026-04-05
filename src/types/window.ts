@@ -1,9 +1,11 @@
-import type { IconType } from "./icon";
-
 // Main window types used in the application
-type Windows = {
+type WindowContent = {
   id: string;
-  state: "open" | "minimized";
+  type: "file-explorer" | "browser" | "image-viewer" | "text-editor" | "browser" | "alert";
+  address: string;
+  zIndex: number;
+  state: "open" | "minimized" | "full";
+  url?: string;
   titleBar: {
     title: string;
     iconPath: string;
@@ -18,16 +20,4 @@ type Windows = {
   };
 };
 
-type Browser = Windows & {
-  type: "browser";
-  url: string;
-  contents: React.ReactNode;
-};
-
-type FileExplorer = Windows & {
-  type: "file-explorer";
-  address: string;
-  contents?: IconType[];
-};
-
-export type { Browser, FileExplorer };
+export type { WindowContent };

@@ -1,5 +1,11 @@
 @import "tailwindcss";
 
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #008083;
+}
+
 /* Custom variant for popover-open state */
 @custom-variant popover-open (&:popover-open);
 
@@ -22,6 +28,11 @@
     --yellow: #ffff00;
 
     --taskbar-height: 3rem;
+    --window-titlebar-height: 1.5rem;
+
+    --window-z-index: 500;
+    --app-z-index: 600;
+    --taskbar-z-index: 1000;
   }
 }
 
@@ -35,17 +46,113 @@
   --font-ms-sans: "MS Sans", sans-serif;
 }
 
+@layer base {
+  * {
+    scrollbar-color: var(--light-gray) #dfdfdf;
+    scrollbar-width: auto;
+  }
+
+  *::-webkit-scrollbar {
+    width: 16px;
+    height: 16px;
+    background: var(--light-gray);
+  }
+
+  *::-webkit-scrollbar-track {
+    background: var(--light-gray);
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background: var(--light-gray);
+    border-radius: 0;
+    box-shadow:
+      inset 1px 1px 0px 0px #ffffff,
+      inset -1px -1px 0px 0px #000000,
+      inset -2px -2px 0px 0px #808080;
+  }
+
+  /* Up/Down/Left/Right Buttons */
+  *::-webkit-scrollbar-button:single-button {
+    background-color: var(--light-gray);
+    display: block;
+    height: 16px;
+    width: 16px;
+    border-radius: 0;
+    box-shadow:
+      inset 1px 1px 0px 0px #ffffff,
+      inset -1px -1px 0px 0px #000000,
+      inset -2px -2px 0px 0px #808080;
+  }
+
+  *::-webkit-scrollbar-button:single-button:active {
+    box-shadow:
+      inset 1px 1px 0px 0px #000000,
+      inset -1px -1px 0px 0px #ffffff,
+      inset 2px 2px 0px 0px #808080;
+  }
+
+  /* Up Arrow */
+  *::-webkit-scrollbar-button:single-button:vertical:decrement {
+    background-repeat: no-repeat;
+    background-position: center 2px;
+  }
+  *::-webkit-scrollbar-button:single-button:vertical:decrement:active {
+    background-position: center 3px;
+  }
+
+  /* Down Arrow */
+  *::-webkit-scrollbar-button:single-button:vertical:increment {
+    background-repeat: no-repeat;
+    background-position: center 5px;
+  }
+  *::-webkit-scrollbar-button:single-button:vertical:increment:active {
+    background-position: center 6px;
+  }
+
+  /* Left Arrow */
+  *::-webkit-scrollbar-button:single-button:horizontal:decrement {
+    background-repeat: no-repeat;
+    background-position: 2px center;
+  }
+  *::-webkit-scrollbar-button:single-button:horizontal:decrement:active {
+    background-position: 3px center;
+  }
+
+  /* Right Arrow */
+  *::-webkit-scrollbar-button:single-button:horizontal:increment {
+    background-repeat: no-repeat;
+    background-position: 4px center;
+  }
+  *::-webkit-scrollbar-button:single-button:horizontal:increment:active {
+    background-position: 5px center;
+  }
+
+  *::-webkit-scrollbar-corner {
+    background: var(--light-gray);
+  }
+}
+
 /*  Custom component classes */
 @layer components {
   .app-grid {
     display: grid;
     column-gap: 16px;
-    row-gap: 18px;
+    row-gap: 14px;
     grid-auto-flow: column;
     grid-template-rows: repeat(auto-fill, minmax(min-content, 76px));
     grid-template-columns: repeat(auto-fill, 80px);
     /* prevent stretching items to full track height */
     align-items: start;
+  }
+
+  .window-grid {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 18px;
+    align-items: flex-start;
+    align-content: flex-start;
+    justify-content: flex-start;
   }
 }
 

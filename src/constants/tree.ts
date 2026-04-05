@@ -5,7 +5,7 @@ const DataTree: DataTreeType = {
     data: {
       name: "C Drive",
       type: "folder",
-      iconPath: "/icons/c-drive-icon.png",
+      iconPath: "/icons/c-drive.png",
       address: "C:\\",
     },
     children: {
@@ -13,7 +13,7 @@ const DataTree: DataTreeType = {
         data: {
           name: "My Documents",
           type: "folder",
-          iconPath: "/icons/my-documents-icon.png",
+          iconPath: "/icons/folder.png",
           address: "C:\\My Documents",
         },
       },
@@ -21,7 +21,7 @@ const DataTree: DataTreeType = {
         data: {
           name: "Program Files",
           type: "folder",
-          iconPath: "/icons/folder-icon.png",
+          iconPath: "/icons/folder.png",
           address: "C:\\Program Files",
         },
       },
@@ -29,7 +29,7 @@ const DataTree: DataTreeType = {
         data: {
           name: "Windows",
           type: "folder",
-          iconPath: "/icons/folder-icon.png",
+          iconPath: "/icons/folder.png",
           address: "C:\\Windows",
         },
         children: {
@@ -37,7 +37,7 @@ const DataTree: DataTreeType = {
             data: {
               name: "Desktop",
               type: "folder",
-              iconPath: "/icons/folder-icon.png",
+              iconPath: "/icons/folder.png",
               address: "C:\\Windows\\Desktop",
             },
             children: {
@@ -45,9 +45,8 @@ const DataTree: DataTreeType = {
                 data: {
                   name: "My Computer",
                   type: "folder",
-                  targetPath: "C:\\",
-                  iconPath: "/icons/my-computer-icon.png",
-                  address: "C:\\Windows\\Desktop\\My Computer",
+                  address: "C:\\",
+                  iconPath: "/icons/my-computer.png",
                 },
               },
               recyclebin: {
@@ -55,15 +54,16 @@ const DataTree: DataTreeType = {
                   name: "Recycle Bin",
                   type: "folder",
                   address: "C:\\Windows\\Desktop\\Recycle Bin",
-                  iconPath: "/icons/recycle-bin-icon.png",
+                  iconPath: "/icons/recycle-bin.png",
                 },
               },
               portfolio: {
                 data: {
-                  name: "About_Me.exe",
-                  type: "react-node",
-                  address: "C:\\Windows\\Desktop\\About_Me.exe",
-                  iconPath: "/icons/portfolio-icon.png",
+                  name: "About Me",
+                  type: "browser",
+                  url: "www.abdurrabkhan.dev",
+                  address: "C:\\Windows\\Desktop\\About Me",
+                  iconPath: "/icons/explorer.png",
                   component: null, // Placeholder for React component
                 },
               },
@@ -71,7 +71,7 @@ const DataTree: DataTreeType = {
                 data: {
                   name: "Skills",
                   type: "folder",
-                  iconPath: "/icons/folder-icon.png",
+                  iconPath: "/icons/folder.png",
                   address: "C:\\Windows\\Desktop\\Skills",
                 },
                 children: {
@@ -81,7 +81,7 @@ const DataTree: DataTreeType = {
                       type: "image",
                       address: "C:\\Windows\\Desktop\\Skills\\HTML",
                       imagePath: "/images/skills/html.png",
-                      iconPath: "/icons/html-icon.png",
+                      iconPath: "/icons/skills/html.png",
                     },
                   },
                   css: {
@@ -90,7 +90,7 @@ const DataTree: DataTreeType = {
                       type: "image",
                       address: "C:\\Windows\\Desktop\\Skills\\CSS",
                       imagePath: "/images/skills/css.png",
-                      iconPath: "/icons/css-icon.png",
+                      iconPath: "/icons/skills/css.png",
                     },
                   },
                   tailwindcss: {
@@ -98,8 +98,8 @@ const DataTree: DataTreeType = {
                       name: "Tailwind CSS",
                       type: "image",
                       address: "C:\\Windows\\Desktop\\Skills\\Tailwind CSS",
-                      imagePath: "/images/skills/tailwindcss.png",
-                      iconPath: "/icons/tailwindcss-icon.png",
+                      imagePath: "/images/skills/tailwind-css.png",
+                      iconPath: "/icons/skills/tailwind-css.png",
                     },
                   },
                   javascript: {
@@ -108,7 +108,7 @@ const DataTree: DataTreeType = {
                       type: "image",
                       address: "C:\\Windows\\Desktop\\Skills\\JavaScript",
                       imagePath: "/images/skills/javascript.png",
-                      iconPath: "/icons/javascript-icon.png",
+                      iconPath: "/icons/skills/javascript.png",
                     },
                   },
                   typescript: {
@@ -117,7 +117,7 @@ const DataTree: DataTreeType = {
                       type: "image",
                       address: "C:\\Windows\\Desktop\\Skills\\TypeScript",
                       imagePath: "/images/skills/typescript.png",
-                      iconPath: "/icons/typescript-icon.png",
+                      iconPath: "/icons/skills/typescript.png",
                     },
                   },
                   python: {
@@ -126,7 +126,7 @@ const DataTree: DataTreeType = {
                       type: "image",
                       address: "C:\\Windows\\Desktop\\Skills\\Python",
                       imagePath: "/images/skills/python.png",
-                      iconPath: "/icons/python-icon.png",
+                      iconPath: "/icons/skills/python.png",
                     },
                   },
                   cpp: {
@@ -135,7 +135,7 @@ const DataTree: DataTreeType = {
                       type: "image",
                       address: "C:\\Windows\\Desktop\\Skills\\C++",
                       imagePath: "/images/skills/cpp.png",
-                      iconPath: "/icons/cpp-icon.png",
+                      iconPath: "/icons/skills/cpp.png",
                     },
                   },
                   react: {
@@ -143,8 +143,8 @@ const DataTree: DataTreeType = {
                       name: "React",
                       type: "image",
                       address: "C:\\Windows\\Desktop\\Skills\\React",
-                      imagePath: "/images/skills/react.png",
-                      iconPath: "/icons/react-icon.png",
+                      imagePath: "/images/skills/react-js.png",
+                      iconPath: "/icons/skills/react-js.png",
                     },
                   },
                   reactnative: {
@@ -152,8 +152,8 @@ const DataTree: DataTreeType = {
                       name: "React Native",
                       type: "image",
                       address: "C:\\Windows\\Desktop\\Skills\\React Native",
-                      imagePath: "/images/skills/reactnative.png",
-                      iconPath: "/icons/reactnative-icon.png",
+                      imagePath: "/images/skills/react-native.png",
+                      iconPath: "/icons/skills/react-native.png",
                     },
                   },
                   nextjs: {
@@ -161,8 +161,8 @@ const DataTree: DataTreeType = {
                       name: "Next.js",
                       type: "image",
                       address: "C:\\Windows\\Desktop\\Skills\\Next.js",
-                      imagePath: "/images/skills/nextjs.png",
-                      iconPath: "/icons/nextjs-icon.png",
+                      imagePath: "/images/skills/next-js.png",
+                      iconPath: "/icons/skills/next-js.png",
                     },
                   },
                   socketio: {
@@ -171,7 +171,7 @@ const DataTree: DataTreeType = {
                       type: "image",
                       address: "C:\\Windows\\Desktop\\Skills\\Socket.io",
                       imagePath: "/images/skills/socketio.png",
-                      iconPath: "/icons/socketio-icon.png",
+                      iconPath: "/icons/skills/socket-io.png",
                     },
                   },
                   nodejs: {
@@ -179,8 +179,8 @@ const DataTree: DataTreeType = {
                       name: "Node.js",
                       type: "image",
                       address: "C:\\Windows\\Desktop\\Skills\\Node.js",
-                      imagePath: "/images/skills/nodejs.png",
-                      iconPath: "/icons/nodejs-icon.png",
+                      imagePath: "/images/skills/node-js.png",
+                      iconPath: "/icons/skills/node-js.png",
                     },
                   },
                   expressjs: {
@@ -188,8 +188,8 @@ const DataTree: DataTreeType = {
                       name: "Express.js",
                       type: "image",
                       address: "C:\\Windows\\Desktop\\Skills\\Express.js",
-                      imagePath: "/images/skills/expressjs.png",
-                      iconPath: "/icons/expressjs-icon.png",
+                      imagePath: "/images/skills/express-js.png",
+                      iconPath: "/icons/skills/express-js.png",
                     },
                   },
                   postgres: {
@@ -198,7 +198,7 @@ const DataTree: DataTreeType = {
                       type: "image",
                       address: "C:\\Windows\\Desktop\\Skills\\PostgreSQL",
                       imagePath: "/images/skills/postgres.png",
-                      iconPath: "/icons/postgres-icon.png",
+                      iconPath: "/icons/skills/postgres.png",
                     },
                   },
                   mongodb: {
@@ -207,7 +207,7 @@ const DataTree: DataTreeType = {
                       type: "image",
                       address: "C:\\Windows\\Desktop\\Skills\\MongoDB",
                       imagePath: "/images/skills/mongodb.png",
-                      iconPath: "/icons/mongodb-icon.png",
+                      iconPath: "/icons/skills/mongodb.png",
                     },
                   },
                   redis: {
@@ -216,7 +216,7 @@ const DataTree: DataTreeType = {
                       type: "image",
                       address: "C:\\Windows\\Desktop\\Skills\\Redis",
                       imagePath: "/images/skills/redis.png",
-                      iconPath: "/icons/redis-icon.png",
+                      iconPath: "/icons/skills/redis.png",
                     },
                   },
                   docker: {
@@ -225,7 +225,7 @@ const DataTree: DataTreeType = {
                       type: "image",
                       address: "C:\\Windows\\Desktop\\Skills\\Docker",
                       imagePath: "/images/skills/docker.png",
-                      iconPath: "/icons/docker-icon.png",
+                      iconPath: "/icons/skills/docker.png",
                     },
                   },
                   git: {
@@ -234,7 +234,16 @@ const DataTree: DataTreeType = {
                       type: "image",
                       address: "C:\\Windows\\Desktop\\Skills\\Git",
                       imagePath: "/images/skills/git.png",
-                      iconPath: "/icons/git-icon.png",
+                      iconPath: "/icons/skills/git.png",
+                    },
+                  },
+                  figma: {
+                    data: {
+                      name: "Figma",
+                      type: "image",
+                      address: "C:\\Windows\\Desktop\\Skills\\figma",
+                      imagePath: "/images/skills/figma.png",
+                      iconPath: "/icons/skills/figma.png",
                     },
                   },
                 },
@@ -243,7 +252,7 @@ const DataTree: DataTreeType = {
                 data: {
                   name: "New Folder",
                   type: "folder",
-                  iconPath: "/icons/folder-icon.png",
+                  iconPath: "/icons/folder.png",
                   address: "C:\\Windows\\Desktop\\New Folder",
                 },
                 children: {},
@@ -254,7 +263,7 @@ const DataTree: DataTreeType = {
             data: {
               name: "System32",
               type: "folder",
-              iconPath: "/icons/folder-icon.png",
+              iconPath: "/icons/folder.png",
               address: "C:\\Windows\\System32",
             },
           },
@@ -262,7 +271,7 @@ const DataTree: DataTreeType = {
             data: {
               name: "Temp",
               type: "folder",
-              iconPath: "/icons/folder-icon.png",
+              iconPath: "/icons/folder.png",
               address: "C:\\Windows\\Temp",
             },
           },
@@ -270,7 +279,7 @@ const DataTree: DataTreeType = {
             data: {
               name: "Fonts",
               type: "folder",
-              iconPath: "/icons/folder-icon.png",
+              iconPath: "/icons/folder.png",
               address: "C:\\Windows\\Fonts",
             },
           },
@@ -278,7 +287,7 @@ const DataTree: DataTreeType = {
             data: {
               name: "Help",
               type: "folder",
-              iconPath: "/icons/folder-icon.png",
+              iconPath: "/icons/folder.png",
               address: "C:\\Windows\\Help",
             },
           },
@@ -288,7 +297,7 @@ const DataTree: DataTreeType = {
         data: {
           name: "Users",
           type: "folder",
-          iconPath: "/icons/folder-icon.png",
+          iconPath: "/icons/folder.png",
           address: "C:\\Users",
         },
       },
@@ -296,7 +305,7 @@ const DataTree: DataTreeType = {
         data: {
           name: "Temp",
           type: "folder",
-          iconPath: "/icons/folder-icon.png",
+          iconPath: "/icons/folder.png",
           address: "C:\\Temp",
         },
       },
@@ -304,7 +313,7 @@ const DataTree: DataTreeType = {
         data: {
           name: "RECYCLER",
           type: "folder",
-          iconPath: "/icons/folder-icon.png",
+          iconPath: "/icons/folder.png",
           address: "C:\\RECYCLER",
         },
       },
@@ -312,7 +321,8 @@ const DataTree: DataTreeType = {
         data: {
           name: "BOOTLOG.TXT",
           type: "text",
-          iconPath: "/icons/text-icon.png",
+          content: "",
+          iconPath: "/icons/text.png",
           address: "C:\\BOOTLOG.TXT",
         },
       },
@@ -320,7 +330,8 @@ const DataTree: DataTreeType = {
         data: {
           name: "AUTOEXEC.BAT",
           type: "text",
-          iconPath: "/icons/text-icon.png",
+          content: "",
+          iconPath: "/icons/text.png",
           address: "C:\\AUTOEXEC.BAT",
         },
       },
@@ -328,7 +339,8 @@ const DataTree: DataTreeType = {
         data: {
           name: "CONFIG.SYS",
           type: "text",
-          iconPath: "/icons/text-icon.png",
+          content: "",
+          iconPath: "/icons/text.png",
           address: "C:\\CONFIG.SYS",
         },
       },
@@ -336,7 +348,8 @@ const DataTree: DataTreeType = {
         data: {
           name: "IO.SYS",
           type: "text",
-          iconPath: "/icons/text-icon.png",
+          content: "",
+          iconPath: "/icons/text.png",
           address: "C:\\IO.SYS",
         },
       },
@@ -344,7 +357,8 @@ const DataTree: DataTreeType = {
         data: {
           name: "MSDOS.SYS",
           type: "text",
-          iconPath: "/icons/text-icon.png",
+          content: "",
+          iconPath: "/icons/text.png",
           address: "C:\\MSDOS.SYS",
         },
       },

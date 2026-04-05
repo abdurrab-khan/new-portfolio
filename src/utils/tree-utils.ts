@@ -1,27 +1,43 @@
-import type { DataTreeType } from "@/types/data-tree";
+import DataTree from "@/constants/tree";
+import type { DataTreeType, NodeData } from "@/types/data-tree";
 
-const getNode = (path: string, tree: DataTreeType) => {
-  const segments = path
+const getNode = (path: string, tree: DataTreeType = DataTree) => {
+  const pathSegments = path
     .toLowerCase()
     .split("\\")
     .filter((s) => s.length > 0)
     .map((s) => s.replace(":", ""));
 
-  let currentNode = tree;
+  let currentNode: DataTreeType | NodeData = tree;
 
-  for (const segment of segments) {
-    const nextNode = currentNode[segment];
+  for (let i = 0; i < pathSegments.length; i++) {
+    const segment = pathSegments[i];
+    currentNode = currentNode[segment];
 
-    if (!nextNode) return null;
+    // Return null if node doesn't exist
+    if (currentNode === null) return currentNode;
 
-    if (nextNode.children) {
-      currentNode = nextNode.children;
+    if (currentNode?.children && i !== pathSegments.length - 1) {
+      currentNode = currentNode.children;
     } else {
-      return segments.indexOf(segment) === segments.length - 1 ? nextNode : null;
+      return i === pathSegments.length - 1 ? currentNode : null;
     }
   }
 
-  return currentNode;
+  return null;
 };
 
-export { getNode };
+const getChildren = (node: NodeData | null) => {
+  // Return blank array if no node exist
+  if (!node) return [];
+
+  const currentNode = node.children ?? {};
+  const keys = Object.keys(currentNode);
+
+  // Return blank array if no child is there
+  if (keys.length === 0) return [];
+
+  return keys.map((v) => currentNode[v].data);
+};
+
+export { getNode, getChildren };

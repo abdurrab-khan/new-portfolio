@@ -1,5 +1,6 @@
 type Icon = {
   name: string;
+  address: string;
   iconPath: string;
   position?: {
     x: number;
@@ -9,27 +10,24 @@ type Icon = {
 
 type FolderIcon = Icon & {
   type: "folder";
-  address: string;
-  targetPath?: string;
 };
 
 type ImageIcon = Icon & {
   type: "image";
-  address: string;
   imagePath: string;
 };
 
 type TextIcon = Icon & {
   type: "text";
-  address: string;
+  content: string;
 };
 
-type ReactNodeIcon = Icon & {
-  type: "react-node";
-  address: string;
+type BrowserIcon = Icon & {
+  type: "browser";
+  url: string;
   component: React.ReactNode;
 };
 
-type IconType = FolderIcon | ImageIcon | TextIcon | ReactNodeIcon;
+type App = FolderIcon | ImageIcon | TextIcon | BrowserIcon;
 
-export type { IconType, FolderIcon, ImageIcon, TextIcon, ReactNodeIcon };
+export type { App, FolderIcon, ImageIcon, TextIcon, BrowserIcon };

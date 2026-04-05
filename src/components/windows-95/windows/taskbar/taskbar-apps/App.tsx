@@ -1,18 +1,32 @@
+import useStore from "@/zustand/store";
 import Button from "@/components/windows-95/common/Button";
-import folderIcon from "@/assets/icons/taskbar-folder-icon.png";
+import { getAssetsUrl } from "@/lib/utils";
 
-function App() {
-    return (
-        <div className="h-full min-w-40">
-            <Button mainStyle="bg-checkerboard">
-                <div className="flex h-full items-center gap-x-0.5 p-1 font-semibold overflow-hidden">
-                    <img src={folderIcon} className="h-full" />
-                    <span className="ml-1 font-ms-sans-bold truncate">My Computer</span>
-                </div>
-            </Button>
+interface IAppProps {
+  id: string;
+  name: string;
+  iconPath: string;
+  state: "open" | "minimized" | "full";
+}
+
+function App({ id, name, iconPath, state }: IAppProps) {
+  const toggleApp = useStore((state) => state.toggleAppState);
+
+  return (
+    <div className="h-full min-w-40">
+      <Button
+        data-state={state}
+        onClick={() => toggleApp(id)}
+        state={state === "open" ? "active" : "default"}
+        className={state === "open" ? "bg-checkerboard" : ""}
+      >
+        <div className="flex h-full items-center gap-x-0.5 overflow-hidden p-1 font-semibold">
+          <img src={getAssetsUrl(iconPath)} className="h-full" />
+          <span className="font-ms-sans-bold ml-1 truncate">{name}</span>
         </div>
-    );
-};
-
+      </Button>
+    </div>
+  );
+}
 
 export default App;

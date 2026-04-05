@@ -1,18 +1,17 @@
-import React from "react";
-import WindowLayout from "../layout/WindowLayout";
+import Window from "../layout/window/Window";
 
-import type { FileExplorer, Browser } from "@/types/window";
+import type { WindowContent } from "@/types/window";
+import Portfolio from "./web-apps/portfolio/Portfolio";
 
 interface IBrowserProps {
-  children: React.ReactNode;
-  appData: Browser | FileExplorer;
+  app: WindowContent;
 }
 
-function Browser({ children, appData }: IBrowserProps) {
+function Browser({ app }: IBrowserProps) {
   return (
-    <WindowLayout appData={appData}>
-      <></>
-    </WindowLayout>
+    <Window app={app}>
+      <Portfolio />
+    </Window>
   );
 }
 
