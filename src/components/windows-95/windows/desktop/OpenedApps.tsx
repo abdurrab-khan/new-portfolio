@@ -1,8 +1,7 @@
+import { lazy, Suspense } from "react";
 import useStore from "@/zustand/store";
-import Browser from "../../applications/Browser";
-import FileExplorer from "../../applications/FileExplorer";
-import type { WindowContent } from "@/types/window";
 import Alert from "../../common/Alert";
+import type { WindowContent } from "@/types/window";
 
 function OpenedApps() {
   const openedApps = useStore((state) => state.apps);
@@ -11,13 +10,16 @@ function OpenedApps() {
     .sort((a, b) => (a.zIndex ?? 0) - (b.zIndex ?? 0));
 
   return (
-    <div className="pointer-events-none absolute inset-0 size-full">
+    <section className="pointer-events-none absolute inset-0 size-full overflow-auto">
       {visibleApps.map((app) => (
         <App key={app.id} app={app} />
       ))}
-    </div>
+    </section>
   );
 }
+
+const Browser = lazy(() => import("../../applications/Browser"));
+const FileExplorer = lazy(() => import("../../applications/FileExplorer"));
 
 const App = ({ app }: { app: WindowContent }) => {
   const handleCloseApp = useStore((state) => state.handleCloseApp);
@@ -26,13 +28,17 @@ const App = ({ app }: { app: WindowContent }) => {
     handleCloseApp(app.id);
   };
 
+  let component = null;
+
   switch (app.type) {
     case "file-explorer":
-      return <FileExplorer app={app} />;
+      component = <FileExplorer app={app} />;
+      break;
     case "browser":
-      return <Browser app={app} />;
+      component = <Browser app={app} />;
+      break;
     default:
-      return (
+      component = (
         <Alert
           title="App Not Found"
           message={`The application of type "${app.type}" is not found.`}
@@ -40,6 +46,8 @@ const App = ({ app }: { app: WindowContent }) => {
         />
       );
   }
+
+  return <Suspense fallback={null}>{component}</Suspense>;
 };
 
 export default OpenedApps;

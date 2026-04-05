@@ -10,7 +10,7 @@ function Desktop() {
         backgroundRepeat: "no-repeat",
         backgroundPosition: "center",
       }}
-      className="relative size-full flex-1 overflow-auto px-2 py-4 lg:overflow-hidden"
+      className="relative size-full flex-1 px-2 py-4 lg:overflow-hidden"
     >
       <DesktopApps />
     </section>

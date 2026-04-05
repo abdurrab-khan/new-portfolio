@@ -8,7 +8,7 @@ function Home({ setCurrentTab }: { setCurrentTab: React.Dispatch<React.SetStateA
       <div className="flex w-full flex-col @md:w-auto">
         <Frame title="Profile">
           <img
-            src="https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg"
+            src="https://pub-81e18240e1ba4002b841e7d326b86d34.r2.dev/my-image.png"
             alt="Abdur Rab Khan"
             className="border-b-dark-gray border-r-dark-gray h-72 w-56 rounded-sm border-2 border-t-white border-l-white bg-[#c0c0c0] object-cover"
             style={{ imageRendering: "pixelated" }}

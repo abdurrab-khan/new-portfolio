@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import Activity from "./Activity.tsx";
 import Windows from "./components/windows-95/Windows";
 import useStore from "./zustand/store.ts";
+import Loading from "./components/Loading.tsx";
 
 function App() {
   const launchApplication = useStore((s) => s.handleLaunchApp);
@@ -56,6 +57,7 @@ function App() {
           <Windows />
         </div>
       </Activity>
+      <Loading />
     </main>
   );
 }
