@@ -74,26 +74,22 @@ function Contact() {
 
     setIsLoading(true);
     try {
-      // TODO: Privately store keys like this instead of hardcoding in frontend
-      const sendResponse = await fetch("https://api.emailjs.com/api/v1.0/email/send", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          service_id: "service_v6708ki",
-          template_id: "template_biyl66w",
-          user_id: "vKgUJhwJXb-eqnMEe",
-          accessToken: "GtfPgXVh9_VJb7Lb86hkN",
-          template_params: {
+      const sendResponse = await fetch(
+        "https://etpmyzcjtbqwdcqlfatb.supabase.co/functions/v1/super-responder",
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Basic ${btoa(`${import.meta.env.NEXT_PUBLIC_EMAILJS_USER_ID}`)}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
             name: data.name,
             email: data.email,
             subject: data.subject,
             message: data.message,
-            currentTime: getFormattedDate(),
-          },
-        }),
-      });
+          }),
+        },
+      );
 
       if (!sendResponse.ok) {
         throw new Error("Failed to send message");
@@ -199,15 +195,6 @@ function Contact() {
     </TabContainer>
   );
 }
-
-const getFormattedDate = () => {
-  const now = new Date();
-
-  const hours = now.getHours();
-  const minutes = now.getMinutes();
-
-  return `${hours}:${minutes}`;
-};
 
 const FormField = ({
   label,
