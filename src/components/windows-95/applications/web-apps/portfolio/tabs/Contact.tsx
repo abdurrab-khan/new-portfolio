@@ -79,7 +79,7 @@ function Contact() {
         {
           method: "POST",
           headers: {
-            Authorization: `Basic ${btoa(`${import.meta.env.NEXT_PUBLIC_EMAILJS_USER_ID}`)}`,
+            Authorization: `Basic ${btoa(`${import.meta.env.VITE_PUBLIC_ANON_KEY}`)}`,
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
@@ -100,11 +100,9 @@ function Contact() {
       setTimeout(() => {
         setSuccessMessage("");
       }, 5000);
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    } catch (_) {
-      setValidationError({
-        sendError: "Failed to send message. Please try again later.",
-      });
+    } catch (err) {
+      const message = err instanceof Error ? err.message : "Failed to send message.";
+      setValidationError({ sendError: message });
     } finally {
       setIsLoading(false);
     }
