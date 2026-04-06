@@ -165,13 +165,40 @@ const DataTree: DataTreeType = {
                       iconPath: "/icons/skills/next-js.png",
                     },
                   },
-                  socketio: {
+                  react_hook_form: {
                     data: {
-                      name: "Socket.io",
+                      name: "React Hook Form",
                       type: "image",
-                      address: "C:\\Windows\\Desktop\\Skills\\Socket.io",
-                      imagePath: "/images/skills/socketio.png",
-                      iconPath: "/icons/skills/socket-io.png",
+                      address: "C:\\Windows\\Desktop\\Skills\\react_hook_form",
+                      imagePath: "/images/skills/react-hook-form.png",
+                      iconPath: "/icons/skills/react-hook-form.png",
+                    },
+                  },
+                  tanstackquery: {
+                    data: {
+                      name: "TanStack Query",
+                      type: "image",
+                      address: "C:\\Windows\\Desktop\\Skills\\tanstackquery",
+                      imagePath: "/images/skills/tanstack-query.png",
+                      iconPath: "/icons/skills/tanstack-query.png",
+                    },
+                  },
+                  motion: {
+                    data: {
+                      name: "Motion JS",
+                      type: "image",
+                      address: "C:\\Windows\\Desktop\\Skills\\motion",
+                      imagePath: "/images/skills/motion-js.png",
+                      iconPath: "/icons/skills/motion-js.png",
+                    },
+                  },
+                  zod: {
+                    data: {
+                      name: "Zod",
+                      type: "image",
+                      address: "C:\\Windows\\Desktop\\Skills\\Zod",
+                      imagePath: "/images/skills/zod.png",
+                      iconPath: "/icons/skills/zod.png",
                     },
                   },
                   nodejs: {
@@ -190,6 +217,33 @@ const DataTree: DataTreeType = {
                       address: "C:\\Windows\\Desktop\\Skills\\Express.js",
                       imagePath: "/images/skills/express-js.png",
                       iconPath: "/icons/skills/express-js.png",
+                    },
+                  },
+                  socketio: {
+                    data: {
+                      name: "Socket.io",
+                      type: "image",
+                      address: "C:\\Windows\\Desktop\\Skills\\Socket.io",
+                      imagePath: "/images/skills/socketio.png",
+                      iconPath: "/icons/skills/socket-io.png",
+                    },
+                  },
+                  bullmq: {
+                    data: {
+                      name: "BullMQ",
+                      type: "image",
+                      address: "C:\\Windows\\Desktop\\Skills\\bullmq",
+                      imagePath: "/images/skills/bullmq.png",
+                      iconPath: "/icons/skills/bullmq.png",
+                    },
+                  },
+                  jest: {
+                    data: {
+                      name: "Jest",
+                      type: "image",
+                      address: "C:\\Windows\\Desktop\\Skills\\jest",
+                      imagePath: "/images/skills/jest.png",
+                      iconPath: "/icons/skills/jest.png",
                     },
                   },
                   postgres: {
@@ -235,6 +289,24 @@ const DataTree: DataTreeType = {
                       address: "C:\\Windows\\Desktop\\Skills\\Git",
                       imagePath: "/images/skills/git.png",
                       iconPath: "/icons/skills/git.png",
+                    },
+                  },
+                  nginx: {
+                    data: {
+                      name: "Nginx",
+                      type: "image",
+                      address: "C:\\Windows\\Desktop\\Skills\\Nginx",
+                      imagePath: "/images/skills/nginx.png",
+                      iconPath: "/icons/skills/nginx.png",
+                    },
+                  },
+                  linux: {
+                    data: {
+                      name: "Linux",
+                      type: "image",
+                      address: "C:\\Windows\\Desktop\\Skills\\Linux",
+                      imagePath: "/images/skills/linux.png",
+                      iconPath: "/icons/skills/linux.png",
                     },
                   },
                   figma: {
