@@ -79,7 +79,7 @@ function Contact() {
         {
           method: "POST",
           headers: {
-            Authorization: `Basic ${btoa(`${import.meta.env.VITE_PUBLIC_ANON_KEY}`)}`,
+            Authorization: `Bearer ${import.meta.env.VITE_PUBLIC_ANON_KEY}`,
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
