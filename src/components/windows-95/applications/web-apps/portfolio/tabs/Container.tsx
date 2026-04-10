@@ -39,11 +39,18 @@ interface IWindowFrameProps {
   index?: number;
   showTitleBar?: boolean;
   children: React.ReactNode;
+  videoContainerRef?: React.RefObject<HTMLDivElement | null>;
 }
 
-export function Frame({ title, index = -1, showTitleBar = true, children }: IWindowFrameProps) {
+export function Frame({
+  title,
+  index = -1,
+  showTitleBar = true,
+  children,
+  videoContainerRef,
+}: IWindowFrameProps) {
   return (
-    <div className="flex size-full flex-col">
+    <div ref={videoContainerRef} className="flex size-full flex-col">
       <div className="border-b-dark-gray border-r-dark-gray size-full rounded-sm border-2 border-t-white border-l-white bg-[#c0c0c0] p-px">
         <div className="border-t-dark-gray border-l-dark-gray border-r-light-gray border-b-light-gray size-full rounded-sm border-2 bg-white">
           <div className="border-b-dark-gray flex items-center justify-between border-b-2 bg-linear-to-b from-[#000080] to-[#1e1b4b] px-2 py-1">

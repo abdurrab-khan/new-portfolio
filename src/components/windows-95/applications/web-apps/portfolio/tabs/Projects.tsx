@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { TabContainer, Frame } from "./Container";
 import Button from "@/components/windows-95/common/Button";
 import { projects } from "@/constants/personal";
@@ -67,7 +67,6 @@ function Projects() {
     videoUrl: string;
     index: number;
   } | null>(null);
-
   return (
     <TabContainer title="Projects">
       <div className="grid grid-cols-1 gap-4 @xl:grid-cols-2 @7xl:grid-cols-3 @[100rem]:grid-cols-4">
@@ -167,7 +166,6 @@ function Projects() {
 function ProjectVideoDialog({
   title,
   index,
-  videoPath,
   onClose,
 }: {
   title: string;
@@ -175,6 +173,16 @@ function ProjectVideoDialog({
   videoPath: string;
   onClose: () => void;
 }) {
+  const containerRef = useRef(null);
+  const videoContainerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    // Scroll the video container into view when the dialog opens
+    if (videoContainerRef.current) {
+      videoContainerRef.current.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+  }, []);
+
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape" || event.key.toLowerCase() === "q") {
@@ -190,11 +198,17 @@ function ProjectVideoDialog({
 
   return (
     <div
-      className="absolute inset-0 z-20 flex items-center justify-center bg-black/30 p-2 backdrop-blur-sm"
+      ref={containerRef}
       onClick={onClose}
+      className="absolute inset-0 z-20 flex items-center justify-center bg-black/30 p-2 backdrop-blur-sm"
     >
-      <div className="w-full max-w-3xl" onClick={(event) => event.stopPropagation()}>
-        <Frame title={`${title} Demo`} showTitleBar={false} index={index}>
+      <div className="w-full" onClick={(event) => event.stopPropagation()}>
+        <Frame
+          title={`${title} Demo`}
+          showTitleBar={false}
+          index={index}
+          videoContainerRef={videoContainerRef}
+        >
           <div className="mb-3 flex items-center justify-between gap-3 border-b border-gray-300 pb-2">
             <h3 className="text-sm font-bold text-purple-900">{title} Preview</h3>
             <div className="h-7 w-18">
@@ -203,10 +217,17 @@ function ProjectVideoDialog({
               </Button>
             </div>
           </div>
-          <video className="min-h-100 w-full bg-black" controls autoPlay muted loop playsInline>
+          {/* TODO: Implement video playback functionality */}
+          {/* <video className="min-h-100 w-full bg-black" controls autoPlay muted loop playsInline>
             <source src={videoPath} type="video/mp4" />
             Your browser does not support the video tag.
-          </video>
+          </video> */}
+          <div className="flex min-h-100 w-full items-center justify-center">
+            <p className="font-ms-sans max-w-md text-center text-sm text-gray-700">
+              Video playback is currently unavailable. Please visit the project's GitHub repository
+              to view the demo video.
+            </p>
+          </div>
         </Frame>
       </div>
     </div>
