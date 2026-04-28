@@ -166,6 +166,7 @@ function Projects() {
 function ProjectVideoDialog({
   title,
   index,
+  videoPath,
   onClose,
 }: {
   title: string;
@@ -173,7 +174,7 @@ function ProjectVideoDialog({
   videoPath: string;
   onClose: () => void;
 }) {
-  const containerRef = useRef(null);
+  const containerRef = useRef<HTMLDivElement>(null);
   const videoContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -202,7 +203,7 @@ function ProjectVideoDialog({
       onClick={onClose}
       className="absolute inset-0 z-20 flex items-center justify-center bg-black/30 p-2 backdrop-blur-sm"
     >
-      <div className="w-full" onClick={(event) => event.stopPropagation()}>
+      <div className="w-240" onClick={(event) => event.stopPropagation()}>
         <Frame
           title={`${title} Demo`}
           showTitleBar={false}
@@ -217,17 +218,19 @@ function ProjectVideoDialog({
               </Button>
             </div>
           </div>
-          {/* TODO: Implement video playback functionality */}
-          {/* <video className="min-h-100 w-full bg-black" controls autoPlay muted loop playsInline>
-            <source src={videoPath} type="video/mp4" />
-            Your browser does not support the video tag.
-          </video> */}
-          <div className="flex min-h-100 w-full items-center justify-center">
-            <p className="font-ms-sans max-w-md text-center text-sm text-gray-700">
-              Video playback is currently unavailable. Please visit the project's GitHub repository
-              to view the demo video.
-            </p>
-          </div>
+          {videoPath ? (
+            <video width="100%" height="auto" controls autoPlay muted loop>
+              <source src={videoPath} type="video/mp4" />
+              Your browser does not support the video.
+            </video>
+          ) : (
+            <div className="flex min-h-100 w-full items-center justify-center">
+              <p className="font-ms-sans max-w-md text-center text-sm text-gray-700">
+                Video playback is currently unavailable. Please visit the project's GitHub
+                repository to view the demo video.
+              </p>
+            </div>
+          )}
         </Frame>
       </div>
     </div>

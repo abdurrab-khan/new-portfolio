@@ -56,8 +56,10 @@ export const projects: Project[] = [
     title: "Sketch Blade",
     description:
       "Sketch Blade is a real-time collaborative digital whiteboard that lets teams draw, brainstorm, and share ideas together instantly. With live multi-user syncing, robust file management, and a smooth infinite canvas, it brings your creative workspace to life.",
-    githubUrl: "https://github.com/abdurrab-khan/sketch-blade", // Updated to match your folder name pattern
-    videoUrl: "https://cdn.pixabay.com/video/2026/01/28/331030_tiny.mp4",
+    githubUrl: "https://github.com/abdurrab-khan/sketch_blade", // Updated to match your folder name pattern
+    videoUrl:
+      "https://res.cloudinary.com/dliujfjmi/video/upload/v1777380577/sketch-blade_vcx9to.mp4",
+    demoUrl: "https://sketch-blade.vercel.app/",
     techStack: [
       "React",
       "TypeScript",
@@ -78,7 +80,6 @@ export const projects: Project[] = [
     description:
       "A collaborative streaming app that lets you and your friends queue, play, and upvote your favorite Spotify and YouTube tracks in real-time. Create shared spaces to basically pass the aux cable from anywhere!",
     githubUrl: "https://github.com/abdurrab-khan/play-by-choice",
-    videoUrl: "https://cdn.pixabay.com/video/2026/01/28/331030_tiny.mp4",
     techStack: [
       "Next.js",
       "TypeScript",
@@ -95,7 +96,6 @@ export const projects: Project[] = [
     description:
       "An automated deal-hunting platform that crawls sites like Amazon and Flipkart to find the best product discounts and captures their screenshots. It pairs closely with a React Native mobile app, allowing users to effortlessly share these top deals directly to their social media groups or with friends.",
     githubUrl: "https://github.com/abdurrab-khan/aladdin-scrapper",
-    videoUrl: "https://cdn.pixabay.com/video/2026/01/28/331030_tiny.mp4",
     techStack: ["React Native", "TypeScript", "Node.js", "Supabase", "Redis", "BullMQ", "Docker"],
   },
   {
@@ -103,7 +103,6 @@ export const projects: Project[] = [
     description:
       "A fun, real-time multiplayer Tic-Tac-Toe game that lets you play locally or challenge friends online in custom rooms. It features a responsive UI with smooth animations for a seamless gaming experience.",
     githubUrl: "https://github.com/abdurrab-khan/Multiplayer_Tic_Tac_Toe",
-    videoUrl: "https://cdn.pixabay.com/video/2026/01/28/331030_tiny.mp4",
     techStack: [
       "React",
       "TypeScript",
