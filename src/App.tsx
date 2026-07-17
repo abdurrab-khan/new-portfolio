@@ -3,7 +3,6 @@ import Activity from "./Activity.tsx";
 import Windows from "./components/windows-95/Windows";
 import useStore from "./zustand/store.ts";
 import Loading from "./components/Loading.tsx";
-import type { App } from "./types/app.ts";
 import type { WindowContent } from "./types/window.ts";
 
 function App() {
