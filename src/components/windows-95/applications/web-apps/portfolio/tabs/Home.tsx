@@ -1,5 +1,8 @@
-import { techSpots } from "@/constants/personal";
+import { FaXTwitter } from "react-icons/fa6";
+import { FaLinkedin, FaGithub } from "react-icons/fa";
+
 import { Frame } from "./Container";
+import { techSpots } from "@/constants/personal";
 
 function Home({ setCurrentTab }: { setCurrentTab: React.Dispatch<React.SetStateAction<string>> }) {
   return (
@@ -14,6 +17,27 @@ function Home({ setCurrentTab }: { setCurrentTab: React.Dispatch<React.SetStateA
             style={{ imageRendering: "pixelated" }}
           />
         </Frame>
+        <ul className="mt-3 flex flex-wrap gap-3 text-xl text-blue-950">
+          <li title="Github">
+            <a href="https://github.com/abdurrab-khan" target="_blank" rel="noopener noreferrer">
+              <FaGithub />
+            </a>
+          </li>
+          <li title="LinkedIn">
+            <a
+              href="https://www.linkedin.com/in/abdur-rab-khan/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <FaLinkedin />
+            </a>
+          </li>
+          <li title="Twitter (X)">
+            <a href="https://twitter.com/abdurrabkhan01" target="_blank" rel="noopener noreferrer">
+              <FaXTwitter />
+            </a>
+          </li>
+        </ul>
       </div>
 
       {/* Content body (right) */}

@@ -219,6 +219,15 @@ const DataTree: DataTreeType = {
                       iconPath: "/icons/skills/express-js.png",
                     },
                   },
+                  prismaorm: {
+                    data: {
+                      name: "Prisma ORM",
+                      type: "image",
+                      address: "C:\\Windows\\Desktop\\Skills\\Prisma ORM",
+                      imagePath: "/images/skills/prisma-orm.png",
+                      iconPath: "/icons/skills/prisma-orm.png",
+                    },
+                  },
                   socketio: {
                     data: {
                       name: "Socket.io",

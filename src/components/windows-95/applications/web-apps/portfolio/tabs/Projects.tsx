@@ -3,64 +3,6 @@ import { TabContainer, Frame } from "./Container";
 import Button from "@/components/windows-95/common/Button";
 import { projects } from "@/constants/personal";
 
-const escapeXml = (value: string) =>
-  value
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&apos;");
-
-const makePlaceholderImage = (title: string) => {
-  const safeTitle = escapeXml(title.toUpperCase());
-  const svg = `<svg xmlns='http://www.w3.org/2000/svg' width='600' height='360' viewBox='0 0 600 360'>
-  <defs>
-    <pattern id='c' width='20' height='20' patternUnits='userSpaceOnUse'>
-      <rect width='10' height='10' fill='#ffffff'/>
-      <rect x='10' y='0' width='10' height='10' fill='#cccccc'/>
-      <rect x='0' y='10' width='10' height='10' fill='#cccccc'/>
-      <rect x='10' y='10' width='10' height='10' fill='#ffffff'/>
-    </pattern>
-    <pattern id='scan' width='4' height='4' patternUnits='userSpaceOnUse'>
-      <rect width='4' height='1' fill='#000000' opacity='0.10'/>
-    </pattern>
-  </defs>
-
-  <rect width='600' height='360' fill='#c0c0c0'/>
-
-  <!-- Outer bezel -->
-  <rect x='16' y='16' width='568' height='328' fill='url(#c)' opacity='0.95'/>
-  <rect x='16' y='16' width='568' height='328' fill='none' stroke='#808080' stroke-width='6'/>
-
-  <!-- Window title bar -->
-  <rect x='26' y='26' width='548' height='44' fill='#000080'/>
-  <rect x='26' y='26' width='548' height='44' fill='url(#scan)' opacity='0.18'/>
-  <rect x='42' y='38' width='12' height='12' fill='#808080'/>
-  <rect x='60' y='38' width='12' height='12' fill='#ffff00'/>
-  <rect x='78' y='38' width='12' height='12' fill='#00aa00'/>
-  <text x='50%' y='48' text-anchor='middle'
-    font-family='monospace' font-size='16' fill='#ffff00' font-weight='800'
-    dominant-baseline='middle'>
-    WINDOWS 95 PREVIEW
-  </text>
-
-  <!-- Main content -->
-  <rect x='26' y='70' width='548' height='290' fill='url(#c)' opacity='0.92'/>
-  <rect x='26' y='70' width='548' height='290' fill='url(#scan)' opacity='0.22'/>
-
-  <text x='50%' y='50%' text-anchor='middle'
-    font-family='monospace' font-size='38' fill='#000080' font-weight='900'
-    dominant-baseline='middle'>
-    ${safeTitle}
-  </text>
-
-  <!-- Faux frame highlight -->
-  <rect x='22' y='22' width='556' height='316' fill='none' stroke='#ffffff' stroke-width='3' opacity='0.55'/>
-</svg>`;
-
-  return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
-};
-
 function Projects() {
   const [activeVideo, setActiveVideo] = useState<{
     title: string;
@@ -88,9 +30,9 @@ function Projects() {
                 {/* Placeholder "preview image" */}
                 <div className="bg-checkerboard group relative p-2">
                   <img
-                    src={makePlaceholderImage(project.title)}
+                    src={project.imageUrl}
                     alt={`${project.title} preview`}
-                    className="border-b-dark-gray border-r-dark-gray h-32 w-full rounded-sm border-2 border-t-white border-l-white bg-[#c0c0c0] object-cover"
+                    className="border-b-dark-gray border-r-dark-gray h-32 w-full rounded-sm border-2 border-t-white border-l-white bg-[#c0c0c0] object-cover object-top"
                     style={{ imageRendering: "pixelated" }}
                   />
                 </div>

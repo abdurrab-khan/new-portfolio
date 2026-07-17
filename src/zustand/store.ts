@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import type { WindowContent } from "@/types/window";
+import { persist } from "zustand/middleware";
 
 const getMaxZIndex = (apps: WindowContent[]) =>
   apps.reduce((max, app) => Math.max(max, app.zIndex ?? 0), 0);
@@ -19,93 +20,102 @@ interface IStoreActions {
   updateAppState: (appId: string, update: Partial<WindowContent>) => void;
 }
 
-const useStore = create<IStore & IStoreActions>((set) => ({
-  apps: [],
-  isShutdown: false,
-  toggleShutdown() {
-    set((prevState) => ({
-      ...prevState,
-      isShutdown: !prevState.isShutdown,
-    }));
-  },
-  handleLaunchApp(app) {
-    set((prevState) => ({
-      apps: [
-        ...prevState.apps,
-        {
-          ...app,
-          zIndex: getMaxZIndex(prevState.apps) + 1,
-        },
-      ],
-    }));
-  },
-  handleCloseApp(appId) {
-    set((prevState) => ({
-      apps: prevState.apps.filter((a) => a.id !== appId),
-    }));
-  },
-  updateAppState(appId, update) {
-    set((prevState) => ({
-      apps: prevState.apps.map((a) =>
-        a.id === appId
-          ? {
-              ...a,
-              ...update,
-            }
-          : a,
-      ),
-    }));
-  },
-  bringToFront(appId) {
-    set((prevState) => {
-      const topZIndex = getMaxZIndex(prevState.apps);
-      const targetApp = prevState.apps.find((a) => a.id === appId);
+type PersistanceStore = IStore & IStoreActions;
 
-      if (!targetApp || targetApp.zIndex === topZIndex) return prevState;
+const useStore = create<PersistanceStore>()(
+  persist(
+    (set) => ({
+      apps: [],
+      isShutdown: false,
+      toggleShutdown() {
+        set((prevState) => ({
+          ...prevState,
+          isShutdown: !prevState.isShutdown,
+        }));
+      },
+      handleLaunchApp(app) {
+        set((prevState) => ({
+          apps: [
+            ...prevState.apps,
+            {
+              ...app,
+              zIndex: getMaxZIndex(prevState.apps) + 1,
+            },
+          ],
+        }));
+      },
+      handleCloseApp(appId) {
+        set((prevState) => ({
+          apps: prevState.apps.filter((a) => a.id !== appId),
+        }));
+      },
+      updateAppState(appId, update) {
+        set((prevState) => ({
+          apps: prevState.apps.map((a) =>
+            a.id === appId
+              ? {
+                  ...a,
+                  ...update,
+                }
+              : a,
+          ),
+        }));
+      },
+      bringToFront(appId) {
+        set((prevState) => {
+          const topZIndex = getMaxZIndex(prevState.apps);
+          const targetApp = prevState.apps.find((a) => a.id === appId);
 
-      return {
-        apps: prevState.apps.map((a) =>
-          a.id === appId
-            ? {
-                ...a,
-                zIndex: topZIndex + 1,
-              }
-            : a,
-        ),
-      };
-    });
-  },
-  toggleAppState(appId) {
-    set((prevState) => {
-      const topZIndex = getMaxZIndex(prevState.apps);
-
-      return {
-        apps: prevState.apps.map((a) => {
-          if (a.id !== appId) return a;
-
-          const isRestoring = a.state === "minimized";
+          if (!targetApp || targetApp.zIndex === topZIndex) return prevState;
 
           return {
-            ...a,
-            state: isRestoring ? "open" : "minimized",
-            ...(isRestoring ? { zIndex: topZIndex + 1 } : {}),
+            apps: prevState.apps.map((a) =>
+              a.id === appId
+                ? {
+                    ...a,
+                    zIndex: topZIndex + 1,
+                  }
+                : a,
+            ),
           };
-        }),
-      };
-    });
-  },
-  toggleAppSize(appId) {
-    set((prevState) => ({
-      apps: prevState.apps.map((a) =>
-        a.id === appId
-          ? {
-              ...a,
-              state: a.state === "full" ? "open" : "full",
-            }
-          : a,
-      ),
-    }));
-  },
-}));
+        });
+      },
+      toggleAppState(appId) {
+        set((prevState) => {
+          const topZIndex = getMaxZIndex(prevState.apps);
+
+          return {
+            apps: prevState.apps.map((a) => {
+              if (a.id !== appId) return a;
+
+              const isRestoring = a.state === "minimized";
+
+              return {
+                ...a,
+                state: isRestoring ? "open" : "minimized",
+                ...(isRestoring ? { zIndex: topZIndex + 1 } : {}),
+              };
+            }),
+          };
+        });
+      },
+      toggleAppSize(appId) {
+        set((prevState) => ({
+          apps: prevState.apps.map((a) =>
+            a.id === appId
+              ? {
+                  ...a,
+                  state: a.state === "full" ? "open" : "full",
+                }
+              : a,
+          ),
+        }));
+      },
+    }),
+    {
+      name: "persist-store",
+    },
+  ),
+);
 
 export default useStore;
