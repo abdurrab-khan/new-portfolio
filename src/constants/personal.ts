@@ -83,8 +83,10 @@ export const projects: Project[] = [
     description:
       "An automated deal-hunting platform that crawls sites like Amazon and Flipkart to find the best product discounts and captures their screenshots. It pairs closely with a React Native mobile app, allowing users to effortlessly share these top deals directly to their social media groups or with friends.",
     githubUrl: "https://github.com/abdurrab-khan/aladdin-scrapper",
+    videoUrl:
+      "https://res.cloudinary.com/dliujfjmi/video/upload/v1785678676/aladdin-video_ww29cc.mp4",
     imageUrl:
-      "https://res.cloudinary.com/dliujfjmi/image/upload/v1784293083/image_original_muexsy.png",
+      "https://res.cloudinary.com/dliujfjmi/image/upload/v1785678950/vlcsnap-2026-08-02-19h25m28s130_fzx4qs.png",
     techStack: ["React Native", "TypeScript", "Node.js", "Supabase", "Redis", "BullMQ", "Docker"],
   },
   {
