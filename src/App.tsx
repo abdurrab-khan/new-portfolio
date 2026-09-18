@@ -68,7 +68,7 @@ function App() {
     return () => {
       window.removeEventListener("load", handleLoad);
     };
-  }, [launchApplication]);
+  }, [launchApplication, updateAppState]);
 
   return (
     <main className="scroll-none relative flex h-screen w-screen items-center justify-center overflow-hidden bg-[#008083]">
